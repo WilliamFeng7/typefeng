@@ -727,7 +727,8 @@ macro_rules! app_invoke_handler_mobile {
             $crate::restart_app,
             $crate::reset_accessibility_permission_and_restart_app,
             $crate::log_client_error,
-            // Local ASR: arm64 Android links sherpa-onnx (build.rs `local_asr_sherpa`).
+            // Local ASR is registered on platforms that link sherpa-onnx (build.rs
+            // `local_asr_sherpa`).
             #[cfg(local_asr_sherpa)]
             $crate::commands::local_asr_get_settings,
             #[cfg(local_asr_sherpa)]
