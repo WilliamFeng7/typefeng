@@ -41,7 +41,7 @@
 ## TypeFeng 改了什么
 
 1. **品牌**：应用名、窗口、托盘、菜单、权限说明、首屏、图标全部改为 TypeFeng；
-   Bundle ID 改为 `top.typefeng.desktop`，版本号从 1.0.0 开始。
+   Bundle ID 改为 `top.typefeng.desktop`，版本号 1.1.0。
 2. **关闭上游自动更新**：移除上游 Update 端点，前端不再发起更新检查；
    这样不会把 TypeFeng 替换成其他项目的安装包。
 3. **移除上游社区入口**：About 页的 QQ 群、Discord、官网等入口已删除，
@@ -56,7 +56,7 @@
 
 ## 安装（从 Release）
 
-1. 下载 `TypeFeng-1.0.0-arm64.dmg`；
+1. 下载 `TypeFeng-1.1.0-arm64.dmg`；
 2. 拖进「应用程序」；
 3. 首次打开若被 Gatekeeper 拦下：右键 → 打开，或执行
    `xattr -dr com.apple.quarantine /Applications/TypeFeng.app`；
@@ -79,7 +79,7 @@ npm run tauri -- build --ci --config src-tauri/tauri.macos.conf.json -- --locked
 产物：
 
 - `src-tauri/target/release/bundle/macos/TypeFeng.app`
-- `src-tauri/target/release/bundle/dmg/TypeFeng_1.0.0_aarch64.dmg`
+- `src-tauri/target/release/bundle/dmg/TypeFeng_1.1.0_aarch64.dmg`
 
 签名相关：本地 ad-hoc 构建可设置 `APPLE_SIGNING_IDENTITY="-"`；
 正式分发需自备 Apple Developer ID 与公证流程。

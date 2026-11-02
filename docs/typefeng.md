@@ -9,7 +9,7 @@
 | --- | --- | --- |
 | 应用名 | OpenLess | TypeFeng |
 | Bundle ID | com.openless.app | top.typefeng.desktop |
-| 版本 | 2.0.2-Beta.3 | 1.0.0 |
+| 版本 | 2.0.2-Beta.3 | 1.1.0 |
 | 图标 | OpenLess | TypeFeng（重新生成） |
 | 窗口/托盘/权限文案 | OpenLess | TypeFeng |
 

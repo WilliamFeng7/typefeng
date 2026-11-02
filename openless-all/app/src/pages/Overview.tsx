@@ -24,7 +24,7 @@ import {
 } from '../lib/activityMetrics';
 import type { ActivityDay, CredentialsStatus, DictationSession, PolishMode } from '../lib/types';
 import { useHotkeySettings } from '../state/HotkeySettingsContext';
-import { Btn, Card, PageHeader, Pill } from './_atoms';
+import { Btn, Card, Pill } from './_atoms';
 import { ASR_LABELS } from './settings/shared';
 import { isHarmonyHost } from '../lib/harmonyBridge';
 import { HarmonyDictation } from '../components/HarmonyDictation';
@@ -270,15 +270,31 @@ export function Overview({ onOpenHistory, onOpenSettings }: OverviewProps) {
         gap: 14,
       }}
     >
-      <PageHeader
-        compact
-        title={t('overview.title')}
-        right={
-          <Btn size="sm" icon="refresh" onClick={refreshAll}>
+      <section className="tf-hero">
+        <div className="tf-hero__copy">
+          <span className="tf-hero__kicker">TypeFeng · Voice first</span>
+          <h1>{t('overview.title')}</h1>
+          <div className="tf-hero__stats">
+            <b>{historyError ? '—' : formatLocaleNumber(metrics.charsToday, locale)}</b>
+            <span>{t('overview.metricChars')}</span>
+            <span aria-hidden="true">·</span>
+            <span>{t('overview.metricSegments', { count: metrics.segmentsToday })}</span>
+          </div>
+        </div>
+        <div className="tf-hero__aside">
+          <button type="button" className="tf-hero__refresh" onClick={refreshAll}>
+            <Icon name="refresh" size={14} />
             {t('overview.refresh')}
-          </Btn>
-        }
-      />
+          </button>
+          {prefs?.dictationHotkey.primary ? (
+            <span className="tf-hero__keys">
+              <Icon name="mic" size={13} />
+              <kbd>{prefs.dictationHotkey.primary}</kbd>
+            </span>
+          ) : null}
+        </div>
+      </section>
+
 
       {isHarmonyHost && <HarmonyDictation onComplete={refreshAll} />}
 
@@ -932,8 +948,8 @@ function PeriodChart({
                   height: `${(bucket.value / max) * 88}%`,
                   minHeight: 2,
                   borderRadius: dense ? 2 : 4,
-                  background: isToday ? 'var(--ol-blue)' : 'var(--ol-ink-4)',
-                  opacity: bucket.value === 0 ? 0.15 : isToday ? 1 : 0.85,
+                  background: 'linear-gradient(180deg, #7AA9FF 0%, #2563EB 100%)',
+                  opacity: bucket.value === 0 ? 0.12 : isToday ? 1 : 0.62,
                   transition:
                     'height 0.18s var(--ol-motion-soft), opacity 0.18s var(--ol-motion-soft)',
                 }}

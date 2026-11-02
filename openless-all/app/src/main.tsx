@@ -15,6 +15,7 @@ import './styles/tokens.css';
 import './styles/global.css';
 import './styles/overlays.css';
 import './styles/refinements.css';
+import './styles/typefeng.css';
 
 import type { OS } from './components/WindowChrome';
 

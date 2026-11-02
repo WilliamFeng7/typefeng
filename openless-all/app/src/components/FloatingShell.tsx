@@ -63,7 +63,7 @@ const STYLE_TAB_IDS: AppTab[] = ['style', 'marketplace'];
 
 /** Reserve the native traffic-light strip before the sidebar's version row. */
 const MAC_TRAFFIC_LIGHT_CLEARANCE = 44;
-const SIDEBAR_WIDTH = 226;
+const SIDEBAR_WIDTH = 246;
 
 /** tab → page component map (renders main content; decoupled from the sidebar tree, includes pages not listed there directly). */
 const PAGE_CMP: Record<Exclude<AppTab, 'localAsr'>, ComponentType> = {
@@ -151,6 +151,7 @@ function FloatingShellBody({
   const providerPromptMount = useExitMount(providerPromptOpen);
   const hotkeyPromptMount = useExitMount(hotkeyModePromptOpen);
   const [moreOpen, setMoreOpen] = useState(false);
+
   const [styleOpen, setStyleOpen] = useState(false);
   const shellRef = useRef<HTMLDivElement>(null);
 
@@ -331,43 +332,21 @@ function FloatingShellBody({
                 os === 'mac' ? `${MAC_TRAFFIC_LIGHT_CLEARANCE}px 10px 12px` : '10px 10px 12px',
             }}
           >
-            {/* Version row: replaces the old "TypeFeng" brand spot, filling the gap
-              above the nav; the BETA badge shares the version number's baseline. */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                flexWrap: 'wrap',
-                padding: '0 10px 12px',
-                fontFamily: 'var(--ol-font-sans)',
-                fontSize: 12,
-                color: 'var(--ol-ink-4)',
-              }}
-            >
-              <strong style={{ fontSize: 15, color: 'var(--ol-ink)', letterSpacing: '-0.02em' }}>
-                TypeFeng
-              </strong>
-              {IS_BETA_BUILD && (
-                <span
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    padding: '1px 6px',
-                    fontSize: 10,
-                    lineHeight: '14px',
-                    fontWeight: 'var(--ol-font-weight-semibold)',
-                    letterSpacing: '0.05em',
-                    textTransform: 'uppercase',
-                    color: 'var(--ol-blue)',
-                    background: 'transparent',
-                    border: '0.5px solid var(--ol-pill-blue-border)',
-                    borderRadius: 5,
-                  }}
-                >
-                  {t('shell.betaTag')}
-                </span>
-              )}
+            <div className="tf-brand">
+              <span className="tf-brand__mark" aria-hidden="true">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+                  <rect x="3" y="8.6" width="2.4" height="6.8" rx="1.2" fill="#EAF1FF" />
+                  <rect x="7.4" y="5.6" width="2.4" height="12.8" rx="1.2" fill="#EAF1FF" />
+                  <rect x="11.6" y="2.6" width="2.4" height="18.8" rx="1.2" fill="#FFFFFF" />
+                  <rect x="15.8" y="6.4" width="2.4" height="11.2" rx="1.2" fill="#EAF1FF" />
+                  <rect x="20" y="9" width="2.4" height="6" rx="1.2" fill="#EAF1FF" />
+                </svg>
+              </span>
+              <div className="tf-brand__copy">
+                <span className="tf-brand__name">TypeFeng</span>
+                <span className="tf-brand__tag">Voice · First</span>
+              </div>
+              {IS_BETA_BUILD && <span className="tf-brand__beta">{t('shell.betaTag')}</span>}
             </div>
 
             {/* nav — flat items + expandable groups. Flat: overview/history/vocab.

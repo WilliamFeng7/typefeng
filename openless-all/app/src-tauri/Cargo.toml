@@ -1,6 +1,6 @@
 [package]
 name = "openless"
-version = "1.0.0"
+version = "1.1.0"
 license = "AGPL-3.0-only"
 description = "TypeFeng — a TypeFeng fork of OpenLess, local voice input that types where your cursor is"
 authors = ["TypeFeng contributors", "OpenLess authors"]
