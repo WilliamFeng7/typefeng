@@ -817,7 +817,7 @@ export function QaPanel({ embedded = false, onRequestClose }: QaPanelProps = {})
             <span className="qa-symbol" aria-hidden="true">
               ✳
             </span>
-            <h1 data-tauri-drag-region={embedded ? undefined : true}>OpenLess</h1>
+            <h1 data-tauri-drag-region={embedded ? undefined : true}>TypeFeng</h1>
             <div className="qa-window-actions">
               <button
                 type="button"

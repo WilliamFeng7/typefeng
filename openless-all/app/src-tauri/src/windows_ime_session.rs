@@ -74,7 +74,7 @@ pub fn should_fallback_after_ime_result(status: ImeSubmitStatus) -> bool {
     )
 }
 
-/// Submits dictated text to the OpenLess text service inside the target app.
+/// Submits dictated text to the TypeFeng text service inside the target app.
 ///
 /// The text service is registered under the TSF speech category, which TSF keeps
 /// active next to the user's keyboard IME. There is no per-dictation session to

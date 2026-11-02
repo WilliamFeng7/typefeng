@@ -392,7 +392,7 @@ export function makeMockStylePack(
     id,
     name,
     description,
-    author: 'OpenLess',
+    author: 'TypeFeng',
     version: '1.0.0',
     kind,
     baseMode,
@@ -483,7 +483,7 @@ export function composeMockStylePackRuntimeDiagnostics(
   const contextPremise = mockSettings.workingLanguages.length
     ? ['# Context', `Working languages: ${mockSettings.workingLanguages.join(', ')}`].join('\n')
     : '';
-  const hotwordLines = [`GitHub`, `OpenLess`];
+  const hotwordLines = [`GitHub`, `TypeFeng`];
   const hotwordBlock =
     hotwordLines.length > 0
       ? [

@@ -296,8 +296,8 @@ pub(crate) fn next_press_id() -> u64 {
 }
 
 /// While a session is active (capsule showing recording/transcribing/polishing), Esc is owned
-/// exclusively by OpenLess: the tap/hook swallows the keydown and does not forward it to the host
-/// app. Otherwise one Esc would take effect twice — canceling the OpenLess session and triggering
+/// exclusively by TypeFeng: the tap/hook swallows the keydown and does not forward it to the host
+/// app. Otherwise one Esc would take effect twice — canceling the TypeFeng session and triggering
 /// the host app's own Esc behavior (e.g. canceling a Claude reply being generated). This mirrors
 /// IME behavior: while the composition window is active, Esc only cancels candidates and the host
 /// app never sees it. keyup is not swallowed: host apps almost all respond to Esc on keydown, an
@@ -1674,7 +1674,7 @@ mod platform {
                 // Synthetic input (SendInput/keybd_event) and real keyboards share the same
                 // dispatch path. As long as the event's virtual key matches the current
                 // configuration, the existing edge dedup and combo-abort logic still decide
-                // whether OpenLess fires; no filtering by synthetic-input source here.
+                // whether TypeFeng fires; no filtering by synthetic-input source here.
                 if dispatch_keyboard_event(ctx, keyboard.vkCode, wparam.0) {
                     return LRESULT(1);
                 }

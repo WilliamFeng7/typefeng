@@ -26,7 +26,7 @@ pub fn run() {
             }
 
             crate::init_file_logger();
-            log::info!("=== OpenLess mobile 启动 ===");
+            log::info!("=== TypeFeng mobile 启动 ===");
             initialize_android_ndk_context_for_audio();
 
             if let Some(main) = app.get_webview_window("main") {
@@ -47,7 +47,7 @@ pub fn run() {
             coordinator.bind_restore_runtime_effects()?;
             let startup = tauri::async_runtime::block_on(core_backend.start())?;
             if !startup.backend.running {
-                return Err("OpenLess Core did not reach the running state".into());
+                return Err("TypeFeng Core did not reach the running state".into());
             }
             crate::tauri_events::start(app.handle().clone(), Arc::clone(&core_backend));
             #[cfg(target_os = "android")]

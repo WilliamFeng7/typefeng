@@ -1,4 +1,4 @@
-//! OpenLess Tauri backend.
+//! TypeFeng Tauri backend.
 //!
 //! Modules mirror the original Swift libraries (one purpose per file):
 //! - hotkey: global hotkey monitor
@@ -138,7 +138,7 @@ use std::time::Duration;
 
 const LOG_ROTATE_LIMIT_BYTES: u64 = 10 * 1024 * 1024;
 #[cfg(target_os = "macos")]
-const OPENLESS_BUNDLE_ID: &str = "com.openless.app";
+const OPENLESS_BUNDLE_ID: &str = "top.typefeng.desktop";
 
 /// Positions the QA window at the bottom-center of the screen on first show only, so the
 /// user-dragged position survives hide → show cycles. See issue #118 v2.
@@ -897,7 +897,7 @@ fn run_desktop() {
         .manage(commands::TrayMicrophoneMenuState::new(Vec::new()))
         .manage(TrayMicrophoneDeviceCache(parking_lot::Mutex::new(Vec::new())))
         .setup(move |app| {
-            log::info!("=== OpenLess 启动 ===");
+            log::info!("=== TypeFeng 启动 ===");
 
             // Position the capsule at the bottom-center of the screen and hide it at
             // startup; the coordinator shows it on demand. Same semantics as Swift
@@ -1229,7 +1229,7 @@ impl TrayLabels {
                 default_microphone: "System default microphone",
                 no_microphones: "No microphones found",
                 default_device_suffix: " (System default)",
-                quit: "Quit OpenLess",
+                quit: "Quit TypeFeng",
                 raw: "Raw",
                 light: "Light polish",
                 structured: "Structured",
@@ -1242,7 +1242,7 @@ impl TrayLabels {
                 default_microphone: "Micrófono del sistema",
                 no_microphones: "No se encontraron micrófonos",
                 default_device_suffix: " (Predeterminado del sistema)",
-                quit: "Salir de OpenLess",
+                quit: "Salir de TypeFeng",
                 raw: "Texto original",
                 light: "Pulido ligero",
                 structured: "Estructurado",
@@ -1255,7 +1255,7 @@ impl TrayLabels {
                 default_microphone: "Microphone du système",
                 no_microphones: "Aucun microphone détecté",
                 default_device_suffix: " (Par défaut du système)",
-                quit: "Quitter OpenLess",
+                quit: "Quitter TypeFeng",
                 raw: "Texte original",
                 light: "Retouche légère",
                 structured: "Structuré",
@@ -1268,7 +1268,7 @@ impl TrayLabels {
                 default_microphone: "Systemmikrofon",
                 no_microphones: "Keine Mikrofone gefunden",
                 default_device_suffix: " (Systemstandard)",
-                quit: "OpenLess beenden",
+                quit: "TypeFeng beenden",
                 raw: "Originaltext",
                 light: "Leichte Überarbeitung",
                 structured: "Strukturiert",
@@ -1281,7 +1281,7 @@ impl TrayLabels {
                 default_microphone: "系統預設麥克風",
                 no_microphones: "找不到麥克風",
                 default_device_suffix: "（系統預設）",
-                quit: "退出 OpenLess",
+                quit: "退出 TypeFeng",
                 raw: "原文",
                 light: "輕度潤色",
                 structured: "清晰結構",
@@ -1294,7 +1294,7 @@ impl TrayLabels {
                 default_microphone: "システムのデフォルトマイク",
                 no_microphones: "マイクが見つかりません",
                 default_device_suffix: "（システムのデフォルト）",
-                quit: "OpenLessを終了",
+                quit: "TypeFengを終了",
                 raw: "原文",
                 light: "軽い整文",
                 structured: "明確な構造",
@@ -1307,7 +1307,7 @@ impl TrayLabels {
                 default_microphone: "시스템 기본 마이크",
                 no_microphones: "마이크를 찾을 수 없음",
                 default_device_suffix: "（시스템 기본）",
-                quit: "OpenLess 종료",
+                quit: "TypeFeng 종료",
                 raw: "원문",
                 light: "가벼운 정리",
                 structured: "명확한 구조",
@@ -1320,7 +1320,7 @@ impl TrayLabels {
                 default_microphone: "系统默认麦克风",
                 no_microphones: "未发现麦克风",
                 default_device_suffix: "（系统默认）",
-                quit: "退出 OpenLess",
+                quit: "退出 TypeFeng",
                 raw: "原文",
                 light: "轻度润色",
                 structured: "清晰结构",
@@ -1868,7 +1868,7 @@ fn prepare_for_restart() {
     // macOS: auto-updates leave the newly installed .app with com.apple.quarantine (no
     // matter how the Tauri updater unpacks, the download stream goes through LaunchServices
     // and the output may still carry the xattr). Without stripping it, Gatekeeper blocks
-    // the relaunch with "OpenLess is damaged / from an unidentified developer", forcing the
+    // the relaunch with "TypeFeng is damaged / from an unidentified developer", forcing the
     // user to run xattr -cr manually — violating "auto-update must be zero-friction".
     //
     // Clear the xattr once, blocking, before restart. Tolerate failures (bad PATH, missing
@@ -1945,7 +1945,7 @@ pub(crate) fn reset_tcc_service_for_restart(service: &str, reason: &str) {
     }
 }
 
-/// Writes logs to both stderr and ~/Library/Logs/OpenLess/openless.log (matches Swift `Log.swift`).
+/// Writes logs to both stderr and ~/Library/Logs/TypeFeng/openless.log (matches Swift `Log.swift`).
 pub(crate) fn init_file_logger() {
     use simplelog::{
         ColorChoice, CombinedLogger, ConfigBuilder, LevelFilter, TermLogger, TerminalMode,
@@ -2012,14 +2012,14 @@ pub fn log_dir_path() -> std::path::PathBuf {
             return std::path::PathBuf::from(home)
                 .join("Library")
                 .join("Logs")
-                .join("OpenLess");
+                .join("TypeFeng");
         }
     }
     #[cfg(target_os = "windows")]
     {
         if let Ok(local) = std::env::var("LOCALAPPDATA") {
             return std::path::PathBuf::from(local)
-                .join("OpenLess")
+                .join("TypeFeng")
                 .join("Logs");
         }
     }
@@ -2029,7 +2029,7 @@ pub fn log_dir_path() -> std::path::PathBuf {
             return std::path::PathBuf::from(home)
                 .join(".local")
                 .join("share")
-                .join("OpenLess")
+                .join("TypeFeng")
                 .join("logs");
         }
     }
@@ -2044,7 +2044,7 @@ pub fn log_dir_path() -> std::path::PathBuf {
     }
     #[cfg(not(target_os = "android"))]
     {
-        std::env::temp_dir().join("OpenLess")
+        std::env::temp_dir().join("TypeFeng")
     }
 }
 
@@ -2205,7 +2205,7 @@ fn activate_app<R: Runtime>(app: &AppHandle<R>) {
 #[cfg(not(target_os = "macos"))]
 fn activate_app<R: Runtime>(_app: &AppHandle<R>) {}
 
-/// Called after showing the capsule: if OpenLess is already the frontmost app, restore main
+/// Called after showing the capsule: if TypeFeng is already the frontmost app, restore main
 /// window focus via makeKeyWindow. Does not call NSApp.activate or steal focus from other
 /// apps, per the CLAUDE.md constraint.
 #[cfg(target_os = "macos")]
@@ -2924,9 +2924,9 @@ pub(crate) fn show_qa_window<R: tauri::Runtime>(app: &AppHandle<R>, content_kind
         }
         QA_WINDOW_POSITIONED.store(true, Ordering::Relaxed);
     }
-    // macOS: don't use window.show() (it does makeKeyAndOrderFront, pushing OpenLess to
+    // macOS: don't use window.show() (it does makeKeyAndOrderFront, pushing TypeFeng to
     // frontmost; the subsequent capture_selection AX read / Cmd+C fallback would then run
-    // against OpenLess's own webview → can't grab the original app's selection). Use
+    // against TypeFeng's own webview → can't grab the original app's selection). Use
     // orderFrontRegardless so the window is visible but **not** key; the user's app stays
     // frontmost and AX can still read the selection. Standard Spotlight / Raycast approach.
     //
@@ -2985,10 +2985,10 @@ pub(crate) fn show_qa_window<R: tauri::Runtime>(app: &AppHandle<R>, content_kind
 /// Converts the chat-panel floating windows (qa / less-computer) into non-activating
 /// NSPanels (macOS; same technique as the capsule).
 ///
-/// Goal: the panel can become key window **without OpenLess being activated** (Spotlight
+/// Goal: the panel can become key window **without TypeFeng being activated** (Spotlight
 /// style). Previously typing focus went through `window.set_focus()`, which activates the
 /// whole app — the main window (settings page) comes to the foreground too, frontmost
-/// becomes OpenLess itself, and AX can no longer read the original app's selection. After
+/// becomes TypeFeng itself, and AX can no longer read the original app's selection. After
 /// the NonactivatingPanel conversion, clicking the input box / makeKeyWindow gives only the
 /// panel keyboard focus: the app stays in the background, the main window doesn't move, and
 /// frontmost is always the user's original app.
@@ -3082,7 +3082,7 @@ fn ensure_qa_window<R: tauri::Runtime>(app: &AppHandle<R>) -> Option<tauri::Webv
     }
     let built =
         WebviewWindowBuilder::new(app, "qa", WebviewUrl::App("index.html?window=qa".into()))
-            .title("OpenLess QA")
+            .title("TypeFeng QA")
             .inner_size(QA_WINDOW_WIDTH, QA_WINDOW_HEIGHT)
             .decorations(false)
             .transparent(true)
@@ -3141,7 +3141,7 @@ fn ensure_less_computer_window<R: tauri::Runtime>(
         "less-computer",
         WebviewUrl::App("index.html?window=less-computer".into()),
     )
-    .title("OpenLess Less Computer")
+    .title("TypeFeng Less Computer")
     .inner_size(LESS_COMPUTER_WINDOW_WIDTH, LESS_COMPUTER_WINDOW_HEIGHT)
     .decorations(true)
     .title_bar_style(tauri::TitleBarStyle::Overlay)
@@ -3193,7 +3193,7 @@ fn ensure_less_computer_window<R: tauri::Runtime>(
         "less-computer",
         WebviewUrl::App("index.html?window=less-computer".into()),
     )
-    .title("OpenLess Less Computer")
+    .title("TypeFeng Less Computer")
     .inner_size(LESS_COMPUTER_WINDOW_WIDTH, LESS_COMPUTER_WINDOW_HEIGHT)
     .decorations(false)
     .transparent(true)
@@ -3292,7 +3292,7 @@ fn ensure_voice_edit_window<R: tauri::Runtime>(
         "voice-edit",
         WebviewUrl::App("index.html?window=voice-edit".into()),
     )
-    .title("OpenLess 语音编辑")
+    .title("TypeFeng 语音编辑")
     .inner_size(VOICE_EDIT_WINDOW_WIDTH, VOICE_EDIT_WINDOW_HEIGHT)
     .min_inner_size(380.0, 420.0)
     .decorations(false)
@@ -3409,7 +3409,7 @@ fn ensure_selection_voice_intent_prompt_window<R: tauri::Runtime>(
         "selection-voice-intent",
         WebviewUrl::App("index.html?window=selection-voice-intent".into()),
     )
-    .title("OpenLess 選區語音")
+    .title("TypeFeng 選區語音")
     .inner_size(420.0, 280.0)
     .min_inner_size(360.0, 240.0)
     .resizable(true)
@@ -4015,7 +4015,7 @@ mod tests {
         assert_eq!(english.style, "Output style");
         assert_eq!(english.microphone, "Select microphone");
         assert_eq!(english.default_microphone, "System default microphone");
-        assert_eq!(english.quit, "Quit OpenLess");
+        assert_eq!(english.quit, "Quit TypeFeng");
         assert_eq!(english.style_pack_name(PolishMode::Light), "Light polish");
         assert_eq!(
             english.default_device_label("USB microphone"),
@@ -4024,7 +4024,7 @@ mod tests {
 
         let chinese = TrayLabels::for_locale("zh-CN");
         assert_eq!(chinese.style_pack_name(PolishMode::Structured), "清晰结构");
-        assert_eq!(TrayLabels::for_locale("es").quit, "Salir de OpenLess");
+        assert_eq!(TrayLabels::for_locale("es").quit, "Salir de TypeFeng");
         assert_eq!(
             TrayLabels::for_locale("fr").toggle,
             "Afficher la fenêtre principale"

@@ -39,7 +39,7 @@ export function DebugToolsSection() {
 
   /// Click → count down a few seconds → read the foreground app's cursor context once.
   ///
-  /// A countdown is required: at the moment the button is clicked the foreground app is OpenLess
+  /// A countdown is required: at the moment the button is clicked the foreground app is TypeFeng
   /// itself, so reading directly would only read our own settings window. During the countdown the
   /// user switches to Notes / VS Code / WeChat and clicks into an input field, and only then does
   /// the probe read something real.

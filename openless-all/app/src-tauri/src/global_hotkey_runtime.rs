@@ -1,7 +1,7 @@
 //! Shared `global-hotkey` runtime.
 //!
 //! `global-hotkey` installs a process-level Carbon event handler on macOS and
-//! exposes one process-level event receiver. OpenLess has two logical users of
+//! exposes one process-level event receiver. TypeFeng has two logical users of
 //! that crate (QA and custom dictation combos), so they must share one manager
 //! and one dispatcher instead of racing on `GlobalHotKeyEvent::receiver()`.
 

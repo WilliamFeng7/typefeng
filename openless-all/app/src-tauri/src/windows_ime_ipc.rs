@@ -83,8 +83,8 @@ impl std::fmt::Display for WindowsImeIpcError {
             | Self::Io(message) => {
                 write!(f, "{message}")
             }
-            Self::NoReadyClient => write!(f, "no OpenLess IME client is ready"),
-            Self::Timeout => write!(f, "OpenLess IME IPC timed out"),
+            Self::NoReadyClient => write!(f, "no TypeFeng IME client is ready"),
+            Self::Timeout => write!(f, "TypeFeng IME IPC timed out"),
         }
     }
 }
@@ -109,7 +109,7 @@ fn classify_submit_reply(reply: u32) -> WindowsImeIpcResult<()> {
                 .to_string(),
         )),
         IME_STATUS_BAD_REQUEST => Err(WindowsImeIpcError::Protocol(
-            "IME rejected the submit payload; the target process may still have an older OpenLessIme.dll loaded; restart the target app after updating OpenLess"
+            "IME rejected the submit payload; the target process may still have an older OpenLessIme.dll loaded; restart the target app after updating TypeFeng"
                 .to_string(),
         )),
         code if is_failed_hresult(code) => Err(WindowsImeIpcError::Io(format!(
@@ -154,7 +154,7 @@ fn classify_query_reply(reply: u32) -> WindowsImeIpcResult<Option<ImeSubmitStatu
 }
 
 /// Tokens only have to differ between consecutive submits to one IME window,
-/// including across an OpenLess restart; zero is reserved by the DLL.
+/// including across an TypeFeng restart; zero is reserved by the DLL.
 fn next_submit_token() -> u32 {
     static SEQUENCE: AtomicU32 = AtomicU32::new(1);
     let sequence = SEQUENCE.fetch_add(1, Ordering::Relaxed) & 0xFFFF;
@@ -244,11 +244,11 @@ pub struct ImeSubmitRequest {
     pub op: ImeSubmitOp,
     /// Stable owner for the live composition across submit/query tokens.
     pub composition_owner: u32,
-    /// OpenLess process instance that owns the composition. A changed value permits native
+    /// TypeFeng process instance that owns the composition. A changed value permits native
     /// recovery after the process that created an orphaned composition has exited.
     pub composition_process_id: u32,
     /// Allow a recovery Cancel to use another same-process IME window when the original target
-    /// thread has no registered OpenLess service. This is only safe for native recovery because
+    /// thread has no registered TypeFeng service. This is only safe for native recovery because
     /// owner checks still reject a same-process composition owned by another insertion.
     pub allow_same_process_fallback: bool,
 }
@@ -301,7 +301,7 @@ impl WindowsImeIpcServer {
             let _ = self;
             let _ = request;
             Err(WindowsImeIpcError::Unavailable(
-                "OpenLess IME IPC is only available on Windows".to_string(),
+                "TypeFeng IME IPC is only available on Windows".to_string(),
             ))
         }
     }
@@ -526,7 +526,7 @@ mod windows_message {
         )
         .map_err(|failure| match failure {
             SendFailure::TimedOut => WindowsImeIpcError::OutcomeUnknown(
-                "OpenLess IME did not acknowledge the submit in time".to_string(),
+                "TypeFeng IME did not acknowledge the submit in time".to_string(),
             ),
             SendFailure::NotDelivered(ERROR_ACCESS_DENIED) => WindowsImeIpcError::Io(
                 "IME window refused the message (target runs at a higher integrity level)"
@@ -626,7 +626,7 @@ mod windows_message {
             }
             if Instant::now() >= deadline {
                 return Err(WindowsImeIpcError::OutcomeUnknown(
-                    "OpenLess IME IPC timed out after submit dispatch".to_string(),
+                    "TypeFeng IME IPC timed out after submit dispatch".to_string(),
                 ));
             }
         }

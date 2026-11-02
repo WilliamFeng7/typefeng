@@ -443,7 +443,7 @@ export interface UserPreferences {
   macosNewlineMode: MacosNewlineMode;
   /** Legacy compat: `true` is equivalent to `windowsInsertionMode === 'sendInput'`. */
   windowsSendInputInsertionOnly: boolean;
-  /** Windows: whether to show OpenLess in the system keyboard list (Win+Space) for non-TSF insertion. */
+  /** Windows: whether to show TypeFeng in the system keyboard list (Win+Space) for non-TSF insertion. */
   windowsShowOpenlessInKeyboardList: boolean;
   /** User's working languages (multi-select, native names); injected as a premise at the head of LLM polish/translate prompts. */
   workingLanguages: string[];
@@ -486,7 +486,7 @@ export interface UserPreferences {
   translationHotkey: ShortcutBinding;
   /** Global hotkey to switch to the previous polish style. null = disabled by user (issue #576). */
   switchStyleHotkey: ShortcutBinding | null;
-  /** Global hotkey to open the OpenLess main window. null = disabled by user (issue #576). */
+  /** Global hotkey to open the TypeFeng main window. null = disabled by user (issue #576). */
   openAppHotkey: ShortcutBinding | null;
   /** Style pack direct hotkeys: pressing one activates the corresponding style pack. Default empty list (issue #759). */
   stylePackHotkeys: StylePackHotkey[];

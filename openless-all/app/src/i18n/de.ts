@@ -59,7 +59,7 @@ export const de: typeof zhCN = {
       'Leer lassen, um den offiziellen Sync-Server zu verwenden. Die Adresse muss mit https:// beginnen und eine Root-URL sein.',
     protocolTitle: 'Cloud-Sync: Vereinbarung und Datenschutz',
     protocolIntro:
-      'OpenLess und seine unabhängigen Entwickler respektieren Ihre Privatsphäre und schützen Ihre Daten. Lesen Sie diese Hinweise, bevor Sie fortfahren.',
+      'TypeFeng und seine unabhängigen Entwickler respektieren Ihre Privatsphäre und schützen Ihre Daten. Lesen Sie diese Hinweise, bevor Sie fortfahren.',
     protocolPasswordTitle: 'Synchronisierungspasswort sicher aufbewahren',
     protocolPassword:
       'Passwort und Entschlüsselungsschlüssel werden lokal verwendet und nicht an den Sync-Dienst gesendet. Geht das Passwort verloren und kann kein Gerät das Backup mehr entsperren, können wir den Inhalt nicht wiederherstellen.',
@@ -68,7 +68,7 @@ export const de: typeof zhCN = {
       'Einstellungen, API-Schlüssel und Textverlauf werden auf diesem Gerät verschlüsselt. Backup-Inhalte werden als Geheimtext übertragen und gespeichert. Der Sync-Dienst kann Ihre API-Schlüssel daraus weder lesen noch verwenden und führt damit keine Modellanfragen aus.',
     protocolExcludedTitle: 'Anmeldestatus und sichtbare Metadaten',
     protocolExcluded:
-      'Das Backup enthält weder Sync-Passwort noch Entschlüsselungsschlüssel, von OpenLess verwaltete GitHub/OAuth-Anmeldedaten, Zugriffstoken oder private Geräteschlüssel. Die Kontoanmeldung verarbeitet notwendige Zugangsdaten separat. Kontokennung, Größe, Versionen und Sync-Zeiten bleiben für den Server sichtbar.',
+      'Das Backup enthält weder Sync-Passwort noch Entschlüsselungsschlüssel, von TypeFeng verwaltete GitHub/OAuth-Anmeldedaten, Zugriffstoken oder private Geräteschlüssel. Die Kontoanmeldung verarbeitet notwendige Zugangsdaten separat. Kontokennung, Größe, Versionen und Sync-Zeiten bleiben für den Server sichtbar.',
     protocolCheck:
       'Ich habe diese Vereinbarung gelesen, verstehe den Umfang und bewahre mein Sync-Passwort sicher auf.',
     protocolBack: 'Zurück zum Umfang',
@@ -283,15 +283,15 @@ export const de: typeof zhCN = {
     Changed: 'Der Shortcut wurde während des Speicherns geändert. Bitte erneut versuchen.',
     label: 'Mac-Diktat-Taste',
     description:
-      'Ersetzt den aktuellen Diktat-Shortcut durch die Mikrofontaste. Beim Beenden von OpenLess wird die Taste an macOS zurückgegeben.',
+      'Ersetzt den aktuellen Diktat-Shortcut durch die Mikrofontaste. Beim Beenden von TypeFeng wird die Taste an macOS zurückgegeben.',
     Permission:
-      'Erlaube OpenLess unter macOS „Datenschutz & Sicherheit → Bedienungshilfen“ und versuche es erneut.',
+      'Erlaube TypeFeng unter macOS „Datenschutz & Sicherheit → Bedienungshilfen“ und versuche es erneut.',
     Busy: 'Beende erst die aktuelle Diktat-Sitzung, bevor du den Shortcut änderst.',
     Unavailable:
       'Der Shortcut konnte nicht aktiviert werden; die gespeicherte Zuordnung ist unverändert. Versuche es erneut oder wähle eine andere Taste.',
   },
   app: {
-    name: 'OpenLess',
+    name: 'TypeFeng',
     tagline: 'Natürlich sprechen, klar schreiben',
   },
   common: {
@@ -370,7 +370,7 @@ export const de: typeof zhCN = {
       sending: 'Deine Frage wird gesendet…',
       addUnavailable: 'Inhalt hinzufügen · noch nicht verfügbar',
       browserUnavailable: 'Vorschau führt keine Befehle aus',
-      answer: 'OpenLess-Antwort',
+      answer: 'TypeFeng-Antwort',
       layoutError: 'Das Fenster konnte nicht vergrößert werden. Schließe und öffne es erneut.',
     },
     title: 'Nachfragen',
@@ -676,7 +676,7 @@ export const de: typeof zhCN = {
     },
   },
   onboarding: {
-    welcome: 'Willkommen bei OpenLess',
+    welcome: 'Willkommen bei TypeFeng',
     intro:
       'Lokal sprechen, lokal schreiben. Vor dem Start werden zwei Systemberechtigungen benötigt.',
     accessibilityTitle: 'Bedienungshilfen',
@@ -689,21 +689,21 @@ export const de: typeof zhCN = {
     actionNotApplicable: 'Nicht erforderlich',
     actionGranted: 'Erlaubt',
     actionOpenSystem: 'Systemeinstellungen öffnen',
-    actionRestart: 'Bedienungshilfen zurücksetzen und OpenLess neu starten',
+    actionRestart: 'Bedienungshilfen zurücksetzen und TypeFeng neu starten',
     actionGrant: 'Erlauben',
     actionRequestMic: 'Zugriff anfordern',
     micNoDeviceHint:
       'Kein Mikrofon erkannt. Schließe ein Mikrofon an, aktiviere es und versuche es erneut.',
     accessibilityHint:
-      'Nach der Freigabe musst du **OpenLess vollständig beenden** und erneut öffnen (Vorgabe von macOS TCC).',
+      'Nach der Freigabe musst du **TypeFeng vollständig beenden** und erneut öffnen (Vorgabe von macOS TCC).',
     footerHint:
-      'Diese Einführung schließt sich automatisch, sobald beide Berechtigungen erteilt wurden. Falls sie weiterhin angezeigt wird, beende OpenLess über die Menüleiste und starte es erneut.',
+      'Diese Einführung schließt sich automatisch, sobald beide Berechtigungen erteilt wurden. Falls sie weiterhin angezeigt wird, beende TypeFeng über die Menüleiste und starte es erneut.',
     continueToSettings:
       'Nur Einstellungen öffnen (Spracheingabe und globale Kurzbefehle nicht verfügbar)',
     androidContinue: 'Zur App',
     androidFooterHint:
       'Für Diktate ist Mikrofonzugriff erforderlich. Tippe oben auf „Zugriff anfordern“ oder fahre fort und erteile ihn später in der Übersicht.',
-    androidTitle: 'OpenLess einrichten',
+    androidTitle: 'TypeFeng einrichten',
     androidIntro: 'Richte Berechtigungen und Dienste für Mobilgeräte Schritt für Schritt ein.',
     androidStepCounter: 'Schritt {{current}} von {{total}}',
     androidBack: 'Zurück',
@@ -712,13 +712,13 @@ export const de: typeof zhCN = {
     androidSteps: {
       microphoneTitle: 'Mikrofonberechtigung',
       microphoneDesc:
-        'Öffne den Android-Berechtigungsdialog und erlaube OpenLess, Sprache aufzunehmen.',
+        'Öffne den Android-Berechtigungsdialog und erlaube TypeFeng, Sprache aufzunehmen.',
       accessibilityTitle: 'Bedienungshilfendienst',
       accessibilityDesc:
         'Fügt Erkennungsergebnisse in das aktive Eingabefeld ein und hilft, den Eingabekontext zu erkennen.',
       overlayPermissionTitle: 'Berechtigung für schwebende Fenster',
       overlayPermissionDesc:
-        'Erlaube OpenLess, die Aufnahmesteuerung über anderen Apps anzuzeigen.',
+        'Erlaube TypeFeng, die Aufnahmesteuerung über anderen Apps anzuzeigen.',
       overlayConfigTitle: 'Einstellungen für schwebende Fenster',
       overlayConfigDesc: 'Sichtbarkeit, Aktivierung, Wischaktionen und Tastengröße einstellen.',
       asrTitle: 'ASR-Clouddienst',
@@ -1157,7 +1157,7 @@ export const de: typeof zhCN = {
       fullPromptTitle: 'System-Prompt',
       fullPromptHint: 'Der zu diesem Paket gehörende Prompt.',
       promptChars: '{{count}} Zeichen',
-      runtimeTitle: 'OpenLess-Laufzeitanweisungen',
+      runtimeTitle: 'TypeFeng-Laufzeitanweisungen',
       runtimeDesc: 'Schreibgeschützte Ergänzungen zur Laufzeit.',
       runtimeContextTitle: 'Kontextgrundlage',
       runtimeContextDesc: 'Aus Sprach- und App-Kontext',
@@ -1570,7 +1570,7 @@ export const de: typeof zhCN = {
       capsuleDisplayPrimaryScreen: 'Nur Hauptbildschirm',
       capsuleDisplayForegroundWindowScreen: 'Bildschirm des Vordergrundfensters',
       capsuleDisplayAllScreens: 'Auf allen Bildschirmen anzeigen',
-      capsuleDisplayModeRestartTitle: 'OpenLess neu starten, um den Anzeigemodus anzuwenden',
+      capsuleDisplayModeRestartTitle: 'TypeFeng neu starten, um den Anzeigemodus anzuwenden',
       capsuleDisplayModeRestartDesc:
         'Der Wechsel vom Modus für alle Bildschirme erfordert einen Neustart, um die bisherigen Kapselfenster zu schließen. Jetzt neu starten?',
       capsuleStyleLabel: 'Kapselstil',
@@ -1704,11 +1704,11 @@ export const de: typeof zhCN = {
       windowsSendInputNewlineModeEnter: 'Enter (die meisten Editoren)',
       windowsSendInputNewlineModeShiftEnter: 'Shift+Enter (Chateingabefelder)',
       windowsSendInputNewlineModeCrLf: 'CR+LF Unicode',
-      windowsShowOpenlessInKeyboardListLabel: 'OpenLess in der Tastaturliste anzeigen',
+      windowsShowOpenlessInKeyboardListLabel: 'TypeFeng in der Tastaturliste anzeigen',
       windowsShowOpenlessInKeyboardListDesc:
-        'Wenn deaktiviert, wechselt Win+Space nicht zu OpenLess. SendInput und Einfügen über die Zwischenablage funktionieren weiterhin. Aktiviere die Option erneut, um den Eintrag wiederherzustellen.',
+        'Wenn deaktiviert, wechselt Win+Space nicht zu TypeFeng. SendInput und Einfügen über die Zwischenablage funktionieren weiterhin. Aktiviere die Option erneut, um den Eintrag wiederherzustellen.',
       windowsShowOpenlessInKeyboardListError:
-        'Die Tastaturliste konnte nicht aktualisiert werden: Das System hat die Änderung des OpenLess-Sprachprofils abgelehnt.',
+        'Die Tastaturliste konnte nicht aktualisiert werden: Das System hat die Änderung des TypeFeng-Sprachprofils abgelehnt.',
       historyGroupTitle: 'Verlauf und Kontext',
       historyRetentionLabel: 'Verlauf aufbewahren (Tage)',
       historyRetentionDesc:
@@ -1760,7 +1760,7 @@ export const de: typeof zhCN = {
       marketplaceDevLoginDesc:
         'Identifiziert die hochladende Person. Leer lassen, um Hochladen und „Gefällt mir“ zu deaktivieren.',
       startupAtBoot: 'Bei Anmeldung starten',
-      startupAtBootDesc: 'Startet OpenLess automatisch, wenn du dich anmeldest.',
+      startupAtBootDesc: 'Startet TypeFeng automatisch, wenn du dich anmeldest.',
       startupAtBootError: 'Start bei Anmeldung konnte nicht geändert werden: {{message}}',
     },
     channels: {
@@ -1847,7 +1847,7 @@ export const de: typeof zhCN = {
       credentialStorageNotice:
         'Zugangsdaten werden im geschützten Zugangsspeicher des Betriebssystems gespeichert.',
       codexOAuthNotice:
-        'Codex OAuth nutzt die lokale Codex-Anmeldung (~/.codex/auth.json). OpenLess speichert dafür weder API-Schlüssel noch Basis-URL.',
+        'Codex OAuth nutzt die lokale Codex-Anmeldung (~/.codex/auth.json). TypeFeng speichert dafür weder API-Schlüssel noch Basis-URL.',
       asrProviderDesc:
         'Beim Anbieterwechsel werden automatisch die zugehörigen Zugangsdaten geladen.',
       asrTitle: 'ASR (Transkription)',
@@ -2115,7 +2115,7 @@ export const de: typeof zhCN = {
       cancel: 'Aktuelle Aufnahme abbrechen',
       confirm: 'Einfügen über die Kapsel bestätigen',
       switchStyle: 'Zum vorherigen Stil wechseln',
-      openApp: 'OpenLess öffnen',
+      openApp: 'TypeFeng öffnen',
       stylePackTitle: 'Stilkurzbefehle',
       stylePackDesc:
         'Weise deinen Lieblingsstilpaketen Kurzbefehle zu, um mit einem Tastendruck zu wechseln. Deaktivierte Pakete werden dabei automatisch wieder aktiviert.',
@@ -2140,9 +2140,9 @@ export const de: typeof zhCN = {
     permissions: {
       title: 'Berechtigungen',
       descAcc:
-        'OpenLess benötigt die folgenden Systemberechtigungen. Beende die App nach der Freigabe vollständig und starte sie erneut, damit Änderungen wirksam werden.',
+        'TypeFeng benötigt die folgenden Systemberechtigungen. Beende die App nach der Freigabe vollständig und starte sie erneut, damit Änderungen wirksam werden.',
       descNoAcc:
-        'OpenLess benötigt Mikrofonzugriff und prüft anhand des globalen Kurzbefehlstatus, ob der native Hook läuft.',
+        'TypeFeng benötigt Mikrofonzugriff und prüft anhand des globalen Kurzbefehlstatus, ob der native Hook läuft.',
       micLabel: 'Mikrofon',
       micDesc: 'Erfasst deine Spracheingabe.',
       accLabel: 'Bedienungshilfen',
@@ -2171,7 +2171,7 @@ export const de: typeof zhCN = {
       hotkeyFailed: 'Kurzbefehlüberwachung fehlgeschlagen',
       windowsImeLabel: 'Windows-Eingabemethode',
       windowsImeDesc:
-        'Fügt diktierten Text über den OpenLess-TSF-Textdienst ein, der neben Ihrer Eingabemethode aktiv bleibt, um Einschränkungen der Zwischenablage zu umgehen.',
+        'Fügt diktierten Text über den TypeFeng-TSF-Textdienst ein, der neben Ihrer Eingabemethode aktiv bleibt, um Einschränkungen der Zwischenablage zu umgehen.',
       windowsImeInstalled: 'Installiert',
       windowsImeUnavailable: 'Nicht verfügbar',
       androidImeLabel: 'Eingabemethode (IME)',
@@ -2185,10 +2185,10 @@ export const de: typeof zhCN = {
       androidAccessibilityGrantedStale: 'Erlaubt, nicht verbunden',
       androidAccessibilityMessages: {
         not_android: 'Der Bedienungshilfenstatus ist nur auf Android verfügbar.',
-        not_enabled: 'Aktiviere OpenLess in den Bedienungshilfeneinstellungen des Systems.',
+        not_enabled: 'Aktiviere TypeFeng in den Bedienungshilfeneinstellungen des Systems.',
         operational: 'Der Bedienungshilfendienst läuft.',
         authorized_not_connected:
-          'Bedienungshilfen sind erlaubt, aber nicht verbunden. Aktiviere OpenLess in den Systemeinstellungen erneut.',
+          'Bedienungshilfen sind erlaubt, aber nicht verbunden. Aktiviere TypeFeng in den Systemeinstellungen erneut.',
         status_read_failed: 'Der Bedienungshilfenstatus konnte nicht gelesen werden.',
       },
       androidShizukuLabel: 'Shizuku-Erweiterung',
@@ -2198,7 +2198,7 @@ export const de: typeof zhCN = {
       androidShizukuRequestPermission: 'Freigabe anfordern',
       androidShizukuRecover: 'Bedienungshilfen wiederherstellen',
       androidShizukuRecoverConfirm:
-        'Den OpenLess-Bedienungshilfendienst mit Shizuku erneut aktivieren? OpenLess berücksichtigt dabei die beim Schreiben bereits aktivierten Dienste. Ist der globale Bedienungshilfenschalter aus, können beim Aktivieren auch andere registrierte Dienste starten.',
+        'Den TypeFeng-Bedienungshilfendienst mit Shizuku erneut aktivieren? TypeFeng berücksichtigt dabei die beim Schreiben bereits aktivierten Dienste. Ist der globale Bedienungshilfenschalter aus, können beim Aktivieren auch andere registrierte Dienste starten.',
       androidShizukuYes: 'ja',
       androidShizukuNo: 'nein',
       androidShizukuAccessibilityOperational: 'Bedienungshilfen sind registriert und laufen.',
@@ -2217,7 +2217,7 @@ export const de: typeof zhCN = {
         unsupported_backend:
           'Dieses Shizuku-Backend ist zu alt. Aktualisiere Shizuku oder Sui auf v11 oder neuer.',
         not_running: 'Shizuku läuft nicht. Starte zuerst Shizuku oder Sui.',
-        not_authorized: 'Shizuku ist nicht freigegeben. Erteile OpenLess die Berechtigung.',
+        not_authorized: 'Shizuku ist nicht freigegeben. Erteile TypeFeng die Berechtigung.',
         binder_dead: 'Verbindung zu Shizuku verloren. Starte Shizuku neu.',
         authorized_operational: 'Shizuku freigegeben. Bedienungshilfen laufen.',
         authorized_registered_stale:
@@ -2235,7 +2235,7 @@ export const de: typeof zhCN = {
         granted: 'Shizuku-Berechtigung erteilt.',
         denied: 'Shizuku-Berechtigung verweigert.',
         permission_permanently_denied:
-          'Die Shizuku-Freigabe wurde blockiert. Öffne Shizuku und erlaube OpenLess den Zugriff manuell.',
+          'Die Shizuku-Freigabe wurde blockiert. Öffne Shizuku und erlaube TypeFeng den Zugriff manuell.',
         launched: 'Shizuku-Freigabe geöffnet.',
         launch_failed: 'Shizuku-Freigabe konnte nicht geöffnet werden.',
         open_shizuku: 'Shizuku-Verwaltung geöffnet.',
@@ -2352,20 +2352,20 @@ export const de: typeof zhCN = {
       },
       windowsIme: {
         installed:
-          'Installiert. Die Spracheingabe wechselt vorübergehend zur OpenLess-Eingabemethode.',
+          'Installiert. Die Spracheingabe wechselt vorübergehend zur TypeFeng-Eingabemethode.',
         notInstalled:
-          'Nicht installiert. OpenLess verwendet die Alternative über Zwischenablage/WM_PASTE.',
+          'Nicht installiert. TypeFeng verwendet die Alternative über Zwischenablage/WM_PASTE.',
         registrationBroken:
-          'Die Registrierung ist beschädigt. Installiere die OpenLess-Eingabemethode erneut.',
+          'Die Registrierung ist beschädigt. Installiere die TypeFeng-Eingabemethode erneut.',
         notWindows: 'Nur unter Windows verfügbar.',
       },
     },
     inputMethod: {
-      guidanceTitle: 'OpenLess-Eingabemethode',
+      guidanceTitle: 'TypeFeng-Eingabemethode',
       enableSystemIme:
-        'Aktiviere OpenLess Voice in Android → Tastatur / Eingabemethoden und wähle sie bei Bedarf aus.',
+        'Aktiviere TypeFeng Voice in Android → Tastatur / Eingabemethoden und wähle sie bei Bedarf aus.',
       longPressLogo:
-        'Halte im OpenLess-Keyboard das Logo oben links gedrückt, um die systemeigenen Tastatureinstellungen zu öffnen.',
+        'Halte im TypeFeng-Keyboard das Logo oben links gedrückt, um die systemeigenen Tastatureinstellungen zu öffnen.',
     },
     advanced: {
       multimodalPipelineTitle: 'Multimodale Spracherkennung (experimentell)',
@@ -2387,7 +2387,7 @@ export const de: typeof zhCN = {
         'Verwendet das fcitx5-Plugin zur Textübermittlung. Laufendes Einfügen simuliert Tasten über enigo + XTest.',
       windowsCompositionInputLabel: 'Live-Transkript im Eingabefeld anzeigen (Windows)',
       windowsCompositionInputDesc:
-        'Während du sprichst, erscheint der erkannte Text unterstrichen im Eingabefeld und wird beim Beenden durch das Endergebnis ersetzt. Erfordert die OpenLess-TSF-Eingabekomponente und eine App mit Unterstützung für TSF.',
+        'Während du sprichst, erscheint der erkannte Text unterstrichen im Eingabefeld und wird beim Beenden durch das Endergebnis ersetzt. Erfordert die TypeFeng-TSF-Eingabekomponente und eine App mit Unterstützung für TSF.',
       streamingInsertSaveClipboardLabel: 'In Zwischenablage kopieren',
       streamingInsertSaveClipboardHint:
         'Kopiert nach erfolgreichem Einfügen den fertigen Text in die Zwischenablage, damit du ihn mit Cmd+V erneut einfügen kannst. Bei „Aus“ bleibt die Zwischenablage unberührt.',
@@ -2530,29 +2530,29 @@ export const de: typeof zhCN = {
       updateDialog: {
         stableChannelSwitch: {
           title: 'Zum stabilen Kanal wechseln',
-          desc: 'Aktuelle Version: OpenLess {{currentVersion}}\nZielversion: OpenLess {{version}}\nDadurch wechselst du vom Beta-Kanal zum stabilen Kanal. Fortfahren?',
+          desc: 'Aktuelle Version: TypeFeng {{currentVersion}}\nZielversion: TypeFeng {{version}}\nDadurch wechselst du vom Beta-Kanal zum stabilen Kanal. Fortfahren?',
         },
         available: {
           title: 'Update verfügbar',
-          desc: 'OpenLess {{version}} ist verfügbar. Jetzt aktualisieren?',
+          desc: 'TypeFeng {{version}} ist verfügbar. Jetzt aktualisieren?',
         },
         downloading: {
           title: 'Update wird heruntergeladen',
-          desc: 'OpenLess {{version}} wird heruntergeladen. Lass die App geöffnet.',
+          desc: 'TypeFeng {{version}} wird heruntergeladen. Lass die App geöffnet.',
         },
         downloaded: {
           title: 'Update bereit',
-          desc: 'OpenLess {{version}} wurde installiert. Jetzt automatisch neu starten, um es anzuwenden?',
+          desc: 'TypeFeng {{version}} wurde installiert. Jetzt automatisch neu starten, um es anzuwenden?',
         },
         installing: {
           title: 'Update wird installiert',
-          desc: 'OpenLess {{version}} wird installiert. Lass die App geöffnet.',
+          desc: 'TypeFeng {{version}} wird installiert. Lass die App geöffnet.',
         },
         install: 'Jetzt aktualisieren',
         androidInstall: 'Herunterladen und Installation öffnen',
         androidInstalled: {
           title: 'Systeminstallation geöffnet',
-          desc: 'Folge den Systemhinweisen, um die Installation abzuschließen. Öffne OpenLess erneut, um {{version}} zu verwenden.',
+          desc: 'Folge den Systemhinweisen, um die Installation abzuschließen. Öffne TypeFeng erneut, um {{version}} zu verwenden.',
         },
         downloadingLabel: 'Wird heruntergeladen…',
         installingLabel: 'Wird installiert…',
@@ -2569,9 +2569,9 @@ export const de: typeof zhCN = {
     },
   },
   startup: {
-    loading: 'OpenLess wird gestartet…',
+    loading: 'TypeFeng wird gestartet…',
     loadingDesc: 'Verbindung zum lokalen Dienst wird hergestellt und die Kompatibilität geprüft.',
-    failed: 'OpenLess konnte nicht gestartet werden',
+    failed: 'TypeFeng konnte nicht gestartet werden',
     recovery:
       'Prüfe erneut. Falls das Problem bleibt, beende die App vollständig und öffne sie wieder. Trat es nach einem Update auf, stelle sicher, dass alle App-Komponenten dieselbe Version verwenden.',
     retry: 'Erneut prüfen',
@@ -2650,7 +2650,7 @@ export const de: typeof zhCN = {
       privacy: 'Berechtigungen und Daten',
       advanced: 'Experimente und Erweiterungen',
       personalize: 'Anpassen',
-      about: 'Über OpenLess und Updates',
+      about: 'Über TypeFeng und Updates',
       helpCenter: 'Hilfezentrum',
       releaseNotes: 'Versionshinweise',
     },
@@ -2737,10 +2737,10 @@ export const de: typeof zhCN = {
     storageReset: 'Auf Standard zurücksetzen',
     storageReveal: 'Modellordner öffnen',
     storageDesc:
-      'Bei einem eigenen Speicherort wird OpenLess/models im gewählten Ordner erstellt und vorhandene Modelle werden dorthin verschoben. Zuvor bricht OpenLess Downloads ab und entlädt geladene Modelle.',
+      'Bei einem eigenen Speicherort wird TypeFeng/models im gewählten Ordner erstellt und vorhandene Modelle werden dorthin verschoben. Zuvor bricht TypeFeng Downloads ab und entlädt geladene Modelle.',
     storageChooseTitle: 'Übergeordneten Speicherordner für lokale Modelle wählen',
     storageChangeConfirm:
-      'Vorhandene lokale Modelle werden nach {{path}}/OpenLess/models verschoben. Zuvor werden Downloads abgebrochen und geladene Modelle entladen. Fortfahren?',
+      'Vorhandene lokale Modelle werden nach {{path}}/TypeFeng/models verschoben. Zuvor werden Downloads abgebrochen und geladene Modelle entladen. Fortfahren?',
     storageResetConfirm:
       'Vorhandene lokale Modelle werden in den Systemstandardordner zurückverschoben. Aktueller Ordner: {{path}}. Fortfahren?',
     modelDir: 'Modellverzeichnis',
@@ -2779,7 +2779,7 @@ export const de: typeof zhCN = {
     foundryEnabling: 'Wird aktiviert…',
     foundryPrepare: 'Modell herunterladen / prüfen',
     runtimeDownloadRestart:
-      'Der Download hat native Laufzeitkomponenten verwendet. Starten Sie OpenLess vor dem Aktivieren neu. Das Modell wird nicht automatisch aktiviert. Jetzt neu starten?',
+      'Der Download hat native Laufzeitkomponenten verwendet. Starten Sie TypeFeng vor dem Aktivieren neu. Das Modell wird nicht automatisch aktiviert. Jetzt neu starten?',
     restartNow: 'Jetzt neu starten',
     foundryPreparing: 'Wird vorbereitet…',
     foundryReleasing: 'Wird entladen…',

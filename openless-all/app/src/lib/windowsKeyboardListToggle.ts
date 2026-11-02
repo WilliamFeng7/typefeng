@@ -11,7 +11,7 @@ export function effectiveWindowsInsertionMode(
   return mode ?? (sendInputOnly ? 'sendInput' : 'tsf');
 }
 
-/** Shows "show OpenLess in the keyboard list" for non-TSF modes (SendInput / Paste). */
+/** Shows "show TypeFeng in the keyboard list" for non-TSF modes (SendInput / Paste). */
 export function showWindowsOpenlessKeyboardListToggle(
   mode: WindowsInsertionMode | undefined,
   sendInputOnly?: boolean,

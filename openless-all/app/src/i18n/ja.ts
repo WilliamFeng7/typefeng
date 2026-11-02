@@ -62,7 +62,7 @@ export const ja: typeof zhCN = {
       '空欄の場合は公式の同期サーバーを使用します。アドレスは https:// で始まるルート URL である必要があります。',
     protocolTitle: 'クラウド同期の同意事項とプライバシー',
     protocolIntro:
-      'OpenLess と開発者はプライバシーを尊重し、データの保護に取り組んでいます。続行する前に、以下をご確認ください。',
+      'TypeFeng と開発者はプライバシーを尊重し、データの保護に取り組んでいます。続行する前に、以下をご確認ください。',
     protocolPasswordTitle: '同期パスワードを大切に保管してください',
     protocolPassword:
       '同期パスワードと復号キーは端末内で使用され、同期サービスには送信されません。パスワードを紛失し、解除できる端末もない場合、内容を復元することはできません。',
@@ -71,7 +71,7 @@ export const ja: typeof zhCN = {
       '設定、API キー、テキスト履歴はこの端末で暗号化されます。バックアップは暗号文として送信・保存されます。同期サービスはその内容から API キーを読み取ったり使用したりせず、モデルへのリクエストにも利用しません。',
     protocolExcludedTitle: 'ログイン状態と確認可能な情報',
     protocolExcluded:
-      '同期パスワード、復号キー、OpenLess が管理する GitHub/OAuth ログイン状態、アクセストークン、端末の秘密鍵はバックアップに含まれません。アカウント認証には必要な認証情報を別途使用します。サーバーにはアカウント識別子、暗号文のサイズ、版、同期日時が見えます。',
+      '同期パスワード、復号キー、TypeFeng が管理する GitHub/OAuth ログイン状態、アクセストークン、端末の秘密鍵はバックアップに含まれません。アカウント認証には必要な認証情報を別途使用します。サーバーにはアカウント識別子、暗号文のサイズ、版、同期日時が見えます。',
     protocolCheck:
       '同意事項とプライバシーの説明を読み、対象を理解しました。同期パスワードを適切に保管します。',
     protocolBack: '同期対象に戻る',
@@ -280,7 +280,7 @@ export const ja: typeof zhCN = {
       '辞書、修正规則、スタイルのアイコン、共通設定を同期します。API キー、ログイン情報、デバイス固有の設定は本機に保持されます。',
   },
   app: {
-    name: 'OpenLess',
+    name: 'TypeFeng',
     tagline: '自然に話し、きれいに書く',
   },
   common: {
@@ -358,7 +358,7 @@ export const ja: typeof zhCN = {
       sending: '質問を送信中…',
       addUnavailable: 'コンテンツを追加 · 未対応',
       browserUnavailable: 'プレビューでは実行できません',
-      answer: 'OpenLess の回答',
+      answer: 'TypeFeng の回答',
       layoutError: 'ウィンドウを展開できませんでした。閉じてから開き直してください。',
     },
     title: '質問',
@@ -660,7 +660,7 @@ export const ja: typeof zhCN = {
     },
   },
   onboarding: {
-    welcome: 'OpenLess へようこそ',
+    welcome: 'TypeFeng へようこそ',
     intro: 'ローカルで話し、ローカルで文字に。開始前にシステム権限が 2 つ必要です。',
     accessibilityTitle: 'アクセシビリティ',
     hotkeyTitle: 'グローバルショートカット',
@@ -672,20 +672,20 @@ export const ja: typeof zhCN = {
     actionNotApplicable: '権限不要',
     actionGranted: '許可済み',
     actionOpenSystem: 'システム設定を開く',
-    actionRestart: 'アクセシビリティをリセットして OpenLess を再起動',
+    actionRestart: 'アクセシビリティをリセットして TypeFeng を再起動',
     actionGrant: '許可する',
     actionRequestMic: '許可ダイアログを表示',
     micNoDeviceHint:
       'マイクが検出されません。マイクを接続して有効にしてから、もう一度お試しください。',
     accessibilityHint:
-      '許可後は **OpenLess を完全に終了** してから再起動してください（macOS TCC の仕様）。',
+      '許可後は **TypeFeng を完全に終了** してから再起動してください（macOS TCC の仕様）。',
     footerHint:
-      'すべての権限が揃うとこのガイドは自動で閉じます。閉じない場合はメニューバーの OpenLess → 終了 から再起動してください。',
+      'すべての権限が揃うとこのガイドは自動で閉じます。閉じない場合はメニューバーの TypeFeng → 終了 から再起動してください。',
     continueToSettings: '設定のみ開く（音声とグローバルショートカットは利用不可）',
     androidContinue: 'アプリに進む',
     androidFooterHint:
       '音声入力にはマイク権限が必要です。上の「許可ダイアログを表示」をタップするか、先にアプリへ進み、概要ページで後から許可してください。',
-    androidTitle: 'OpenLess を設定',
+    androidTitle: 'TypeFeng を設定',
     androidIntro: 'モバイル権限とサービス設定を順番に完了します。',
     androidStepCounter: '{{current}} / {{total}}',
     androidBack: '戻る',
@@ -693,7 +693,7 @@ export const ja: typeof zhCN = {
     androidFinish: '完了して開始',
     androidSteps: {
       microphoneTitle: 'マイク権限',
-      microphoneDesc: 'Android のシステム権限カードを表示し、OpenLess の録音を許可します。',
+      microphoneDesc: 'Android のシステム権限カードを表示し、TypeFeng の録音を許可します。',
       accessibilityTitle: 'アクセシビリティサービス',
       accessibilityDesc: '認識結果を現在の入力欄へ貼り付け、入力環境の検出を補助します。',
       overlayPermissionTitle: 'フローティングウィンドウ権限',
@@ -1127,7 +1127,7 @@ export const ja: typeof zhCN = {
       fullPromptTitle: 'System Prompt',
       fullPromptHint: 'このパック固有の Prompt です。',
       promptChars: '{{count}} 文字',
-      runtimeTitle: 'OpenLess 実行時付加指令',
+      runtimeTitle: 'TypeFeng 実行時付加指令',
       runtimeDesc: '読み取り専用の実行時ヘルパー。',
       runtimeContextTitle: 'コンテキスト前提',
       runtimeContextDesc: '言語とアプリのコンテキストから',
@@ -1527,7 +1527,7 @@ export const ja: typeof zhCN = {
       capsuleDisplayPrimaryScreen: 'メインディスプレイのみ',
       capsuleDisplayForegroundWindowScreen: '前面ウィンドウのある画面',
       capsuleDisplayAllScreens: 'すべての画面に表示',
-      capsuleDisplayModeRestartTitle: '表示モードを適用するには OpenLess を再起動してください',
+      capsuleDisplayModeRestartTitle: '表示モードを適用するには TypeFeng を再起動してください',
       capsuleDisplayModeRestartDesc:
         'すべての画面表示から切り替えるには、以前のカプセルウィンドウを閉じるため再起動が必要です。今すぐ再起動しますか？',
       capsuleStyleLabel: 'カプセルスタイル',
@@ -1659,11 +1659,11 @@ export const ja: typeof zhCN = {
       windowsSendInputNewlineModeEnter: 'Enter（多くのエディタ）',
       windowsSendInputNewlineModeShiftEnter: 'Shift+Enter（チャット入力）',
       windowsSendInputNewlineModeCrLf: 'CR+LF Unicode',
-      windowsShowOpenlessInKeyboardListLabel: 'キーボード一覧に OpenLess を表示',
+      windowsShowOpenlessInKeyboardListLabel: 'キーボード一覧に TypeFeng を表示',
       windowsShowOpenlessInKeyboardListDesc:
-        'オフにすると Win+Space で OpenLess に切り替わりません。SendInput とクリップボード貼り付け挿入には影響しません。オンに戻すと一覧に再表示されます。',
+        'オフにすると Win+Space で TypeFeng に切り替わりません。SendInput とクリップボード貼り付け挿入には影響しません。オンに戻すと一覧に再表示されます。',
       windowsShowOpenlessInKeyboardListError:
-        'キーボード一覧を更新できません：システムが OpenLess 言語プロファイルの変更を拒否しました。',
+        'キーボード一覧を更新できません：システムが TypeFeng 言語プロファイルの変更を拒否しました。',
       historyGroupTitle: '履歴とコンテキスト',
       historyRetentionLabel: '履歴保持期間（日）',
       historyRetentionDesc:
@@ -1712,7 +1712,7 @@ export const ja: typeof zhCN = {
       marketplaceDevLoginLabel: 'GitHub ログイン名（アップロード ID）',
       marketplaceDevLoginDesc: 'アップロード者を識別。空欄でアップロード・いいね無効。',
       startupAtBoot: '起動時に自動起動',
-      startupAtBootDesc: 'ログイン時に OpenLess を自動起動。',
+      startupAtBootDesc: 'ログイン時に TypeFeng を自動起動。',
       startupAtBootError: '自動起動の切り替えに失敗：{{message}}',
     },
     channels: {
@@ -1795,7 +1795,7 @@ export const ja: typeof zhCN = {
       llmProviderDesc: '選択するとデフォルトの Base URL が自動入力されます。',
       credentialStorageNotice: '資格情報は OS の資格情報ストアに保存されます。',
       codexOAuthNotice:
-        'Codex OAuth はローカルの Codex ログイン状態（~/.codex/auth.json）を使用します。OpenLess は API Key や Base URL を保存しません。',
+        'Codex OAuth はローカルの Codex ログイン状態（~/.codex/auth.json）を使用します。TypeFeng は API Key や Base URL を保存しません。',
       asrProviderDesc: '切り替えると対応する認証情報が自動選択されます。',
       asrTitle: 'ASR 音声（転写）',
       asrDesc: '録音した音声をテキストに文字起こしします。',
@@ -2054,7 +2054,7 @@ export const ja: typeof zhCN = {
       cancel: '本回の録音をキャンセル',
       confirm: 'カプセル入力を確定',
       switchStyle: '前のスタイルに切り替え',
-      openApp: 'OpenLess を開く',
+      openApp: 'TypeFeng を開く',
       stylePackTitle: 'スタイル直行ショートカット',
       stylePackDesc:
         'よく使うスタイルパックにショートカットを割り当てて一発切替；無効中のパックは自動で有効化されます。',
@@ -2078,9 +2078,9 @@ export const ja: typeof zhCN = {
     permissions: {
       title: '権限',
       descAcc:
-        'OpenLess は正常動作のため以下のシステム権限が必要です。許可後は通常、App を完全に終了して再起動する必要があります。',
+        'TypeFeng は正常動作のため以下のシステム権限が必要です。許可後は通常、App を完全に終了して再起動する必要があります。',
       descNoAcc:
-        'OpenLess はマイクへのアクセスと、グローバルショートカット監視状態を通じてネイティブフックの正常動作を判定する必要があります。',
+        'TypeFeng はマイクへのアクセスと、グローバルショートカット監視状態を通じてネイティブフックの正常動作を判定する必要があります。',
       micLabel: 'マイク',
       micDesc: '音声入力の取得に使用します。',
       accLabel: 'アクセシビリティ',
@@ -2108,7 +2108,7 @@ export const ja: typeof zhCN = {
       hotkeyFailed: '監視失敗',
       windowsImeLabel: 'Windows 入力メソッドバックエンド',
       windowsImeDesc:
-        '入力方式と併存する OpenLess TSF テキストサービス経由で文字を挿入し、IME を切り替えずにクリップボード入力の制限を回避します。',
+        '入力方式と併存する TypeFeng TSF テキストサービス経由で文字を挿入し、IME を切り替えずにクリップボード入力の制限を回避します。',
       windowsImeInstalled: 'インストール済み',
       windowsImeUnavailable: '利用不可',
       androidImeLabel: '入力メソッド (IME)',
@@ -2122,10 +2122,10 @@ export const ja: typeof zhCN = {
       androidAccessibilityGrantedStale: '許可済み・未接続',
       androidAccessibilityMessages: {
         not_android: 'アクセシビリティ状態は Android でのみ利用できます。',
-        not_enabled: 'システムのアクセシビリティ設定で OpenLess を有効にしてください。',
+        not_enabled: 'システムのアクセシビリティ設定で TypeFeng を有効にしてください。',
         operational: 'アクセシビリティ サービスは稼働中です。',
         authorized_not_connected:
-          'アクセシビリティは許可済みですが未接続です。システム設定で OpenLess を再度有効にしてください。',
+          'アクセシビリティは許可済みですが未接続です。システム設定で TypeFeng を再度有効にしてください。',
         status_read_failed: 'アクセシビリティ状態を読み取れませんでした。',
       },
       androidShizukuLabel: 'Shizuku 拡張モード',
@@ -2135,7 +2135,7 @@ export const ja: typeof zhCN = {
       androidShizukuRequestPermission: '権限をリクエスト',
       androidShizukuRecover: 'アクセシビリティを復旧',
       androidShizukuRecoverConfirm:
-        'Shizuku で OpenLess のアクセシビリティサービスを再有効化しますか？書き込み時点で有効なサービスはマージされます。グローバルスイッチがオフの場合、有効化すると登録済みの他サービスも起動する可能性があります。',
+        'Shizuku で TypeFeng のアクセシビリティサービスを再有効化しますか？書き込み時点で有効なサービスはマージされます。グローバルスイッチがオフの場合、有効化すると登録済みの他サービスも起動する可能性があります。',
       androidShizukuYes: 'はい',
       androidShizukuNo: 'いいえ',
       androidShizukuAccessibilityOperational: 'アクセシビリティは登録済みで稼働中です。',
@@ -2154,7 +2154,7 @@ export const ja: typeof zhCN = {
         unsupported_backend:
           'この Shizuku バックエンドは古すぎます。Shizuku または Sui を v11 以降に更新してください。',
         not_running: 'Shizuku が起動していません。先に Shizuku または Sui を起動してください。',
-        not_authorized: 'Shizuku が未承認です。OpenLess に権限を付与してください。',
+        not_authorized: 'Shizuku が未承認です。TypeFeng に権限を付与してください。',
         binder_dead: 'Shizuku 接続が切断されました。Shizuku を再起動してください。',
         authorized_operational: 'Shizuku 承認済み。アクセシビリティは稼働中です。',
         authorized_registered_stale:
@@ -2169,7 +2169,7 @@ export const ja: typeof zhCN = {
         granted: 'Shizuku 権限が付与されました。',
         denied: 'Shizuku 権限が拒否されました。',
         permission_permanently_denied:
-          'Shizuku 権限がブロックされました。Shizuku を開いて OpenLess を手動で許可してください。',
+          'Shizuku 権限がブロックされました。Shizuku を開いて TypeFeng を手動で許可してください。',
         launched: 'Shizuku 承認画面を開きました。',
         launch_failed: 'Shizuku 承認画面を開けませんでした。',
         open_shizuku: 'Shizuku マネージャーを開きました。',
@@ -2261,19 +2261,19 @@ export const ja: typeof zhCN = {
         qa: '質問',
       },
       windowsIme: {
-        installed: 'インストール済み。音声入力時に OpenLess IME へ一時的に切り替えます。',
+        installed: 'インストール済み。音声入力時に TypeFeng IME へ一時的に切り替えます。',
         notInstalled:
-          '未インストール。OpenLess は現在クリップボード / WM_PASTE フォールバックを使用しています。',
-        registrationBroken: '登録が破損しています。OpenLess IME を再インストールしてください。',
+          '未インストール。TypeFeng は現在クリップボード / WM_PASTE フォールバックを使用しています。',
+        registrationBroken: '登録が破損しています。TypeFeng IME を再インストールしてください。',
         notWindows: 'Windows のみ利用可能。',
       },
     },
     inputMethod: {
-      guidanceTitle: 'OpenLess 入力方法',
+      guidanceTitle: 'TypeFeng 入力方法',
       enableSystemIme:
-        'Android の設定 → キーボード / 入力方法で OpenLess Voice を有効にし、必要に応じて切り替えてください。',
+        'Android の設定 → キーボード / 入力方法で TypeFeng Voice を有効にし、必要に応じて切り替えてください。',
       longPressLogo:
-        'OpenLess キーボードの左上にあるロゴを長押しすると、端末のキーボード設定を開けます。',
+        'TypeFeng キーボードの左上にあるロゴを長押しすると、端末のキーボード設定を開けます。',
     },
     advanced: {
       multimodalPipelineTitle: 'マルチモーダル認識パイプライン',
@@ -2295,7 +2295,7 @@ export const ja: typeof zhCN = {
         'fcitx5 プラグインで文字を送信。ストリーミング入力は enigo + XTest でキー合成。',
       windowsCompositionInputLabel: 'リアルタイム原文を入力欄に表示（Windows）',
       windowsCompositionInputDesc:
-        '録音中、認識された文字を下線付きの変換中テキストとして入力欄に表示し、終了時に最終結果に置き換えます。OpenLess の TSF 入力コンポーネントと、テキストサービスフレームワーク（TSF）に対応したアプリが必要です。',
+        '録音中、認識された文字を下線付きの変換中テキストとして入力欄に表示し、終了時に最終結果に置き換えます。TypeFeng の TSF 入力コンポーネントと、テキストサービスフレームワーク（TSF）に対応したアプリが必要です。',
       streamingInsertSaveClipboardLabel: 'クリップボードに保存',
       streamingInsertSaveClipboardHint:
         '挿入成功後に最終テキストをクリップボードへ書き込み、Cmd+V で再貼付け可能にします。OFF ではクリップボードに触れません。',
@@ -2432,29 +2432,29 @@ export const ja: typeof zhCN = {
       updateDialog: {
         available: {
           title: '新しいバージョンがあります',
-          desc: 'OpenLess {{version}} が見つかりました。今すぐ更新しますか？',
+          desc: 'TypeFeng {{version}} が見つかりました。今すぐ更新しますか？',
         },
         stableChannelSwitch: {
           title: '正式版に切り替える',
-          desc: '現在のバージョン：OpenLess {{currentVersion}}\n対象バージョン：OpenLess {{version}}\nBeta チャンネルから正式版に切り替えます。続行しますか？',
+          desc: '現在のバージョン：TypeFeng {{currentVersion}}\n対象バージョン：TypeFeng {{version}}\nBeta チャンネルから正式版に切り替えます。続行しますか？',
         },
         downloading: {
           title: 'アップデートをダウンロード中',
-          desc: 'OpenLess {{version}} をダウンロード中です。アプリを開いたままにしてください。',
+          desc: 'TypeFeng {{version}} をダウンロード中です。アプリを開いたままにしてください。',
         },
         downloaded: {
           title: 'アップデートの準備完了',
-          desc: 'OpenLess {{version}} のインストールが完了しました。今すぐ自動再起動して適用しますか？',
+          desc: 'TypeFeng {{version}} のインストールが完了しました。今すぐ自動再起動して適用しますか？',
         },
         installing: {
           title: 'アップデートをインストール中',
-          desc: 'OpenLess {{version}} をインストール中です。アプリを開いたままにしてください。',
+          desc: 'TypeFeng {{version}} をインストール中です。アプリを開いたままにしてください。',
         },
         install: '今すぐ更新',
         androidInstall: 'ダウンロードしてインストーラを開く',
         androidInstalled: {
           title: 'システムインストーラを開きました',
-          desc: '画面の指示に従ってインストールしてください。完了後 OpenLess を再度開くと {{version}} が使えます。',
+          desc: '画面の指示に従ってインストールしてください。完了後 TypeFeng を再度開くと {{version}} が使えます。',
         },
         downloadingLabel: 'ダウンロード中…',
         installingLabel: 'インストール中…',
@@ -2471,9 +2471,9 @@ export const ja: typeof zhCN = {
     },
   },
   startup: {
-    loading: 'OpenLess を起動中…',
+    loading: 'TypeFeng を起動中…',
     loadingDesc: 'ローカルサービスに接続し、互換性を確認しています。',
-    failed: 'OpenLess を起動できません',
+    failed: 'TypeFeng を起動できません',
     recovery:
       '再確認してください。解決しない場合はアプリを完全に終了して開き直してください。更新後に発生した場合は、アプリ全体が同じバージョンであることを確認してください。',
     retry: '再確認',
@@ -2631,10 +2631,10 @@ export const ja: typeof zhCN = {
     storageReset: '既定に戻す',
     storageReveal: 'モデルフォルダを開く',
     storageDesc:
-      'カスタム保存先では選択フォルダ配下に OpenLess/models を作成し、既存モデルを移行します。移行前にダウンロードをキャンセルし、読み込み済みモデルを解放します。',
+      'カスタム保存先では選択フォルダ配下に TypeFeng/models を作成し、既存モデルを移行します。移行前にダウンロードをキャンセルし、読み込み済みモデルを解放します。',
     storageChooseTitle: 'ローカルモデル保存先の親フォルダを選択',
     storageChangeConfirm:
-      '既存のローカルモデルを {{path}}/OpenLess/models に移動します。先にダウンロードをキャンセルし、読み込み済みモデルを解放します。続行しますか？',
+      '既存のローカルモデルを {{path}}/TypeFeng/models に移動します。先にダウンロードをキャンセルし、読み込み済みモデルを解放します。続行しますか？',
     storageResetConfirm:
       '既存のローカルモデルをシステム既定フォルダに戻します。現在のフォルダ: {{path}}。続行しますか？',
     modelDir: 'モデルフォルダ',
@@ -2671,7 +2671,7 @@ export const ja: typeof zhCN = {
     foundryEnabling: '有効化中…',
     foundryPrepare: 'モデルをダウンロード / 検証',
     runtimeDownloadRestart:
-      'ダウンロードでネイティブ実行環境を使用しました。有効にする前に OpenLess を再起動してください。モデルは自動で有効になりません。今すぐ再起動しますか？',
+      'ダウンロードでネイティブ実行環境を使用しました。有効にする前に TypeFeng を再起動してください。モデルは自動で有効になりません。今すぐ再起動しますか？',
     restartNow: '今すぐ再起動',
     foundryPreparing: '準備中…',
     foundryReleasing: '解放中…',

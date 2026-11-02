@@ -3,9 +3,8 @@
 // "Join the Beta channel" moved to the bottom of the Advanced page (see BetaChannelSection); here the
 // icon area keeps only the stable-channel "check updates" button.
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Icon } from '../../components/Icon';
 import { Row } from '../../components/ui/Row';
 import { getPlatformCapabilities, openExternal } from '../../lib/ipc';
 import type { PlatformCapabilities } from '../../lib/types';
@@ -15,8 +14,8 @@ import { useConservativeLayout, useLayoutStack } from '../../lib/useMobileLayout
 import { btnGhostStyle, SectionTitle } from './shared';
 import { CheckUpdateButton } from './CheckUpdateButton';
 
-const HELP_URL = 'https://github.com/Open-Less/openless#readme';
-const RELEASE_NOTES_URL = 'https://github.com/Open-Less/openless/releases';
+const HELP_URL = 'https://github.com/WilliamFeng7/typefeng#readme';
+const RELEASE_NOTES_URL = 'https://github.com/WilliamFeng7/typefeng/releases';
 
 export function AboutSection() {
   const { t } = useTranslation();
@@ -24,27 +23,12 @@ export function AboutSection() {
   const conservativeLayout = useConservativeLayout();
   const compactLayout = baseLayoutStack || conservativeLayout;
   const appIconSize = compactLayout ? 36 : 56;
-  const [qqCopied, setQqCopied] = useState(false);
   const [platformCaps, setPlatformCaps] = useState<PlatformCapabilities | null>(null);
-  const qqCopiedRef = useRef<number | null>(null);
 
   useEffect(() => {
     void getPlatformCapabilities().then(setPlatformCaps);
   }, []);
 
-  useEffect(
-    () => () => {
-      if (qqCopiedRef.current) clearTimeout(qqCopiedRef.current);
-    },
-    [],
-  );
-
-  const copyQq = () => {
-    navigator.clipboard?.writeText('1078960553');
-    setQqCopied(true);
-    if (qqCopiedRef.current) clearTimeout(qqCopiedRef.current);
-    qqCopiedRef.current = window.setTimeout(() => setQqCopied(false), 1500);
-  };
 
   return (
     <>
@@ -81,7 +65,7 @@ export function AboutSection() {
                 whiteSpace: 'nowrap',
               }}
             >
-              OpenLess
+              TypeFeng
             </div>
             <div
               style={{
@@ -103,6 +87,22 @@ export function AboutSection() {
         </div>
       </Card>
 
+      <Card>
+        <SectionTitle>关于 TypeFeng</SectionTitle>
+        <div style={{ fontSize: 12.5, lineHeight: 1.7, color: 'var(--ol-ink-3)' }}>
+          TypeFeng 是 OpenLess 的修改版（AGPL-3.0），基于上游提交 defd6924。本分支关闭了上游自动更新，
+          移除了上游社区入口与默认更新端点，并重新制作了品牌与图标。核心听写能力来自上游。
+          <div style={{ marginTop: 8 }}>
+            <button
+              style={btnGhostStyle}
+              onClick={() => openExternal('https://github.com/WilliamFeng7/typefeng')}
+            >
+              查看源码与修改说明
+            </button>
+          </div>
+        </div>
+      </Card>
+
       {/* Personalization (font size) removed as requested (page slimming). */}
 
       {/* ─── Documentation links ─────────────────────────────────────── */}
@@ -111,7 +111,7 @@ export function AboutSection() {
         <Row label={t('modal.about.source')}>
           <button
             style={btnGhostStyle}
-            onClick={() => openExternal('https://github.com/Open-Less/openless')}
+            onClick={() => openExternal('https://github.com/WilliamFeng7/typefeng')}
           >
             GitHub
           </button>
@@ -134,36 +134,18 @@ export function AboutSection() {
         <Row label={t('modal.about.feedback')}>
           <button
             style={btnGhostStyle}
-            onClick={() => openExternal('https://github.com/Open-Less/openless/issues')}
+            onClick={() => openExternal('https://github.com/WilliamFeng7/typefeng/issues')}
           >
             {t('modal.about.feedbackBtn')}
           </button>
         </Row>
-        <Row label={t('modal.about.qq')}>
-          <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-            <kbd
-              style={{
-                padding: '4px 10px',
-                fontSize: 12,
-                fontFamily: 'var(--ol-font-mono)',
-                borderRadius: 6,
-                background: 'var(--ol-surface-2)',
-                border: '0.5px solid var(--ol-line-strong)',
-                boxShadow: '0 1px 0 rgba(0,0,0,0.04)',
-                color: 'var(--ol-ink-2)',
-              }}
-            >
-              1078960553
-            </kbd>
-            <button onClick={copyQq} title={t('modal.about.copyQq')} style={btnGhostStyle}>
-              <Icon name="copy" size={14} />
-            </button>
-            {qqCopied && (
-              <span style={{ fontSize: 11, color: 'var(--ol-ok)', whiteSpace: 'nowrap' }}>
-                {t('common.copied')}
-              </span>
-            )}
-          </div>
+        <Row label="上游项目">
+          <button
+            style={btnGhostStyle}
+            onClick={() => openExternal('https://github.com/Open-Less/openless')}
+          >
+            OpenLess
+          </button>
         </Row>
       </Card>
     </>

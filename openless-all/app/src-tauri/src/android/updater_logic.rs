@@ -6,7 +6,7 @@ pub const UPDATER_PUBKEY_B64: &str =
 
 /// Returned when Kotlin `installApk` cannot open the system installer (e.g. missing install permission).
 pub const INSTALLER_NOT_OPENED_MSG: &str =
-    "无法打开系统安装器：请先在系统设置中允许 OpenLess 安装未知应用，然后重新点击更新";
+    "无法打开系统安装器：请先在系统设置中允许 TypeFeng 安装未知应用，然后重新点击更新";
 
 pub fn map_abi_to_arch(abi: &str) -> &'static str {
     match abi {

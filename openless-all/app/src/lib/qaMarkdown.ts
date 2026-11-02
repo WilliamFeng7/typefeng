@@ -26,7 +26,7 @@ function normalizeHref(href: string | null | undefined): string | null {
   if (!trimmed) return null;
   if (trimmed.startsWith('#')) return trimmed;
   try {
-    const url = new URL(trimmed, 'https://openless.local/');
+    const url = new URL(trimmed, 'https://typefeng.local/');
     if (!SAFE_LINK_PROTOCOLS.has(url.protocol)) return null;
     return trimmed;
   } catch {

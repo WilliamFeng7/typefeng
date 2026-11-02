@@ -256,8 +256,8 @@ pub async fn stop_microphone_level_monitor(app: AppHandle) {
 
 /// Copy the current session's openless.log to a user-chosen location (the frontend obtains
 /// target_path via plugin-dialog). The path comes from lib::log_dir_path() —
-/// mac: ~/Library/Logs/OpenLess/openless.log,
-/// windows: %LOCALAPPDATA%\OpenLess\Logs\openless.log.
+/// mac: ~/Library/Logs/TypeFeng/openless.log,
+/// windows: %LOCALAPPDATA%\TypeFeng\Logs\openless.log.
 ///
 /// On Android the dialog returns a `content://` URI which `std::fs::copy` cannot handle; write
 /// through the JNI ContentResolver instead, avoiding the 0-byte files caused by
@@ -329,7 +329,7 @@ fn resolve_openless_log_path() -> Result<std::path::PathBuf, String> {
 /// a hung app does not freeze the UI.
 ///
 /// `delayMs` is what makes this command usable: when invoked from devtools the foreground app is
-/// OpenLess itself, so it would always read our own window. Pass 3000 and there are three seconds
+/// TypeFeng itself, so it would always read our own window. Pass 3000 and there are three seconds
 /// to switch to Notes / VS Code / WeChat and click into an input field before the probe actually
 /// reads.
 ///

@@ -229,7 +229,7 @@ pub fn open_system_settings(pane: String) -> Result<(), String> {
     }
 }
 
-/// Triggers macOS's "allow OpenLess to access the microphone" system dialog.
+/// Triggers macOS's "allow TypeFeng to access the microphone" system dialog.
 /// Same semantics as Swift `MicrophonePermission.request()`: trust only the system
 /// permission callback, never fake the grant state from cpal stream success.
 #[tauri::command]

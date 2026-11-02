@@ -32,7 +32,7 @@ const UPDATE_CHECK_TIMEOUT_MS = 15_000;
 
 // Manual-download fallback when auto-update fails: straight to GitHub Releases
 // (same as the About page's RELEASE_NOTES_URL).
-const RELEASE_DOWNLOAD_URL = 'https://github.com/Open-Less/openless/releases';
+const RELEASE_DOWNLOAD_URL = 'https://github.com/WilliamFeng7/typefeng/releases';
 
 export type UpdateStatus =
   | 'idle'
@@ -365,7 +365,7 @@ export function UpdateDialog({
               ? t('settings.about.updateDialog.androidInstalled.desc', {
                   version,
                   defaultValue:
-                    '系统安装器已打开，请按提示完成安装。安装后重新打开 OpenLess 即可使用 {{version}}。',
+                    '系统安装器已打开，请按提示完成安装。安装后重新打开 TypeFeng 即可使用 {{version}}。',
                 })
               : installError
                 ? t('settings.about.updateDialog.installError.desc', {

@@ -1,9 +1,9 @@
 [package]
 name = "openless"
-version = "2.0.2-Beta.3+build.20261026-c9f49c60"
+version = "1.0.0"
 license = "AGPL-3.0-only"
-description = "OpenLess — local voice input that types where your cursor is"
-authors = ["OpenLess"]
+description = "TypeFeng — a TypeFeng fork of OpenLess, local voice input that types where your cursor is"
+authors = ["TypeFeng contributors", "OpenLess authors"]
 edition = "2021"
 rust-version = "1.99"
 

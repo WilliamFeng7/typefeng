@@ -28,7 +28,7 @@ use super::foundry_runtime::FoundryRouteEpoch;
 use super::foundry_runtime::{FoundryFallbackNoticeCallback, FoundryPrimaryRecoveryToken};
 
 /// Foundry Local Whisper is a Whisper-family model with a ~30s native decode window. Each SDK
-/// request stays within that window and OpenLess merges the chunk texts afterwards, preventing
+/// request stays within that window and TypeFeng merges the chunk texts afterwards, preventing
 /// long dictations from returning only the first chunk.
 const FOUNDRY_WHISPER_CHUNK_LIMIT_MS: u64 = 30_000;
 
@@ -326,7 +326,7 @@ fn remove_partial_temp_wav(path: &Path) {
 #[cfg(target_os = "windows")]
 fn foundry_temp_dir() -> PathBuf {
     std::env::temp_dir()
-        .join("OpenLess")
+        .join("TypeFeng")
         .join("foundry-local-asr")
 }
 

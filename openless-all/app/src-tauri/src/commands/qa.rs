@@ -148,7 +148,7 @@ pub async fn less_computer_window_dismiss(coord: CoordinatorState<'_>) -> Result
 /// (make_chat_window_panel_macos), so makeKeyAndOrderFront gives the panel
 /// keyboard focus without activating the app (same as Spotlight) — the earlier
 /// window.set_focus() activated the whole app, dragged the main window
-/// (settings) to the front, and made OpenLess frontmost so AX could not read
+/// (settings) to the front, and made TypeFeng frontmost so AX could not read
 /// the original app's selection. Other platforms still use set_focus. Only the
 /// two chat panel windows may call this (same tightening as
 /// less_computer_approve).

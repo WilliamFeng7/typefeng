@@ -839,13 +839,13 @@ mod tests {
     <id>tag:github.com,2008:Repository/X/v1.2.23-tauri</id>
     <updated>2026-05-07T09:05:00Z</updated>
     <link rel="alternate" type="text/html" href="https://github.com/Open-Less/openless/releases/tag/v1.2.23-tauri"/>
-    <title>OpenLess v1.2.23-tauri</title>
+    <title>TypeFeng v1.2.23-tauri</title>
   </entry>
   <entry>
     <id>tag:github.com,2008:Repository/X/v1.2.24-2-beta-tauri</id>
     <updated>2026-05-08T01:27:23Z</updated>
     <link rel="alternate" type="text/html" href="https://github.com/Open-Less/openless/releases/tag/v1.2.24-2-beta-tauri"/>
-    <title>OpenLess v1.2.24-2-beta-tauri</title>
+    <title>TypeFeng v1.2.24-2-beta-tauri</title>
   </entry>
 </feed>"#;
         let got = parse_latest_beta_from_atom(body).expect("must find a Beta entry");

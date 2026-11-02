@@ -4478,7 +4478,7 @@ impl TauriTextInsertionSession {
             ));
         }
 
-        // A restarted OpenLess process may need one native cancel before the new process can open
+        // A restarted TypeFeng process may need one native cancel before the new process can open
         // its composition. Keep this retry iterative: recursive async self-awaits do not compile
         // because they create an infinitely sized future.
         let mut recovered = false;

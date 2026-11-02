@@ -19,7 +19,7 @@ export function CoreStartupScreen({
             <span />
           </div>
         )}
-        <strong>{error ? t('startup.failed') : 'OpenLess'}</strong>
+        <strong>{error ? t('startup.failed') : 'TypeFeng'}</strong>
         <p>{t(error ? 'startup.recovery' : 'startup.loading')}</p>
         {error && !compact && (
           <>

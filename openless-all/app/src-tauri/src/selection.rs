@@ -548,7 +548,7 @@ pub(crate) fn reactivate_selection_insertion_target(target: &SelectionInsertionT
         if current_front_app_pid() == Some(pid) {
             return true;
         }
-        // The preview window is OpenLess's own window; after confirm, focus must go back to the
+        // The preview window is TypeFeng's own window; after confirm, focus must go back to the
         // original app before pasting. NSRunningApplication activate is best-effort, and some
         // apps (Electron, custom-drawn windows) need >120ms to restore their key window — a
         // single fixed sleep followed by one pid check can misread "still restoring" as

@@ -609,7 +609,7 @@ fn hide_capsule_window_if_present() {
         SWP_NOMOVE, SWP_NOSIZE, SW_HIDE,
     };
 
-    let title: Vec<u16> = "OpenLess Capsule".encode_utf16().chain(once(0)).collect();
+    let title: Vec<u16> = "TypeFeng Capsule".encode_utf16().chain(once(0)).collect();
     let hwnd = match unsafe { FindWindowW(PCWSTR::null(), PCWSTR(title.as_ptr())) } {
         Ok(hwnd) => hwnd,
         Err(_) => return,

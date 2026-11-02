@@ -225,7 +225,7 @@ const MOCK_SETTINGS: LocalAsrSettings = {
   activeModel: 'qwen3-asr-0.6b',
   mirror: 'huggingface',
   modelsBaseDir: null,
-  modelsRootDir: '~/Library/Application Support/OpenLess/models',
+  modelsRootDir: '~/Library/Application Support/TypeFeng/models',
   engineAvailable: false,
 };
 
@@ -274,7 +274,7 @@ export function setLocalAsrModelsBaseDir(
 ): Promise<LocalAsrStorageSettings> {
   return invokeOrMock('local_asr_set_models_base_dir', { modelsBaseDir }, () => ({
     modelsBaseDir,
-    modelsRootDir: modelsBaseDir ? `${modelsBaseDir}/OpenLess/models` : MOCK_SETTINGS.modelsRootDir,
+    modelsRootDir: modelsBaseDir ? `${modelsBaseDir}/TypeFeng/models` : MOCK_SETTINGS.modelsRootDir,
     isDefault: !modelsBaseDir,
     restartRequired: false,
   }));

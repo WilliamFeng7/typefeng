@@ -1,6 +1,6 @@
 export const desktopGuideEn = {
-  title: 'Hi, this is OpenLess',
-  intro: 'Say what you are thinking. OpenLess turns your voice into text, right where you work.',
+  title: 'Hi, this is TypeFeng',
+  intro: 'Say what you are thinking. TypeFeng turns your voice into text, right where you work.',
   welcomeBody: 'Let’s get a few things ready, one at a time. You can leave any step for later.',
   name: 'What should we call you? (optional)',
   start: 'Let’s begin',
@@ -14,16 +14,16 @@ export const desktopGuideEn = {
   language: 'Language',
   preview: 'Browser preview. Desktop permissions and settings are not changed.',
   previewGrant: 'Try granting permission',
-  microphoneTitle: 'First, let OpenLess hear you',
+  microphoneTitle: 'First, let TypeFeng hear you',
   microphoneBody: 'Microphone access lets you dictate. Recording starts only when you ask it to.',
   microphoneHint: 'You can grant access later in Settings → Permissions.',
   windowsMicrophoneHint:
     'Open Windows microphone settings, enable microphone access and access for desktop apps, then return here.',
   accessibilityTitle: 'Put your words where you need them',
   accessibilityBody:
-    'On macOS, Accessibility access lets OpenLess respond to your shortcut and insert text into the app you are using.',
+    'On macOS, Accessibility access lets TypeFeng respond to your shortcut and insert text into the app you are using.',
   accessibilityHint:
-    'Open System Settings → Privacy & Security → Accessibility, enable OpenLess, then return here.',
+    'Open System Settings → Privacy & Security → Accessibility, enable TypeFeng, then return here.',
   authorize: 'Allow microphone access',
   openPermissions: 'Open System Settings',
   allowed: 'Access granted',
@@ -64,8 +64,8 @@ export const desktopGuideEn = {
   finishTitle: 'Make yourself at home{{name}}',
   finishBody: 'Your choices are saved. Anything you left for later is still available in Settings.',
   finishPending:
-    'Some steps are still waiting for setup. OpenLess is ready to explore; dictation needs microphone access and a configured speech service.',
-  enter: 'Open OpenLess',
+    'Some steps are still waiting for setup. TypeFeng is ready to explore; dictation needs microphone access and a configured speech service.',
+  enter: 'Open TypeFeng',
   allSet: 'Configured',
   deferred: 'Later',
   storageError: 'Progress could not be saved on this device. You can still continue.',
@@ -74,8 +74,8 @@ export const desktopGuideEn = {
   reopenHint: 'Review permissions, services and your dictation shortcut at your own pace.',
 };
 export const desktopGuideZhCN: typeof desktopGuideEn = {
-  title: 'Hi，这里是 OpenLess',
-  intro: '把想法说出来，OpenLess 会把它变成文字，送到你正在使用的应用里。',
+  title: 'Hi，这里是 TypeFeng',
+  intro: '把想法说出来，TypeFeng 会把它变成文字，送到你正在使用的应用里。',
   welcomeBody: '开始之前，我们一起做几个小设置。一步一步来，每一步都可以稍后再说。',
   name: '怎么称呼你？（选填）',
   start: '开始吧',
@@ -89,15 +89,15 @@ export const desktopGuideZhCN: typeof desktopGuideEn = {
   language: '界面语言',
   preview: '浏览器体验模式，不会更改桌面 App 的权限和设置。',
   previewGrant: '体验授权',
-  microphoneTitle: '先让 OpenLess 听见你的声音',
+  microphoneTitle: '先让 TypeFeng 听见你的声音',
   microphoneBody: '允许使用麦克风，就能把说出的话变成文字。只有你主动开始时才会录音。',
   microphoneHint: '现在不方便也没关系，之后可以在「设置 → 权限」中开启。',
   windowsMicrophoneHint:
     '打开 Windows 麦克风设置，开启麦克风访问权限及桌面应用访问权限，然后回到这里。',
   accessibilityTitle: '把文字送到你正在输入的地方',
   accessibilityBody:
-    '在 macOS 上，辅助功能权限让 OpenLess 响应你的快捷键，并把文字输入到当前应用。',
-  accessibilityHint: '打开「系统设置 → 隐私与安全性 → 辅助功能」，开启 OpenLess 后回到这里。',
+    '在 macOS 上，辅助功能权限让 TypeFeng 响应你的快捷键，并把文字输入到当前应用。',
+  accessibilityHint: '打开「系统设置 → 隐私与安全性 → 辅助功能」，开启 TypeFeng 后回到这里。',
   authorize: '允许使用麦克风',
   openPermissions: '打开系统设置',
   allowed: '已允许',
@@ -134,7 +134,7 @@ export const desktopGuideZhCN: typeof desktopGuideEn = {
   finishBody: '你的选择已经保存。刚才跳过的内容，都可以在设置里继续完成。',
   finishPending:
     '还有一些内容留待配置。你可以先探索界面；开始听写前，需要开启麦克风权限并配置语音服务。',
-  enter: '进入 OpenLess',
+  enter: '进入 TypeFeng',
   allSet: '已配置',
   deferred: '稍后配置',
   storageError: '无法在此设备保存引导进度，但你仍然可以继续。',
@@ -144,8 +144,8 @@ export const desktopGuideZhCN: typeof desktopGuideEn = {
 };
 export const desktopGuideZhTW: typeof desktopGuideEn = {
   ...desktopGuideZhCN,
-  title: 'Hi，這裡是 OpenLess',
-  intro: '把想法說出來，OpenLess 會把它變成文字，送到你正在使用的應用程式裡。',
+  title: 'Hi，這裡是 TypeFeng',
+  intro: '把想法說出來，TypeFeng 會把它變成文字，送到你正在使用的應用程式裡。',
   welcomeBody: '開始之前，我們一起做幾個小設定。一步一步來，每一步都可以稍後再說。',
   name: '怎麼稱呼你？（選填）',
   start: '開始吧',
@@ -159,15 +159,15 @@ export const desktopGuideZhTW: typeof desktopGuideEn = {
   language: '介面語言',
   preview: '瀏覽器體驗模式，不會更改桌面 App 的權限和設定。',
   previewGrant: '體驗授權',
-  microphoneTitle: '先讓 OpenLess 聽見你的聲音',
+  microphoneTitle: '先讓 TypeFeng 聽見你的聲音',
   microphoneBody: '允許使用麥克風，就能把說出的話變成文字。只有你主動開始時才會錄音。',
   microphoneHint: '現在不方便也沒關係，之後可以在「設定 → 權限」中開啟。',
   windowsMicrophoneHint:
     '開啟 Windows 麥克風設定，允許麥克風存取及桌面應用程式存取，然後回到這裡。',
   accessibilityTitle: '把文字送到你正在輸入的地方',
   accessibilityBody:
-    '在 macOS 上，輔助使用權限讓 OpenLess 回應你的快捷鍵，並把文字輸入到目前的應用程式。',
-  accessibilityHint: '開啟「系統設定 → 隱私權與安全性 → 輔助使用」，開啟 OpenLess 後回到這裡。',
+    '在 macOS 上，輔助使用權限讓 TypeFeng 回應你的快捷鍵，並把文字輸入到目前的應用程式。',
+  accessibilityHint: '開啟「系統設定 → 隱私權與安全性 → 輔助使用」，開啟 TypeFeng 後回到這裡。',
   authorize: '允許使用麥克風',
   openPermissions: '開啟系統設定',
   allowed: '已允許',
@@ -204,7 +204,7 @@ export const desktopGuideZhTW: typeof desktopGuideEn = {
   finishBody: '你的選擇已經儲存。剛才略過的內容，都可以在設定裡繼續完成。',
   finishPending:
     '還有一些內容留待設定。你可以先探索介面；開始聽寫前，需要開啟麥克風權限並設定語音服務。',
-  enter: '進入 OpenLess',
+  enter: '進入 TypeFeng',
   allSet: '已設定',
   deferred: '稍後設定',
   storageError: '無法在此裝置儲存引導進度，但你仍然可以繼續。',
@@ -214,8 +214,8 @@ export const desktopGuideZhTW: typeof desktopGuideEn = {
 };
 export const desktopGuideJa: typeof desktopGuideEn = {
   ...desktopGuideEn,
-  title: 'こんにちは、OpenLess です',
-  intro: '思いついたことを話してください。OpenLess が声を文字に変え、使用中のアプリに入力します。',
+  title: 'こんにちは、TypeFeng です',
+  intro: '思いついたことを話してください。TypeFeng が声を文字に変え、使用中のアプリに入力します。',
   welcomeBody: 'いくつかの設定を一つずつ進めましょう。どの手順も後回しにできます。',
   name: 'お名前は？（任意）',
   start: '始める',
@@ -238,7 +238,7 @@ export const desktopGuideJa: typeof desktopGuideEn = {
   accessibilityBody:
     'macOS のアクセシビリティ権限で、ショートカットへの応答と使用中のアプリへの文字入力が可能になります。',
   accessibilityHint:
-    '「システム設定 → プライバシーとセキュリティ → アクセシビリティ」で OpenLess を有効にし、ここに戻ってください。',
+    '「システム設定 → プライバシーとセキュリティ → アクセシビリティ」で TypeFeng を有効にし、ここに戻ってください。',
   authorize: 'マイクを許可',
   openPermissions: 'システム設定を開く',
   allowed: '許可済み',
@@ -278,7 +278,7 @@ export const desktopGuideJa: typeof desktopGuideEn = {
   finishBody: '選択を保存しました。後回しにした項目は設定から続けられます。',
   finishPending:
     'まだ設定が必要な項目があります。画面の探索はできますが、音声入力にはマイクの許可と音声サービスが必要です。',
-  enter: 'OpenLess を開く',
+  enter: 'TypeFeng を開く',
   allSet: '設定済み',
   deferred: '後で設定',
   storageError: 'この端末に進捗を保存できませんでした。引き続き操作できます。',
@@ -288,8 +288,8 @@ export const desktopGuideJa: typeof desktopGuideEn = {
 };
 export const desktopGuideKo: typeof desktopGuideEn = {
   ...desktopGuideEn,
-  title: '안녕하세요, OpenLess입니다',
-  intro: '생각을 말해 보세요. OpenLess가 음성을 글로 바꾸어 사용 중인 앱에 입력합니다.',
+  title: '안녕하세요, TypeFeng입니다',
+  intro: '생각을 말해 보세요. TypeFeng가 음성을 글로 바꾸어 사용 중인 앱에 입력합니다.',
   welcomeBody: '몇 가지 설정을 하나씩 준비해 볼까요? 모든 단계는 나중에 해도 됩니다.',
   name: '어떻게 불러 드릴까요? (선택)',
   start: '시작하기',
@@ -311,7 +311,7 @@ export const desktopGuideKo: typeof desktopGuideEn = {
   accessibilityTitle: '필요한 곳에 글을 입력해요',
   accessibilityBody: 'macOS의 손쉬운 사용 권한으로 단축키에 응답하고 현재 앱에 글을 입력합니다.',
   accessibilityHint:
-    '시스템 설정 → 개인정보 보호 및 보안 → 손쉬운 사용에서 OpenLess를 켠 뒤 돌아오세요.',
+    '시스템 설정 → 개인정보 보호 및 보안 → 손쉬운 사용에서 TypeFeng를 켠 뒤 돌아오세요.',
   authorize: '마이크 허용',
   openPermissions: '시스템 설정 열기',
   allowed: '허용됨',
@@ -351,7 +351,7 @@ export const desktopGuideKo: typeof desktopGuideEn = {
   finishBody: '선택을 저장했습니다. 미룬 항목은 설정에서 계속할 수 있습니다.',
   finishPending:
     '아직 설정할 항목이 있습니다. 화면을 둘러볼 수 있지만 음성 입력에는 마이크 권한과 음성 서비스가 필요합니다.',
-  enter: 'OpenLess 열기',
+  enter: 'TypeFeng 열기',
   allSet: '설정됨',
   deferred: '나중에',
   storageError: '이 기기에 진행 상황을 저장하지 못했습니다. 계속할 수 있습니다.',
@@ -361,9 +361,9 @@ export const desktopGuideKo: typeof desktopGuideEn = {
 };
 export const desktopGuideEs: typeof desktopGuideEn = {
   ...desktopGuideEn,
-  title: 'Hola, esto es OpenLess',
+  title: 'Hola, esto es TypeFeng',
   intro:
-    'Di lo que piensas. OpenLess convierte tu voz en texto, directamente en la aplicación que usas.',
+    'Di lo que piensas. TypeFeng convierte tu voz en texto, directamente en la aplicación que usas.',
   welcomeBody:
     'Preparemos unas pocas cosas, paso a paso. Puedes dejar cualquier paso para después.',
   name: '¿Cómo te llamas? (opcional)',
@@ -379,7 +379,7 @@ export const desktopGuideEs: typeof desktopGuideEn = {
   preview:
     'Vista previa del navegador. No se cambian los permisos ni los ajustes de la aplicación de escritorio.',
   previewGrant: 'Probar la autorización',
-  microphoneTitle: 'Primero, deja que OpenLess te escuche',
+  microphoneTitle: 'Primero, deja que TypeFeng te escuche',
   microphoneBody: 'El acceso al micrófono permite dictar. Solo se graba cuando tú lo inicias.',
   microphoneHint: 'Puedes dar permiso después en Ajustes → Permisos.',
   windowsMicrophoneHint:
@@ -388,7 +388,7 @@ export const desktopGuideEs: typeof desktopGuideEn = {
   accessibilityBody:
     'En macOS, el permiso de accesibilidad permite responder al atajo e insertar texto en la aplicación que usas.',
   accessibilityHint:
-    'Abre Ajustes del Sistema → Privacidad y seguridad → Accesibilidad, activa OpenLess y vuelve aquí.',
+    'Abre Ajustes del Sistema → Privacidad y seguridad → Accesibilidad, activa TypeFeng y vuelve aquí.',
   authorize: 'Permitir micrófono',
   openPermissions: 'Abrir ajustes del sistema',
   allowed: 'Acceso permitido',
@@ -429,8 +429,8 @@ export const desktopGuideEs: typeof desktopGuideEn = {
   finishBody:
     'Tus elecciones están guardadas. Puedes completar los pasos pendientes en los ajustes.',
   finishPending:
-    'Quedan pasos por configurar. Puedes explorar OpenLess; para dictar necesitas acceso al micrófono y un servicio de voz configurado.',
-  enter: 'Abrir OpenLess',
+    'Quedan pasos por configurar. Puedes explorar TypeFeng; para dictar necesitas acceso al micrófono y un servicio de voz configurado.',
+  enter: 'Abrir TypeFeng',
   allSet: 'Configurado',
   deferred: 'Después',
   storageError: 'No se pudo guardar el progreso en este dispositivo. Puedes continuar.',
@@ -440,9 +440,9 @@ export const desktopGuideEs: typeof desktopGuideEn = {
 };
 export const desktopGuideFr: typeof desktopGuideEn = {
   ...desktopGuideEn,
-  title: 'Bonjour, voici OpenLess',
+  title: 'Bonjour, voici TypeFeng',
   intro:
-    'Exprimez vos idées. OpenLess transforme votre voix en texte, dans l’application que vous utilisez.',
+    'Exprimez vos idées. TypeFeng transforme votre voix en texte, dans l’application que vous utilisez.',
   welcomeBody: 'Préparons quelques réglages, un à un. Chaque étape peut attendre.',
   name: 'Comment vous appeler ? (facultatif)',
   start: 'Commencer',
@@ -457,7 +457,7 @@ export const desktopGuideFr: typeof desktopGuideEn = {
   preview:
     'Aperçu dans le navigateur. Les autorisations et réglages de l’application de bureau ne sont pas modifiés.',
   previewGrant: 'Essayer l’autorisation',
-  microphoneTitle: 'Laissez d’abord OpenLess vous entendre',
+  microphoneTitle: 'Laissez d’abord TypeFeng vous entendre',
   microphoneBody:
     'L’accès au micro permet de dicter. L’enregistrement ne commence que sur votre demande.',
   microphoneHint: 'Vous pourrez autoriser le micro dans Réglages → Autorisations.',
@@ -467,7 +467,7 @@ export const desktopGuideFr: typeof desktopGuideEn = {
   accessibilityBody:
     'Sur macOS, l’autorisation d’accessibilité permet de répondre au raccourci et de saisir du texte dans l’application active.',
   accessibilityHint:
-    'Ouvrez Réglages Système → Confidentialité et sécurité → Accessibilité, activez OpenLess, puis revenez ici.',
+    'Ouvrez Réglages Système → Confidentialité et sécurité → Accessibilité, activez TypeFeng, puis revenez ici.',
   authorize: 'Autoriser le micro',
   openPermissions: 'Ouvrir les réglages système',
   allowed: 'Accès autorisé',
@@ -509,8 +509,8 @@ export const desktopGuideFr: typeof desktopGuideEn = {
   finishBody:
     'Vos choix sont enregistrés. Les étapes restantes sont disponibles dans les réglages.',
   finishPending:
-    'Certaines étapes restent à configurer. Vous pouvez explorer OpenLess ; la dictée nécessite le micro et un service vocal configuré.',
-  enter: 'Ouvrir OpenLess',
+    'Certaines étapes restent à configurer. Vous pouvez explorer TypeFeng ; la dictée nécessite le micro et un service vocal configuré.',
+  enter: 'Ouvrir TypeFeng',
   allSet: 'Configuré',
   deferred: 'Plus tard',
   storageError: 'Impossible d’enregistrer la progression sur cet appareil. Vous pouvez continuer.',
@@ -520,9 +520,9 @@ export const desktopGuideFr: typeof desktopGuideEn = {
 };
 export const desktopGuideDe: typeof desktopGuideEn = {
   ...desktopGuideEn,
-  title: 'Hallo, das ist OpenLess',
+  title: 'Hallo, das ist TypeFeng',
   intro:
-    'Sprich deine Gedanken aus. OpenLess verwandelt deine Stimme in Text, direkt in der gerade verwendeten App.',
+    'Sprich deine Gedanken aus. TypeFeng verwandelt deine Stimme in Text, direkt in der gerade verwendeten App.',
   welcomeBody:
     'Wir richten ein paar Dinge Schritt für Schritt ein. Jeden Schritt kannst du auf später verschieben.',
   name: 'Wie heißt du? (optional)',
@@ -537,7 +537,7 @@ export const desktopGuideDe: typeof desktopGuideEn = {
   language: 'Sprache',
   preview: 'Browservorschau. Berechtigungen und Einstellungen der Desktop-App bleiben unverändert.',
   previewGrant: 'Freigabe ausprobieren',
-  microphoneTitle: 'Lass OpenLess zuerst deine Stimme hören',
+  microphoneTitle: 'Lass TypeFeng zuerst deine Stimme hören',
   microphoneBody:
     'Mit Mikrofonzugriff kannst du diktieren. Die Aufnahme beginnt nur, wenn du sie startest.',
   microphoneHint: 'Du kannst den Zugriff später unter Einstellungen → Berechtigungen erlauben.',
@@ -547,7 +547,7 @@ export const desktopGuideDe: typeof desktopGuideEn = {
   accessibilityBody:
     'Unter macOS erlaubt die Bedienungshilfen-Freigabe Tastenkürzel und die Texteingabe in der aktiven App.',
   accessibilityHint:
-    'Öffne Systemeinstellungen → Datenschutz & Sicherheit → Bedienungshilfen, aktiviere OpenLess und kehre zurück.',
+    'Öffne Systemeinstellungen → Datenschutz & Sicherheit → Bedienungshilfen, aktiviere TypeFeng und kehre zurück.',
   authorize: 'Mikrofon erlauben',
   openPermissions: 'Systemeinstellungen öffnen',
   allowed: 'Zugriff erlaubt',
@@ -588,8 +588,8 @@ export const desktopGuideDe: typeof desktopGuideEn = {
   finishBody:
     'Deine Auswahl ist gespeichert. Zurückgestellte Schritte findest du in den Einstellungen.',
   finishPending:
-    'Einige Schritte sind noch offen. Du kannst OpenLess erkunden; zum Diktieren brauchst du Mikrofonzugriff und einen Sprachdienst.',
-  enter: 'OpenLess öffnen',
+    'Einige Schritte sind noch offen. Du kannst TypeFeng erkunden; zum Diktieren brauchst du Mikrofonzugriff und einen Sprachdienst.',
+  enter: 'TypeFeng öffnen',
   allSet: 'Eingerichtet',
   deferred: 'Später',
   storageError:

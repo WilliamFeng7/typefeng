@@ -55,7 +55,7 @@ export const zhCN = {
     customServerHint: '留空则使用官方同步服务器。地址必须是 https:// 开头的根地址。',
     protocolTitle: '云同步协议与隐私提醒',
     protocolIntro:
-      'OpenLess 及个人开发者尊重您的隐私，并致力于保护您的资料。请阅读以下说明，再决定是否继续。',
+      'TypeFeng 及个人开发者尊重您的隐私，并致力于保护您的资料。请阅读以下说明，再决定是否继续。',
     protocolPasswordTitle: '请妥善保存同步密码',
     protocolPassword:
       '同步密码和解密密钥仅用于本机加密与解锁，不会发送给云同步服务。若密码遗失且没有仍可解锁的设备，我们无法找回加密内容。',
@@ -64,7 +64,7 @@ export const zhCN = {
       '配置、服务 API 密钥和历史文本会先在本机加密，发往云端和保存在云端的备份内容均为密文。云同步服务无法据此读取或调用您的服务 API 密钥，也不会使用这些内容执行模型请求。',
     protocolExcludedTitle: '登录状态与可见信息',
     protocolExcluded:
-      '同步密码、解密密钥、OpenLess 管理的 GitHub/OAuth 登录状态、访问令牌及设备私钥不进入备份。账号认证会单独处理必要凭据；服务器仍可见账号标识、密文大小、版本及同步时间。',
+      '同步密码、解密密钥、TypeFeng 管理的 GitHub/OAuth 登录状态、访问令牌及设备私钥不进入备份。账号认证会单独处理必要凭据；服务器仍可见账号标识、密文大小、版本及同步时间。',
     protocolCheck: '我已阅读协议与隐私提醒，了解同步范围，并会妥善保管同步密码。',
     protocolBack: '返回同步范围',
     protocolConfirm: '我已阅读并确认',
@@ -256,13 +256,13 @@ export const zhCN = {
   macDictationKey: {
     Changed: '保存期间快捷键已改变，请重试。',
     label: 'Mac 听写键',
-    description: '用麦克风图标键替换当前听写快捷键。退出 OpenLess 后，此键交回 macOS。',
-    Permission: '请在 macOS「隐私与安全性 → 辅助功能」中允许 OpenLess 后重试。',
+    description: '用麦克风图标键替换当前听写快捷键。退出 TypeFeng 后，此键交回 macOS。',
+    Permission: '请在 macOS「隐私与安全性 → 辅助功能」中允许 TypeFeng 后重试。',
     Busy: '请先结束当前听写，再更改快捷键。',
     Unavailable: '无法启用此快捷键，已保存的绑定未改变。请重试或选择其他键。',
   },
   app: {
-    name: 'OpenLess',
+    name: 'TypeFeng',
     tagline: '自然说话，完美书写',
   },
   common: {
@@ -340,7 +340,7 @@ export const zhCN = {
       sending: '正在发送提问…',
       addUnavailable: '添加内容 · 暂不可用',
       browserUnavailable: '预览不执行指令',
-      answer: 'OpenLess 回答',
+      answer: 'TypeFeng 回答',
       layoutError: '窗口展开失败，请关闭后重新打开。',
     },
     title: '问任何问题',
@@ -636,7 +636,7 @@ export const zhCN = {
     },
   },
   onboarding: {
-    welcome: '欢迎使用 OpenLess',
+    welcome: '欢迎使用 TypeFeng',
     intro: '本地说出，本地落字。开始前需要两个系统权限。',
     accessibilityTitle: '辅助功能',
     hotkeyTitle: '全局快捷键',
@@ -647,18 +647,18 @@ export const zhCN = {
     actionNotApplicable: '无需授权',
     actionGranted: '已授权',
     actionOpenSystem: '打开系统设置',
-    actionRestart: '重置授权并重启 OpenLess',
+    actionRestart: '重置授权并重启 TypeFeng',
     actionGrant: '授权',
     actionRequestMic: '弹出授权',
     micNoDeviceHint: '未检测到麦克风，请连接并启用麦克风后重试。',
-    accessibilityHint: '授权后必须**完全退出 OpenLess** 再重新打开（macOS TCC 规则）。',
+    accessibilityHint: '授权后必须**完全退出 TypeFeng** 再重新打开（macOS TCC 规则）。',
     footerHint:
-      '授权全部完成后此引导自动关闭。如果一直不消失，从菜单栏 OpenLess → 退出，重新打开 App。',
+      '授权全部完成后此引导自动关闭。如果一直不消失，从菜单栏 TypeFeng → 退出，重新打开 App。',
     continueToSettings: '仅进入设置（语音与全局快捷键暂不可用）',
     androidContinue: '先进入应用',
     androidFooterHint:
       '听写需要麦克风权限。可点击上方「弹出授权」，或先进入应用后在概览页继续授权。',
-    androidTitle: '配置 OpenLess',
+    androidTitle: '配置 TypeFeng',
     androidIntro: '按步骤完成移动端权限和服务配置。',
     androidStepCounter: '第 {{current}} / {{total}} 项',
     androidBack: '上一步',
@@ -666,11 +666,11 @@ export const zhCN = {
     androidFinish: '完成并进入',
     androidSteps: {
       microphoneTitle: '麦克风权限',
-      microphoneDesc: '调用 Android 系统授权卡片，允许 OpenLess 录制语音。',
+      microphoneDesc: '调用 Android 系统授权卡片，允许 TypeFeng 录制语音。',
       accessibilityTitle: '无障碍服务',
       accessibilityDesc: '用于把识别结果粘贴回当前输入框，并辅助检测输入环境。',
       overlayPermissionTitle: '悬浮窗权限',
-      overlayPermissionDesc: '允许 OpenLess 在其他应用上显示录音控制按钮。',
+      overlayPermissionDesc: '允许 TypeFeng 在其他应用上显示录音控制按钮。',
       overlayConfigTitle: '悬浮窗配置',
       overlayConfigDesc: '设置悬浮窗显示时机、触发方式、滑动动作和按钮大小。',
       asrTitle: 'ASR 云服务',
@@ -1089,7 +1089,7 @@ export const zhCN = {
       fullPromptTitle: 'System Prompt',
       fullPromptHint: '这就是这套风格包自己的 Prompt。',
       promptChars: '{{count}} 字符',
-      runtimeTitle: 'OpenLess 运行时附加指令',
+      runtimeTitle: 'TypeFeng 运行时附加指令',
       runtimeDesc: '只读的运行时辅助项。',
       runtimeContextTitle: '上下文前提',
       runtimeContextDesc: '来自语言与应用上下文',
@@ -1464,7 +1464,7 @@ export const zhCN = {
       capsuleDisplayPrimaryScreen: '仅主显示器',
       capsuleDisplayForegroundWindowScreen: '当前前台窗口所在显示器',
       capsuleDisplayAllScreens: '所有屏幕显示',
-      capsuleDisplayModeRestartTitle: '重启 OpenLess 以应用显示模式',
+      capsuleDisplayModeRestartTitle: '重启 TypeFeng 以应用显示模式',
       capsuleDisplayModeRestartDesc:
         '从所有屏幕显示切换需要重启软件，以清理之前的胶囊窗口。现在重启吗？',
       capsuleStyleLabel: '胶囊样式',
@@ -1600,11 +1600,11 @@ export const zhCN = {
       windowsSendInputNewlineModeEnter: 'Enter（多数编辑器）',
       windowsSendInputNewlineModeShiftEnter: 'Shift+Enter（聊天输入框）',
       windowsSendInputNewlineModeCrLf: 'CR+LF Unicode',
-      windowsShowOpenlessInKeyboardListLabel: '在键盘列表中显示 OpenLess',
+      windowsShowOpenlessInKeyboardListLabel: '在键盘列表中显示 TypeFeng',
       windowsShowOpenlessInKeyboardListDesc:
-        '关闭后 Win+Space 切换输入法时不会出现 OpenLess；SendInput 与剪贴板粘贴插入不受影响。重新开启本项可恢复显示。',
+        '关闭后 Win+Space 切换输入法时不会出现 TypeFeng；SendInput 与剪贴板粘贴插入不受影响。重新开启本项可恢复显示。',
       windowsShowOpenlessInKeyboardListError:
-        '无法更新键盘列表：系统拒绝更改 OpenLess 语言配置文件。',
+        '无法更新键盘列表：系统拒绝更改 TypeFeng 语言配置文件。',
       historyGroupTitle: '历史与上下文',
       historyRetentionLabel: '历史保留天数',
       historyRetentionDesc: '超过保留天数的历史在写入新条目时被清理；0 = 不按时间清理。',
@@ -1635,7 +1635,7 @@ export const zhCN = {
       marketplaceDevLoginLabel: 'GitHub 用户名（上传身份）',
       marketplaceDevLoginDesc: '标识上传者身份，为空时无法上传或点赞。',
       startupAtBoot: '开机自启',
-      startupAtBootDesc: '登录系统时自动启动 OpenLess。',
+      startupAtBootDesc: '登录系统时自动启动 TypeFeng。',
       startupAtBootError: '开机自启切换失败：{{message}}',
     },
     channels: {
@@ -1714,7 +1714,7 @@ export const zhCN = {
       llmProviderDesc: '选择后将自动填入 Base URL 默认值。',
       credentialStorageNotice: '凭据保存在系统凭据库中。',
       codexOAuthNotice:
-        'Codex OAuth 使用本机 Codex 登录状态（~/.codex/auth.json），无需在 OpenLess 中保存 API Key 或 Base URL。',
+        'Codex OAuth 使用本机 Codex 登录状态（~/.codex/auth.json），无需在 TypeFeng 中保存 API Key 或 Base URL。',
       asrProviderDesc: '切换后将自动选用对应凭据。',
       asrTitle: 'ASR 语音（转写）',
       asrDesc: '用于将录制的语音转写为文本。',
@@ -1952,7 +1952,7 @@ export const zhCN = {
       cancel: '取消本次录音',
       confirm: '胶囊确认插入',
       switchStyle: '切换到上一个风格',
-      openApp: '打开 OpenLess',
+      openApp: '打开 TypeFeng',
       stylePackTitle: '风格直达快捷键',
       stylePackDesc: '为常用风格包各配一个快捷键，按下直接切换；停用中的包会自动启用。',
       stylePackAdd: '添加风格快捷键',
@@ -1973,7 +1973,7 @@ export const zhCN = {
     },
     permissions: {
       title: '权限',
-      descAcc: 'OpenLess 需要以下系统权限。授权后通常要完全退出 App 重启一次才生效。',
+      descAcc: 'TypeFeng 需要以下系统权限。授权后通常要完全退出 App 重启一次才生效。',
       descNoAcc: '麦克风必需；全局快捷键状态用来检测 native hook 是否运行。',
       micLabel: '麦克风',
       micDesc: '用于捕获你的语音输入。',
@@ -2001,7 +2001,7 @@ export const zhCN = {
       hotkeyFailed: '监听失败',
       windowsImeLabel: 'Windows 输入法后端',
       windowsImeDesc:
-        '通过与输入法并存的 OpenLess TSF 文本服务插入文字，不切换输入法，绕过剪贴板限制。',
+        '通过与输入法并存的 TypeFeng TSF 文本服务插入文字，不切换输入法，绕过剪贴板限制。',
       windowsImeInstalled: '已安装',
       windowsImeUnavailable: '不可用',
       androidImeLabel: '输入法 (IME)',
@@ -2015,9 +2015,9 @@ export const zhCN = {
       androidAccessibilityGrantedStale: '已授权，未连接',
       androidAccessibilityMessages: {
         not_android: '无障碍状态仅在 Android 上可用。',
-        not_enabled: '请在系统无障碍设置中启用 OpenLess。',
+        not_enabled: '请在系统无障碍设置中启用 TypeFeng。',
         operational: '无障碍服务正在运行。',
-        authorized_not_connected: '无障碍已授权但未连接，请在系统设置中重新开启 OpenLess。',
+        authorized_not_connected: '无障碍已授权但未连接，请在系统设置中重新开启 TypeFeng。',
         status_read_failed: '无法读取无障碍状态。',
       },
       androidShizukuLabel: 'Shizuku 增强模式',
@@ -2027,7 +2027,7 @@ export const zhCN = {
       androidShizukuRequestPermission: '请求授权',
       androidShizukuRecover: '恢复无障碍服务',
       androidShizukuRecoverConfirm:
-        '是否通过 Shizuku 尝试重新启用 OpenLess 无障碍服务？写入时会合并当时已启用的服务。若全局开关为关闭，启用后可能同时启动列表中已登记的其他无障碍服务。',
+        '是否通过 Shizuku 尝试重新启用 TypeFeng 无障碍服务？写入时会合并当时已启用的服务。若全局开关为关闭，启用后可能同时启动列表中已登记的其他无障碍服务。',
       androidShizukuYes: '是',
       androidShizukuNo: '否',
       androidShizukuAccessibilityOperational: '无障碍服务已注册且正在运行。',
@@ -2045,7 +2045,7 @@ export const zhCN = {
         not_installed: '未安装 Shizuku 或 Sui 后端。',
         unsupported_backend: '当前 Shizuku 后端版本过旧，请更新 Shizuku 或 Sui 至 v11 及以上。',
         not_running: 'Shizuku 未运行，请先启动 Shizuku 或 Sui。',
-        not_authorized: 'Shizuku 未授权，请授予 OpenLess 权限。',
+        not_authorized: 'Shizuku 未授权，请授予 TypeFeng 权限。',
         binder_dead: 'Shizuku 连接已断开，请重新启动 Shizuku。',
         authorized_operational: 'Shizuku 已授权，无障碍服务运行正常。',
         authorized_registered_stale: 'Shizuku 已授权，无障碍服务已注册但未运行。',
@@ -2058,7 +2058,7 @@ export const zhCN = {
         request_cancelled: '已取消 Shizuku 授权请求。',
         granted: 'Shizuku 权限已授予。',
         denied: 'Shizuku 权限被拒绝。',
-        permission_permanently_denied: 'Shizuku 授权已被阻止。请打开 Shizuku 并手动允许 OpenLess。',
+        permission_permanently_denied: 'Shizuku 授权已被阻止。请打开 Shizuku 并手动允许 TypeFeng。',
         launched: '已打开 Shizuku 授权界面。',
         launch_failed: '无法打开 Shizuku 授权界面。',
         open_shizuku: '已打开 Shizuku 管理器。',
@@ -2160,16 +2160,16 @@ export const zhCN = {
         qa: '追问',
       },
       windowsIme: {
-        installed: '已安装，按需切到 OpenLess 输入法。',
+        installed: '已安装，按需切到 TypeFeng 输入法。',
         notInstalled: '未安装，走剪贴板 / WM_PASTE 兜底。',
-        registrationBroken: '注册损坏，请重装 OpenLess 输入法。',
+        registrationBroken: '注册损坏，请重装 TypeFeng 输入法。',
         notWindows: '仅 Windows 可用。',
       },
     },
     inputMethod: {
-      guidanceTitle: 'OpenLess 输入法',
-      enableSystemIme: '请在系统设置 → 键盘 / 输入法中启用 OpenLess Voice，并在需要时切换到它。',
-      longPressLogo: '在 OpenLess 输入法键盘中长按左上角的 logo，可打开原生键盘设置。',
+      guidanceTitle: 'TypeFeng 输入法',
+      enableSystemIme: '请在系统设置 → 键盘 / 输入法中启用 TypeFeng Voice，并在需要时切换到它。',
+      longPressLogo: '在 TypeFeng 输入法键盘中长按左上角的 logo，可打开原生键盘设置。',
     },
     advanced: {
       multimodalPipelineTitle: '多模态识别管线',
@@ -2187,7 +2187,7 @@ export const zhCN = {
       streamingInsertHintLinux: '通过 fcitx5 插件提交文字；流式输入使用 enigo + XTest 合成按键。',
       windowsCompositionInputLabel: '实时原文显示在输入框（Windows）',
       windowsCompositionInputDesc:
-        '录音时把识别到的文字以带下划线的组合文本显示在输入框中，结束后替换为最终结果。需要启用 OpenLess 的 TSF 输入法组件，且目标应用支持文本服务框架（TSF）。',
+        '录音时把识别到的文字以带下划线的组合文本显示在输入框中，结束后替换为最终结果。需要启用 TypeFeng 的 TSF 输入法组件，且目标应用支持文本服务框架（TSF）。',
       streamingInsertSaveClipboardLabel: '同步到剪贴板',
       streamingInsertSaveClipboardHint:
         '插入成功后把最终文本写入剪贴板，方便 Cmd+V 再次粘贴；关闭后流式过程不动剪贴板。',
@@ -2318,29 +2318,29 @@ export const zhCN = {
       updateDialog: {
         available: {
           title: '发现新版本',
-          desc: '发现 OpenLess {{version}}，是否现在更新？',
+          desc: '发现 TypeFeng {{version}}，是否现在更新？',
         },
         stableChannelSwitch: {
           title: '切换到正式版',
-          desc: '当前版本：OpenLess {{currentVersion}}\n目标版本：OpenLess {{version}}\n这是从 Beta 渠道切换到正式版，是否继续？',
+          desc: '当前版本：TypeFeng {{currentVersion}}\n目标版本：TypeFeng {{version}}\n这是从 Beta 渠道切换到正式版，是否继续？',
         },
         downloading: {
           title: '正在下载更新',
-          desc: '正在下载 OpenLess {{version}}，请保持应用打开。',
+          desc: '正在下载 TypeFeng {{version}}，请保持应用打开。',
         },
         downloaded: {
           title: '更新已准备好',
-          desc: 'OpenLess {{version}} 已安装完成。是否现在自动重启以应用更新？',
+          desc: 'TypeFeng {{version}} 已安装完成。是否现在自动重启以应用更新？',
         },
         installing: {
           title: '正在安装更新',
-          desc: '正在安装 OpenLess {{version}}，请保持应用打开。',
+          desc: '正在安装 TypeFeng {{version}}，请保持应用打开。',
         },
         install: '现在更新',
         androidInstall: '下载并打开安装器',
         androidInstalled: {
           title: '系统安装器已打开',
-          desc: '请按系统提示完成安装。安装后重新打开 OpenLess 即可使用 {{version}}。',
+          desc: '请按系统提示完成安装。安装后重新打开 TypeFeng 即可使用 {{version}}。',
         },
         downloadingLabel: '下载中…',
         installingLabel: '安装中…',
@@ -2357,9 +2357,9 @@ export const zhCN = {
     },
   },
   startup: {
-    loading: '正在启动 OpenLess…',
+    loading: '正在启动 TypeFeng…',
     loadingDesc: '正在连接本地服务并检查兼容性。',
-    failed: 'OpenLess 暂时无法启动',
+    failed: 'TypeFeng 暂时无法启动',
     recovery:
       '请重新检查。如果仍然失败，请完全退出后重开应用；升级后出现此问题时，确认已安装完整的同一版本。',
     retry: '重新检查',
@@ -2510,10 +2510,10 @@ export const zhCN = {
     storageReset: '恢复默认',
     storageReveal: '打开模型总目录',
     storageDesc:
-      '自定义目录会在所选位置下创建 OpenLess/models，并自动迁移现有模型；迁移前会取消下载和释放已加载模型。',
+      '自定义目录会在所选位置下创建 TypeFeng/models，并自动迁移现有模型；迁移前会取消下载和释放已加载模型。',
     storageChooseTitle: '选择本地模型存储父目录',
     storageChangeConfirm:
-      '将把现有本地模型迁移到 {{path}}/OpenLess/models。迁移前会自动取消下载并释放已加载模型。是否继续？',
+      '将把现有本地模型迁移到 {{path}}/TypeFeng/models。迁移前会自动取消下载并释放已加载模型。是否继续？',
     storageResetConfirm: '将把现有本地模型迁回系统默认目录。当前目录：{{path}}。是否继续？',
     modelDir: '模型目录',
     revealDir: '打开目录',
@@ -2547,7 +2547,7 @@ export const zhCN = {
     foundryEnabling: '正在启用…',
     foundryPrepare: '下载 / 校验模型',
     runtimeDownloadRestart:
-      '下载操作使用了本地运行组件。请重启 OpenLess 后再启用；模型不会自动启用。现在重启？',
+      '下载操作使用了本地运行组件。请重启 TypeFeng 后再启用；模型不会自动启用。现在重启？',
     restartNow: '现在重启',
     foundryPreparing: '正在准备…',
     foundryReleasing: '正在释放…',

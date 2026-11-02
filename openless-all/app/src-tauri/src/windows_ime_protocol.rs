@@ -1,7 +1,7 @@
 #![allow(dead_code, unused_imports, unused_variables)]
 //! Wire format shared with `windows-ime/src/text_service.cpp`.
 //!
-//! OpenLess sends `WM_COPYDATA` to the message-only window the IME creates on
+//! TypeFeng sends `WM_COPYDATA` to the message-only window the IME creates on
 //! the host's TSF thread. A submit carries a token plus the text and is only
 //! acknowledged; the commit result is then polled with query messages carrying
 //! the same token. Replies travel back as the message result.
@@ -77,7 +77,7 @@ pub const IME_STATUS_NOT_DISPATCHED: u32 = 0x4F4C_0006;
 /// The request was rejected because another insertion still owns a live or externally terminated
 /// composition. Fallback must not replay text beside that composition.
 pub const IME_STATUS_COMPOSITION_CONFLICT: u32 = 0x4F4C_0007;
-/// The native service has an orphaned composition from a previous OpenLess process; the caller
+/// The native service has an orphaned composition from a previous TypeFeng process; the caller
 /// must cancel it and retry the update against the current focus.
 pub const IME_STATUS_COMPOSITION_RECOVERY_REQUIRED: u32 = 0x4F4C_0008;
 /// The installed DLL answered the protocol probe and reports the current wire format.

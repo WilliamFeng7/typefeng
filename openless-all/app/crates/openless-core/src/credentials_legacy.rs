@@ -12,7 +12,7 @@ use serde::Deserialize;
 use crate::credentials::*;
 use crate::{BackendError, BackendErrorCode, MARKETPLACE_GITHUB_TOKEN_ACCOUNT};
 
-pub const LEGACY_CREDENTIAL_SERVICE: &str = "com.openless.app";
+pub const LEGACY_CREDENTIAL_SERVICE: &str = "top.typefeng.desktop.legacy";
 pub const LEGACY_CREDENTIAL_ACCOUNT: &str = "credentials.v1";
 
 pub struct LegacyCredentials {

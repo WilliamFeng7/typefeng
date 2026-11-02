@@ -119,7 +119,7 @@ export function FloatingShell({
 }: FloatingShellProps) {
   const os = osProp ?? detectOS();
   return (
-    <WindowChrome os={os} title="OpenLess" height="100%">
+    <WindowChrome os={os} title="TypeFeng" height="100%">
       <FloatingShellBody os={os} initialTab={initialTab} initialSettings={initialSettings} />
     </WindowChrome>
   );
@@ -331,7 +331,7 @@ function FloatingShellBody({
                 os === 'mac' ? `${MAC_TRAFFIC_LIGHT_CLEARANCE}px 10px 12px` : '10px 10px 12px',
             }}
           >
-            {/* Version row: replaces the old "OpenLess" brand spot, filling the gap
+            {/* Version row: replaces the old "TypeFeng" brand spot, filling the gap
               above the nav; the BETA badge shares the version number's baseline. */}
             <div
               style={{
@@ -346,7 +346,7 @@ function FloatingShellBody({
               }}
             >
               <strong style={{ fontSize: 15, color: 'var(--ol-ink)', letterSpacing: '-0.02em' }}>
-                OpenLess
+                TypeFeng
               </strong>
               {IS_BETA_BUILD && (
                 <span

@@ -397,7 +397,7 @@ pub(crate) fn ensure_capsule_mirror<R: tauri::Runtime>(
         label,
         WebviewUrl::App("index.html?window=capsule".into()),
     )
-    .title("OpenLess Capsule Mirror")
+    .title("TypeFeng Capsule Mirror")
     .inner_size(460.0, 180.0)
     .decorations(false)
     .transparent(true)
@@ -444,7 +444,7 @@ pub(crate) fn ensure_rail_mirror<R: tauri::Runtime>(
         label,
         WebviewUrl::App("index.html?window=capsule-rail&os=win".into()),
     )
-    .title("OpenLess Transcript Rail Mirror")
+    .title("TypeFeng Transcript Rail Mirror")
     .inner_size(460.0, 52.0)
     .decorations(false)
     .transparent(true)

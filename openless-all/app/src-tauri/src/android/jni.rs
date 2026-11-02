@@ -788,7 +788,7 @@ pub mod android {
             )
             .and_then(|value| value.l())
             .map_err(|error| format!("get clipboard service: {error}"))?;
-        let label = jobject_str(env, "OpenLess")?;
+        let label = jobject_str(env, "TypeFeng")?;
         let text_obj = jobject_str(env, text)?;
         let clip = env
             .call_static_method(

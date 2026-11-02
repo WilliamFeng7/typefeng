@@ -18,13 +18,13 @@ pub fn default_models_root() -> Result<PathBuf> {
 
 /// Converts a user-selected parent directory into the actual models root.
 ///
-/// The UI has the user pick an ordinary directory; OpenLess always creates
-/// `OpenLess/models/` under it instead of scattering model files from multiple
+/// The UI has the user pick an ordinary directory; TypeFeng always creates
+/// `TypeFeng/models/` under it instead of scattering model files from multiple
 /// engines directly in the chosen directory root.
 pub fn models_root_for_base_dir(base_dir: Option<&str>) -> Result<PathBuf> {
     let trimmed = base_dir.map(str::trim).filter(|value| !value.is_empty());
     let dir = match trimmed {
-        Some(base) => PathBuf::from(base).join("OpenLess").join("models"),
+        Some(base) => PathBuf::from(base).join("TypeFeng").join("models"),
         None => return default_models_root(),
     };
     ensure_dir(&dir)?;
@@ -162,7 +162,7 @@ pub fn quick_note_recording_path_for_session(session_id: &str) -> Result<PathBuf
 }
 
 /// Foundry Local download and cache root. Neither the DLLs nor the models ship
-/// in the installer; like Qwen3-ASR they live under OpenLess's models directory
+/// in the installer; like Qwen3-ASR they live under TypeFeng's models directory
 /// so uninstall/cleanup can remove them together with the user data.
 #[cfg(target_os = "windows")]
 pub fn foundry_local_root() -> Result<PathBuf> {
@@ -212,7 +212,7 @@ mod tests {
         let root = models_root_for_base_dir(Some(tmp.to_string_lossy().as_ref()))
             .expect("build custom models root");
 
-        assert_eq!(root, tmp.join("OpenLess").join("models"));
+        assert_eq!(root, tmp.join("TypeFeng").join("models"));
         assert!(root.is_dir());
 
         let _ = fs::remove_dir_all(&tmp);

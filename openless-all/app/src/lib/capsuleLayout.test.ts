@@ -117,7 +117,7 @@ for (const os of ['mac', 'win'] as const) {
 for (const style of ['siri', 'classic'] as const) {
   assertEqual(parseCapsuleStyle(style), style, `${style} is accepted from preferences and events`);
 }
-assertEqual(parseCapsuleStyle('typeless'), 'classic', 'legacy Typeless maps to OpenLess');
+assertEqual(parseCapsuleStyle('typeless'), 'classic', 'legacy Typeless maps to TypeFeng');
 assertEqual(getCapsuleTranscriptRailHeight('siri'), 40, 'Siri rail height matches native overlay');
 assertEqual(
   getCapsuleTranscriptRailHeight('classic'),

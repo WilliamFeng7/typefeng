@@ -2,7 +2,7 @@
 //!
 //! Goal: let LLM polishing know what the user is writing. Chinese homophones are
 //! indistinguishable to the acoustic model but clear from context; this information is
-//! entirely missing from OpenLess today.
+//! entirely missing from TypeFeng today.
 //!
 //! ## Boundary
 //!

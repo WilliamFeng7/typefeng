@@ -373,7 +373,7 @@ pub struct Coordinator {
 fn startup_storage_error() -> openless_core::BackendError {
     openless_core::BackendError::new(
         openless_core::BackendErrorCode::Persistence,
-        "local recovery or secure storage is unavailable; restore access and restart OpenLess",
+        "local recovery or secure storage is unavailable; restore access and restart TypeFeng",
     )
     .retryable(true)
 }
@@ -1202,7 +1202,7 @@ impl Coordinator {
         }
         // Spawn a daemon thread that retries installing the hotkey hook, so it
         // takes effect as soon as Accessibility is granted without requiring
-        // the user to restart OpenLess.
+        // the user to restart TypeFeng.
         let inner = Arc::clone(&self.inner);
         std::thread::Builder::new()
             .name("openless-hotkey-supervisor".into())

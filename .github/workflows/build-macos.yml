@@ -1,0 +1,45 @@
+name: build-macos
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [typefeng]
+
+jobs:
+  build:
+    runs-on: macos-15
+    defaults:
+      run:
+        working-directory: openless-all/app
+    env:
+      CI: 'true'
+      APPLE_SIGNING_IDENTITY: '-'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: openless-all/app/package-lock.json
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.99.1
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Build TypeFeng app
+        run: npm run tauri -- build --ci --config src-tauri/tauri.macos.conf.json -- --locked
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TypeFeng-macos
+          path: |
+            openless-all/app/src-tauri/target/release/bundle/macos/TypeFeng.app
+            openless-all/app/src-tauri/target/release/bundle/dmg/*.dmg
+          if-no-files-found: warn

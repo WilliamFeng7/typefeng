@@ -73,7 +73,7 @@ export function inferPlatformCapabilities(): PlatformCapabilities {
       supportsLocalAsr: false,
       supportsLocalQwen3Mlx: false,
       supportsInAppDictation: true,
-      supportsAutoUpdate: true,
+      supportsAutoUpdate: false,
       supportsVoiceEdit: true,
     };
   }
@@ -94,7 +94,7 @@ export function inferPlatformCapabilities(): PlatformCapabilities {
     // keeps MLX visible on macOS until the native capability query is available.
     supportsLocalQwen3Mlx: os === 'mac',
     supportsInAppDictation: false,
-    supportsAutoUpdate: true,
+    supportsAutoUpdate: false,
     supportsVoiceEdit: true,
   };
 }
@@ -115,7 +115,9 @@ export async function getPlatformCapabilities(): Promise<PlatformCapabilities> {
 
   try {
     const { invoke } = await import('@tauri-apps/api/core');
-    cachedCapabilities = await invoke<PlatformCapabilities>('get_platform_capabilities');
+    const nativeCaps = await invoke<PlatformCapabilities>('get_platform_capabilities');
+    // TypeFeng fork: upstream update endpoints are not available to downstream builds.
+    cachedCapabilities = { ...nativeCaps, supportsAutoUpdate: false };
     return cachedCapabilities;
   } catch (err) {
     console.warn('[platform] get_platform_capabilities unavailable; using inferred defaults', err);

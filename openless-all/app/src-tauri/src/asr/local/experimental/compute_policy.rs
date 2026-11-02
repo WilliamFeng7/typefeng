@@ -100,7 +100,7 @@ fn delay(cpu_used: f64, wall_used: f64, cores: f64) -> f64 {
 }
 
 /// Accounts for native worker pools, not just the calling thread. Including
-/// other OpenLess CPU work is deliberately conservative: interaction makes
+/// other TypeFeng CPU work is deliberately conservative: interaction makes
 /// inference yield more, never slows microphone/UI execution.
 pub(super) struct Pacer {
     budget: Budget,

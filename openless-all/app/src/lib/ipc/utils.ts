@@ -79,7 +79,7 @@ export async function logClientError(message: string): Promise<void> {
 /** Probe "the body text around the host app's cursor" once. **Debug only, no product path.**
  *
  *  `delayMs` is what makes this entry point usable: when clicking the button from the settings
- *  page the foreground app is OpenLess itself, so it would always read our own window. A few
+ *  page the foreground app is TypeFeng itself, so it would always read our own window. A few
  *  seconds of delay gives the user time to switch to Notes / VS Code / WeChat and click into an
  *  input field before the probe actually reads. */
 export async function debugReadCursorContext(

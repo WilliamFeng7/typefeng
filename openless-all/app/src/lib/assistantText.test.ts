@@ -24,7 +24,7 @@ function tail(text: string) {
 }
 assert.equal(tail('A paragraph with a final word.'), 'final word.');
 assert.equal(tail('不让最后一个字单独换行。'), '换行。');
-assert.equal(tail('正文混排 OpenLess 很舒服！'), '舒服！');
+assert.equal(tail('正文混排 TypeFeng 很舒服！'), '舒服！');
 assert.equal(tail('An ending with **formatting**'), 'with **formatting**');
 assert.equal(tail('Meet the family 👨‍👩‍👧‍👦!'), 'family 👨‍👩‍👧‍👦!');
 assert.equal(tail('Cafe\u0301 déjà.'), 'Cafe\u0301 déjà.');

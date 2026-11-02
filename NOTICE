@@ -1,0 +1,33 @@
+TypeFeng
+Copyright (C) 2026 William Feng and TypeFeng contributors
+
+This program is a modified version of OpenLess.
+
+Upstream project : https://github.com/Open-Less/openless
+Upstream version : 2.0.2-Beta.3
+Upstream commit  : defd6924d9fd634c64acb5e8c78fb8c785e304af
+Upstream license : GNU Affero General Public License v3.0 (AGPL-3.0)
+Upstream copyright holders: the OpenLess authors and contributors.
+
+Modifications made by the TypeFeng fork (2026-11-02):
+  * Rebranded the application, windows, tray, menus, permission strings,
+    onboarding copy, About page and icons to "TypeFeng"; changed the bundle
+    identifier to top.typefeng.desktop and the version to 1.0.0.
+  * Disabled the upstream auto-update endpoint and update checks so a
+    TypeFeng build cannot be replaced by an upstream/other binary.
+  * Removed upstream community/QQ/Discord/website entry points from the
+    in-app About page; links now point at this fork and at the upstream
+    project for attribution.
+  * Replaced the macOS icon set (.icns and PNGs) and the About icon.
+  * Removed upstream CI workflows that are specific to the OpenLess release
+    pipeline and added a TypeFeng macOS build workflow.
+  * Internal Rust crate names remain "openless"/"openless_core" for
+    compatibility with upstream; all user-visible branding is TypeFeng.
+
+TypeFeng is not affiliated with, endorsed by, or sponsored by the OpenLess
+project. It is distributed under the same license as OpenLess, AGPL-3.0;
+the complete corresponding source is this repository.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the LICENSE file for details.

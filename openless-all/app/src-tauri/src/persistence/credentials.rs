@@ -1451,12 +1451,12 @@ fn is_reserved_extra_header_name(name: &str) -> bool {
 
 fn credentials_path() -> Result<PathBuf> {
     // macOS: ~/.openless/credentials.json (与 Swift 同源)
-    // Windows: %APPDATA%\OpenLess\credentials.json (Windows 没有标准 HOME 环境变量)
+    // Windows: %APPDATA%\TypeFeng\credentials.json (Windows 没有标准 HOME 环境变量)
     #[cfg(target_os = "windows")]
     {
         let appdata = std::env::var("APPDATA").context("APPDATA not set")?;
         return Ok(PathBuf::from(appdata)
-            .join("OpenLess")
+            .join("TypeFeng")
             .join(LEGACY_CREDS_FILE));
     }
     #[cfg(not(target_os = "windows"))]
@@ -1484,7 +1484,7 @@ fn android_credentials_path() -> Result<PathBuf> {
     let files_dir = crate::android::jni::android::app_files_dir()
         .map_err(|error| anyhow::anyhow!("resolve Android credential directory: {error}"))?;
     Ok(PathBuf::from(files_dir)
-        .join("OpenLess")
+        .join("TypeFeng")
         .join(ANDROID_CREDENTIALS_FILE))
 }
 
@@ -1499,13 +1499,13 @@ fn android_legacy_credentials_paths(current_path: &Path) -> Vec<PathBuf> {
     if let Ok(dir) = std::env::var("TAURI_ANDROID_APP_DATA_DIR") {
         add_path(
             PathBuf::from(dir)
-                .join("OpenLess")
+                .join("TypeFeng")
                 .join(ANDROID_CREDENTIALS_FILE),
         );
     }
     add_path(
         std::env::temp_dir()
-            .join("OpenLess")
+            .join("TypeFeng")
             .join(ANDROID_CREDENTIALS_FILE),
     );
     paths
@@ -3497,7 +3497,7 @@ pub struct CredentialsVault;
 
 impl CredentialsVault {
     /// System credential store service name; maps to the Keychain service on macOS.
-    pub const SERVICE_NAME: &'static str = "com.openless.app";
+    pub const SERVICE_NAME: &'static str = "top.typefeng.desktop";
 
     pub(crate) fn bind_sync_gate(
         gate: std::sync::Arc<openless_core::credentials::SyncWriteGate>,

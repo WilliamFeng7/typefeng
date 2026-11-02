@@ -297,7 +297,7 @@ export function DesktopOnboarding({ onComplete }: { onComplete: () => void | Pro
         <header className="ol-guide-header" data-tauri-drag-region>
           <div className="ol-guide-brand">
             <img src="/AppIcon.png" width="25" height="25" alt="" />
-            <span>OpenLess</span>
+            <span>TypeFeng</span>
           </div>
           <button
             className="ol-guide-text-button"

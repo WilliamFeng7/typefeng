@@ -545,10 +545,10 @@ mod tests {
             "https://dl.aeoform.com/releases/v2.0.2-tauri/OpenLess_aarch64.app.tar.gz"
         ));
         assert!(is_allowed_android_update_url(
-            "https://github.com/Open-Less/openless/releases/latest/download/OpenLess.apk"
+            "https://github.com/Open-Less/openless/releases/latest/download/TypeFeng.apk"
         ));
         assert!(is_allowed_android_update_url(
-            "https://fastgit.cc/https://github.com/Open-Less/openless/releases/latest/download/OpenLess.apk"
+            "https://fastgit.cc/https://github.com/Open-Less/openless/releases/latest/download/TypeFeng.apk"
         ));
         assert!(!is_allowed_android_update_url(
             "https://dl.aeoform.com@attacker.example/package.apk"
@@ -557,7 +557,7 @@ mod tests {
             "https://dl.aeoform.com.attacker.example/package.apk"
         ));
         assert!(!is_allowed_android_update_url(
-            "http://dl.aeoform.com/releases/v2.0.2-tauri/OpenLess.apk"
+            "http://dl.aeoform.com/releases/v2.0.2-tauri/TypeFeng.apk"
         ));
     }
 }

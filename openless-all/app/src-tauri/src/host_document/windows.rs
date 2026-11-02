@@ -814,7 +814,7 @@ unsafe fn read_document(element: &IUIAutomationElement, budget_chars: usize) -> 
 /// Gate order follows §15-17 of the design doc: password field and process blocklist are
 /// checked immediately after acquiring the focused element, before any text pattern is
 /// touched. Focus consistency (§12) is re-checked right before returning a successful window,
-/// so a focus change mid-read (Alt+Tab, OpenLess's own UI stealing focus, …) discards the
+/// so a focus change mid-read (Alt+Tab, TypeFeng's own UI stealing focus, …) discards the
 /// result instead of mixing one app's text with another's dictation.
 pub(super) fn read_around_cursor_blocking(
     budget_chars: usize,

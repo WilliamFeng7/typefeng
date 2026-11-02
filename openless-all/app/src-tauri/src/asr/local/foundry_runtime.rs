@@ -1162,7 +1162,7 @@ mod imp {
             if !allow_download {
                 anyhow::ensure!(
                     !self.restart_required(),
-                    "Restart OpenLess after downloading Foundry components"
+                    "Restart TypeFeng after downloading Foundry components"
                 );
                 let root = crate::persistence::foundry_model_cache_root()?;
                 anyhow::ensure!(
@@ -1637,7 +1637,7 @@ mod imp {
         }
 
         fn manager_config(&self) -> FoundryLocalConfig {
-            // OpenLess owns Windows App Runtime installation; keep the SDK bootstrapper non-interactive.
+            // TypeFeng owns Windows App Runtime installation; keep the SDK bootstrapper non-interactive.
             let mut config =
                 FoundryLocalConfig::new("openless").additional_setting("Bootstrap", "false");
             if let Ok(dir) = crate::persistence::foundry_app_data_root() {
