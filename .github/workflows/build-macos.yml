@@ -1,9 +1,8 @@
 name: build-macos
 
 on:
+  # Manual only: a full Tauri release build needs ~15 min and a macOS runner.
   workflow_dispatch:
-  push:
-    branches: [typefeng]
 
 jobs:
   build:
