@@ -517,6 +517,7 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
       setSherpaCatalog(catalog);
     } catch (err) {
       console.warn('[localAsr] Sherpa catalog query failed', err);
+      setError(err instanceof Error ? err.message : String(err));
     }
   };
 
@@ -1563,10 +1564,17 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
   };
 
   const handleMirrorChange = async (mirror: string) => {
+    const previousMirror = settings?.mirror;
+    // SelectLite is controlled. Update it immediately instead of waiting for
+    // the preference round-trip, otherwise the popup appears unresponsive.
+    setSettings((current) => (current ? { ...current, mirror } : current));
     try {
       await setLocalAsrMirror(mirror);
       await refresh();
     } catch (e) {
+      setSettings((current) =>
+        current && previousMirror != null ? { ...current, mirror: previousMirror } : current,
+      );
       setError(e instanceof Error ? e.message : String(e));
     }
   };

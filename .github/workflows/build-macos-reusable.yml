@@ -6,6 +6,9 @@ on:
       arch:
         required: true
         type: string
+      verify_arch:
+        required: true
+        type: string
       runner:
         required: true
         type: string
@@ -55,7 +58,7 @@ jobs:
           binary="$app/Contents/MacOS/openless"
           test -f "$binary"
           file "$binary" | tee architecture.txt
-          grep -q "${{ inputs.arch }}" architecture.txt
+          grep -q "${{ inputs.verify_arch }}" architecture.txt
           mkdir -p deliverables
           cp -R "$app" deliverables/
           find "$dmg_dir" -maxdepth 1 -name "TypeFeng_*_${{ inputs.bundle_arch }}.dmg" -exec cp {} deliverables/ \;
