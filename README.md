@@ -56,7 +56,7 @@
 
 ## 安装（从 Release）
 
-1. 下载 `TypeFeng-1.1.0-arm64.dmg`；
+1. 下载对应架构的安装包：Apple Silicon 用 `TypeFeng-1.1.0-arm64.dmg`，Intel 用 `TypeFeng-1.1.0-x64.dmg`；
 2. 拖进「应用程序」；
 3. 首次打开若被 Gatekeeper 拦下：右键 → 打开，或执行
    `xattr -dr com.apple.quarantine /Applications/TypeFeng.app`；
@@ -66,7 +66,7 @@
 
 ## 从源码构建
 
-要求：macOS 14+（Apple Silicon）、Node.js 22+、Rust 1.99+、Xcode Command Line Tools。
+要求：macOS 14+（Apple Silicon 或 Intel）、Node.js 22+、Rust 1.99+、Xcode Command Line Tools。
 
 ```bash
 git clone https://github.com/WilliamFeng7/typefeng.git
@@ -74,12 +74,16 @@ cd typefeng/openless-all/app
 npm ci
 npm run build
 npm run tauri -- build --ci --config src-tauri/tauri.macos.conf.json -- --locked
+
+# Intel（x86_64）交叉编译
+npm run tauri -- build --ci --config src-tauri/tauri.macos.conf.json --target x86_64-apple-darwin
 ```
 
 产物：
 
 - `src-tauri/target/release/bundle/macos/TypeFeng.app`
 - `src-tauri/target/release/bundle/dmg/TypeFeng_1.1.0_aarch64.dmg`
+- `src-tauri/target/x86_64-apple-darwin/release/bundle/dmg/TypeFeng_1.1.0_x64.dmg`
 
 签名相关：本地 ad-hoc 构建可设置 `APPLE_SIGNING_IDENTITY="-"`；
 正式分发需自备 Apple Developer ID 与公证流程。
