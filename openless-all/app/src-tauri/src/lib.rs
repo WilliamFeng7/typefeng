@@ -773,6 +773,8 @@ macro_rules! app_invoke_handler_mobile {
             #[cfg(local_asr_sherpa)]
             $crate::commands::sherpa_onnx_asr_status,
             #[cfg(local_asr_sherpa)]
+            $crate::commands::local_asr_device_profile,
+            #[cfg(local_asr_sherpa)]
             $crate::commands::sherpa_onnx_asr_catalog,
             #[cfg(local_asr_sherpa)]
             $crate::commands::sherpa_onnx_asr_fetch_remote_info,

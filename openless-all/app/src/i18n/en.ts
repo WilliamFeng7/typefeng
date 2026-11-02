@@ -1866,7 +1866,7 @@ export const en: typeof zhCN = {
         asrTencentCloud: 'Tencent Cloud Hunyuan Realtime ASR',
         asrGemini: 'Google Gemini Transcribe',
         asrElevenLabs: 'ElevenLabs Scribe',
-        asrSherpaOnnxLocal: 'Local sherpa-onnx (Experimental)',
+        asrSherpaOnnxLocal: 'Local sherpa-onnx',
         asrFoundryLocalWhisper: 'Local Whisper (Foundry Local)',
         asrLocalWhisper: 'Local Whisper (batch)',
         asrExperimentalSenseVoice: experimentalAsr.senseVoiceLabel,
@@ -1880,6 +1880,14 @@ export const en: typeof zhCN = {
         omniGemini: 'Google Gemini',
         omniDashscope: 'Alibaba DashScope Omni',
       },
+      recognitionModeLabel: 'Recognition setup',
+      recognitionModeHint: 'Switch between cloud/local channels and the on-device model library.',
+      recognitionChannelsTab: 'Channels',
+      recognitionLocalModelsTab: 'Local models',
+      recognitionLocalModelsTitle: 'Download / configure local models',
+      recognitionLocalModelsDesc:
+        'Download SenseVoice, Whisper and other offline models, see what each one is best for, then choose the model used for dictation.',
+      localModelsBadge: 'On-device',
       geminiTranscribeNotice:
         'Both models return verbatim text here, with optional processing by your configured LLM. gemini-3.5-transcribe uploads audio after recording stops. gemini-3.5-transcribe-live shows results while you speak, for up to 10 minutes per recording. For Smart transcription, use Multimodal mode. Base URL: https://generativelanguage.googleapis.com/v1beta.',
       geminiTranscribeOmniNotice:
@@ -2736,9 +2744,38 @@ export const en: typeof zhCN = {
     foundryModelBaseDesc: 'Faster with lower resource use for lightweight daily dictation.',
     foundryModelTiny: 'Whisper Tiny (fastest / smoke test)',
     foundryModelTinyDesc: 'Fastest check option for confirming the Foundry path works.',
-    sherpaTitle: 'Windows sherpa-onnx Local (Experimental)',
+    sherpaTitle: 'Local sherpa-onnx model library',
     sherpaDesc:
-      'Windows uses sherpa-onnx for offline batch recognition on this device with no ASR API key.',
+      'Download and run SenseVoice, Whisper, Paraformer, Zipformer and Qwen3-ASR on your Mac or Windows PC without an ASR API key.',
+    sherpaLanguageTitle: 'Recognition language',
+    sherpaLanguageDesc:
+      'Choose Chinese for Mandarin, Cantonese or mixed Chinese/English dictation. Automatic is best when the language is uncertain.',
+    deviceRecommendedTitle: 'Recommended for this device',
+    deviceDetected: 'Detected: {{model}} · {{arch}} · {{cores}} CPU cores · {{memory}} RAM',
+    deviceDownloadRecommended: 'Download recommended model',
+    deviceFit: {
+      label: 'Device fit',
+      recommended: 'Recommended',
+      good: 'Good fit',
+      demanding: 'Demanding',
+    },
+    deviceReasonDetecting: 'Reading this device’s CPU and memory configuration.',
+    deviceReasonIntelChinese:
+      'Best balance of Chinese accuracy, speed and battery use for an Intel Mac.',
+    deviceReasonLowMemory: 'Its small memory footprint leaves room for other apps on this device.',
+    deviceReasonBalancedChinese:
+      'A balanced Chinese-first model for everyday dictation and mixed-language notes.',
+    deviceReasonChineseLight: 'A lightweight Chinese-only option with predictable resource use.',
+    deviceReasonMultilingual:
+      'A balanced multilingual fallback when Whisper behavior is preferred.',
+    deviceReasonStreaming:
+      'Shows text while speaking, at the cost of sustained CPU use during recording.',
+    deviceReasonHeavyForDevice:
+      'This model is large and slow for the detected CPU; expect higher heat and battery use.',
+    deviceReasonPowerful:
+      'The detected memory can support this larger model when quality matters more than speed.',
+    deviceReasonAppSiliconLongContext:
+      'The detected Apple Silicon and memory can handle long or mixed-language dictation.',
     sherpaRuntimeReady: 'Model loaded',
     sherpaRuntimeMissing: 'Model not loaded',
     sherpaSetDefault: 'Set default / Enable sherpa-onnx',
@@ -2751,23 +2788,36 @@ export const en: typeof zhCN = {
     sherpaLanguageJa: 'Japanese ja',
     sherpaLanguageKo: 'Korean ko',
     sherpaLanguageYue: 'Cantonese yue',
-    sherpaModelSenseVoice: 'SenseVoice Small (default / Chinese-first)',
+    sherpaModelSenseVoice: 'SenseVoice Small (Chinese-first)',
     sherpaModelSenseVoiceDesc:
-      'Default experimental model for Chinese and mixed Chinese-English dictation.',
+      'A compact multilingual offline model optimized for Mandarin, Cantonese, English, Japanese and Korean. It offers the best balance of Chinese accuracy, speed and battery use on Intel Macs.',
+    sherpaModelSenseVoiceUseCase:
+      'Best for daily Chinese dictation, mixed Chinese/English notes, short messages and battery-sensitive laptops.',
     sherpaModelParaformer: 'Paraformer Chinese',
-    sherpaModelParaformerDesc: 'Chinese-focused experimental model.',
+    sherpaModelParaformerDesc:
+      'A Chinese-specialized offline model with low resource use and predictable Mandarin recognition. It is less robust when the speaker switches languages.',
+    sherpaModelParaformerUseCase:
+      'Best for Mandarin-only meetings, long notes and devices that need low memory use.',
     sherpaModelWhisper: 'Whisper Small multilingual',
     sherpaModelWhisperDesc:
-      'Multilingual experimental fallback aligned with Whisper-family behavior.',
+      'A balanced multilingual Whisper model with broad language coverage and stable punctuation. It is usually slower and less Chinese-specialized than SenseVoice.',
+    sherpaModelWhisperUseCase:
+      'Best for multilingual dictation, English-heavy work and users who want predictable Whisper behavior.',
     sherpaModelWhisperLargeV3: 'Whisper Large V3 (multilingual)',
     sherpaModelWhisperLargeV3Desc:
-      'The best open-source multilingual Whisper tier — high quality, large download.',
+      'The high-accuracy Whisper option for difficult accents, noisy recordings and mixed-language audio. The download is roughly 1.7 GB and inference is noticeably slower.',
+    sherpaModelWhisperLargeV3UseCase:
+      'Best for quality-first transcription on powerful hardware; avoid it for frequent short dictation on battery.',
     sherpaModelZipformer: 'Zipformer Streaming (zh/en)',
     sherpaModelZipformerDesc:
-      'Streaming Chinese-English model with the lowest latency — text appears as you speak.',
+      'A streaming Chinese/English model that displays a draft while you speak. Latency is low, but continuous CPU use is higher and offline-model accuracy may be better.',
+    sherpaModelZipformerUseCase:
+      'Best for live previews, short commands and situations where seeing text immediately matters more than maximum accuracy.',
     sherpaModelQwen3: 'Qwen3-ASR 0.6B INT8',
     sherpaModelQwen3Desc:
-      'Converted sherpa-onnx Qwen3-ASR model with multilingual recognition and stronger long-form context handling.',
+      'A converted Qwen3-ASR model with stronger long-context and mixed-language handling. It is larger and slower than SenseVoice and uses more memory.',
+    sherpaModelQwen3UseCase:
+      'Best for long, complex or mixed-language dictation on newer hardware; not the first choice for an Intel Mac.',
     modelSelectTitle: 'Models on this device',
     modelSelectDesc: 'Track downloads, manage files, or load a model to test it.',
     modelSelectPlaceholder: 'Select a downloaded model…',
@@ -2819,6 +2869,7 @@ export const en: typeof zhCN = {
     sidebarTitle: 'Downloaded & downloading',
     activePill: 'Active',
     setDefault: 'Set as default',
+    useModel: 'Use this model',
     downloading: 'Downloading',
     startDownload: 'Start download',
     downloadNewModel: 'Download new model',
@@ -2846,6 +2897,8 @@ export const en: typeof zhCN = {
     detailFiles: 'files',
     detailDownloaded: 'Downloaded',
     detailEmpty: 'Select a model to view its details',
+    modelGuideUseCase: 'Best for',
+    modelGuideDescription: 'About this model',
     foundryLanguage: 'Language',
     foundryRuntimeSource: 'Runtime source',
     mirrorGithubRelease: 'GitHub Releases',

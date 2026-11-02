@@ -1853,7 +1853,7 @@ export const ja: typeof zhCN = {
         asrGemini: 'Google Gemini Transcribe',
         asrTencentCloud: 'Tencent Cloud Hunyuan リアルタイム ASR',
         asrElevenLabs: 'ElevenLabs Scribe',
-        asrSherpaOnnxLocal: 'ローカル sherpa-onnx（実験的）',
+        asrSherpaOnnxLocal: 'ローカル sherpa-onnx',
         asrFoundryLocalWhisper: 'ローカル Whisper（Foundry Local）',
         asrLocalWhisper: 'ローカル Whisper（バッチ）',
         asrExperimentalSenseVoice: experimentalAsr.senseVoiceLabel,
@@ -1867,6 +1867,14 @@ export const ja: typeof zhCN = {
         omniGemini: 'Google Gemini',
         omniDashscope: 'Alibaba DashScope Omni',
       },
+      recognitionModeLabel: '音声認識の設定方法',
+      recognitionModeHint: 'クラウド/ローカルチャネルと端末内モデルライブラリを切り替えます。',
+      recognitionChannelsTab: 'チャネル',
+      recognitionLocalModelsTab: 'ローカルモデル',
+      recognitionLocalModelsTitle: 'ローカルモデルのダウンロード / 設定',
+      recognitionLocalModelsDesc:
+        'SenseVoice、Whisper などのオフラインモデルをダウンロードし、用途を比較して、ディクテーションに使うモデルを選択します。',
+      localModelsBadge: '端末内',
       geminiTranscribeNotice:
         'どちらのモデルもここでは逐語的に文字起こしし、必要に応じて設定済みの LLM で処理できます。gemini-3.5-transcribe は録音終了後に音声をアップロードします。gemini-3.5-transcribe-live は話している間に結果を表示し、1 回の録音は最大 10 分です。スマート文字起こしにはマルチモーダルモードを使用してください。ベース URL：https://generativelanguage.googleapis.com/v1beta。',
       geminiTranscribeOmniNotice:
@@ -2705,9 +2713,36 @@ export const ja: typeof zhCN = {
       'より高速でリソース消費が少なく、日常の軽量ディクテーションに適しています。',
     foundryModelTiny: 'Whisper Tiny（最速 / スモークテスト）',
     foundryModelTinyDesc: 'Foundry 経路が動作するか確認するための最速オプション。',
-    sherpaTitle: 'Windows sherpa-onnx Local（実験的）',
+    sherpaTitle: 'ローカル sherpa-onnx モデルライブラリ',
     sherpaDesc:
-      'Windows では sherpa-onnx によるデバイス上のオフライン一括認識を使用します。ASR API キーは不要です。',
+      'Mac または Windows で SenseVoice、Whisper、Paraformer、Zipformer、Qwen3-ASR を ASR API キーなしで端末内実行します。',
+    sherpaLanguageTitle: '認識言語',
+    sherpaLanguageDesc:
+      '標準中国語、広東語、中国語と英語の混在音声では言語を指定してください。不明な場合は自動認識を使用します。',
+    deviceRecommendedTitle: 'この端末へのおすすめ',
+    deviceDetected: '検出：{{model}} · {{arch}} · CPU {{cores}} コア · メモリ {{memory}}',
+    deviceDownloadRecommended: '推奨モデルをダウンロード',
+    deviceFit: {
+      label: '端末との適合性',
+      recommended: '推奨',
+      good: '適しています',
+      demanding: '高負荷',
+    },
+    deviceReasonDetecting: 'この端末の CPU とメモリ構成を読み取っています。',
+    deviceReasonIntelChinese:
+      'Intel Mac で中国語の正確さ、速度、バッテリー消費のバランスが最も良い選択です。',
+    deviceReasonLowMemory: 'メモリ使用量が少なく、他のアプリ用の余裕を残せます。',
+    deviceReasonBalancedChinese:
+      '中国語を優先したバランス型モデルで、日常のディクテーションや中英混在メモに適します。',
+    deviceReasonChineseLight: '中国語専用の軽量オプションで、リソース使用が安定しています。',
+    deviceReasonMultilingual: '多言語 Whisper の動作を優先する場合のバランス型代替です。',
+    deviceReasonStreaming: '話しながら表示できますが、録音中は CPU を使用し続けます。',
+    deviceReasonHeavyForDevice:
+      '検出された CPU では大きく遅くなり、発熱とバッテリー消費が増える可能性があります。',
+    deviceReasonPowerful:
+      '検出されたメモリはこの大型モデルを支えられます。速度より品質を優先する場合に適します。',
+    deviceReasonAppSiliconLongContext:
+      '検出された Apple Silicon とメモリで長い文や多言語ディクテーションを処理できます。',
     sherpaRuntimeReady: 'モデル読み込み済み',
     sherpaRuntimeMissing: 'モデル未読み込み',
     sherpaSetDefault: '既定に設定 / sherpa-onnx を有効化',
@@ -2720,21 +2755,36 @@ export const ja: typeof zhCN = {
     sherpaLanguageJa: '日本語 ja',
     sherpaLanguageKo: '韓国語 ko',
     sherpaLanguageYue: '広東語 yue',
-    sherpaModelSenseVoice: 'SenseVoice Small（既定 / 中国語優先）',
-    sherpaModelSenseVoiceDesc: '中国語および中英混在ディクテーション向けの既定実験モデル。',
+    sherpaModelSenseVoice: 'SenseVoice Small（中国語優先）',
+    sherpaModelSenseVoiceDesc:
+      '標準中国語、広東語、英語、日本語、韓国語に最適化した小型の多言語オフラインモデルです。Intel Mac では中国語の精度、速度、バッテリー消費のバランスが最も良好です。',
+    sherpaModelSenseVoiceUseCase:
+      '日常の中国語ディクテーション、中英混在メモ、短いメッセージ、バッテリーを重視するノート PC に最適です。',
     sherpaModelParaformer: 'Paraformer 中国語',
-    sherpaModelParaformerDesc: '中国語向けの実験モデル。',
+    sherpaModelParaformerDesc:
+      '中国語専用のオフラインモデルで、リソース消費が少なく標準中国語の認識が安定しています。言語を切り替える音声では SenseVoice ほど堅牢ではありません。',
+    sherpaModelParaformerUseCase:
+      '中国語だけの会議、長いメモ、メモリ使用量を抑えたい端末に最適です。',
     sherpaModelWhisper: 'Whisper Small 多言語',
-    sherpaModelWhisperDesc: 'Whisper 系列の挙動に合わせた多言語実験フォールバックモデル。',
+    sherpaModelWhisperDesc:
+      '幅広い言語と安定した句読点を備えたバランス型 Whisper モデルです。通常は SenseVoice より遅く、中国語専用ではありません。',
+    sherpaModelWhisperUseCase:
+      '多言語ディクテーション、英語中心の作業、安定した Whisper の動作が必要な場面に最適です。',
     sherpaModelWhisperLargeV3: 'Whisper Large V3（多言語）',
     sherpaModelWhisperLargeV3Desc:
-      'オープンソース多言語モデルの中で最高品質の Whisper 系。高品質だが大容量。',
+      '難しい訛り、雑音、多言語音声向けの高精度 Whisper です。約 1.7 GB で、推論は明らかに遅くなります。',
+    sherpaModelWhisperLargeV3UseCase:
+      '高性能端末で品質を優先する文字起こし向けです。バッテリー駆動で短い音声を頻繁に使う用途には向きません。',
     sherpaModelZipformer: 'Zipformer ストリーミング（中英）',
     sherpaModelZipformerDesc:
-      '話しながら文字が出るストリーミング型の中英モデル。遅延が最も小さく、リアルタイム文字起こしに適します。',
+      '話しながら下書きを表示する中英ストリーミングモデルです。低遅延ですが CPU を継続使用し、オフラインモデルの方が精度が高い場合があります。',
+    sherpaModelZipformerUseCase:
+      'ライブプレビュー、短いコマンド、最高精度より即時表示を優先する場面に最適です。',
     sherpaModelQwen3: 'Qwen3-ASR 0.6B INT8',
     sherpaModelQwen3Desc:
-      '変換済み sherpa-onnx Qwen3-ASR モデル。多言語認識とより強い長文コンテキスト処理に対応。',
+      '長い文脈と多言語混在に強い変換済み Qwen3-ASR モデルです。SenseVoice より大きく、遅く、メモリ消費も多くなります。',
+    sherpaModelQwen3UseCase:
+      '新しいハードウェアで長く複雑な音声や多言語音声を扱う用途向けです。Intel Mac の日常用途には最初の選択肢ではありません。',
     modelSelectTitle: 'この端末のモデル',
     modelSelectDesc: 'ダウンロード状況の確認、ファイルの管理、モデルの読み込みとテストができます。',
     modelSelectPlaceholder: 'ダウンロード済みモデルを選択…',
@@ -2787,6 +2837,7 @@ export const ja: typeof zhCN = {
     sidebarTitle: 'ダウンロード済み・進行中',
     activePill: '使用中',
     setDefault: 'デフォルトに設定',
+    useModel: 'このモデルを使用',
     downloading: 'ダウンロード中',
     startDownload: 'ダウンロード開始',
     downloadNewModel: '新しいモデルをダウンロード',
@@ -2814,6 +2865,8 @@ export const ja: typeof zhCN = {
     detailFiles: 'ファイル',
     detailDownloaded: 'ダウンロード済み',
     detailEmpty: 'モデルを選択して詳細を表示',
+    modelGuideUseCase: '向いている用途',
+    modelGuideDescription: 'モデルの説明',
     foundryLanguage: '言語',
     foundryRuntimeSource: 'ランタイムソース',
     mirrorGithubRelease: 'GitHub Releases',

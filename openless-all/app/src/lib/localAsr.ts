@@ -13,7 +13,8 @@ export function isLocalAsrModelSupportedOnOs(
   model: Pick<LocalAsrModelStatus, 'runtime' | 'family'>,
   os: OS,
 ): boolean {
-  if (model.runtime === 'foundry' || model.runtime === 'sherpa_onnx') return os === 'win';
+  if (model.runtime === 'foundry') return os === 'win';
+  if (model.runtime === 'sherpa_onnx') return os === 'win' || os === 'mac';
   if (model.runtime !== 'generic') return false;
   if (model.family === 'whisper') return os === 'mac';
   if (model.family === 'qwen3' || model.family === 'qwen3_asr') return os === 'mac';
@@ -505,10 +506,29 @@ export interface SherpaOnnxCatalogModel {
   fileSizeMb: number | null;
 }
 
+export interface LocalAsrDeviceProfile {
+  architecture: string;
+  physicalCpuCores: number;
+  logicalCpuCores: number;
+  memoryBytes: number;
+  hardwareModel: string | null;
+}
+
+export function getLocalAsrDeviceProfile(): Promise<LocalAsrDeviceProfile> {
+  return invokeOrMock('local_asr_device_profile', undefined, () => ({
+    architecture: 'x86_64',
+    physicalCpuCores: 6,
+    logicalCpuCores: 12,
+    memoryBytes: 16 * 1024 ** 3,
+    hardwareModel: 'MacBookPro16,1',
+  }));
+}
+
 export interface SherpaOnnxModelOption {
   alias: SherpaOnnxModelAlias;
   labelKey: string;
   descKey: string;
+  useCaseKey: string;
 }
 
 export const SHERPA_ONNX_ASR_MODELS: SherpaOnnxModelOption[] = [
@@ -516,31 +536,37 @@ export const SHERPA_ONNX_ASR_MODELS: SherpaOnnxModelOption[] = [
     alias: 'sense-voice-small-zh',
     labelKey: 'localAsr.sherpaModelSenseVoice',
     descKey: 'localAsr.sherpaModelSenseVoiceDesc',
+    useCaseKey: 'localAsr.sherpaModelSenseVoiceUseCase',
   },
   {
     alias: 'paraformer-zh',
     labelKey: 'localAsr.sherpaModelParaformer',
     descKey: 'localAsr.sherpaModelParaformerDesc',
+    useCaseKey: 'localAsr.sherpaModelParaformerUseCase',
   },
   {
     alias: 'whisper-small-multi',
     labelKey: 'localAsr.sherpaModelWhisper',
     descKey: 'localAsr.sherpaModelWhisperDesc',
+    useCaseKey: 'localAsr.sherpaModelWhisperUseCase',
   },
   {
     alias: 'whisper-large-v3-multi',
     labelKey: 'localAsr.sherpaModelWhisperLargeV3',
     descKey: 'localAsr.sherpaModelWhisperLargeV3Desc',
+    useCaseKey: 'localAsr.sherpaModelWhisperLargeV3UseCase',
   },
   {
     alias: 'zipformer-bilingual-zh-en-streaming',
     labelKey: 'localAsr.sherpaModelZipformer',
     descKey: 'localAsr.sherpaModelZipformerDesc',
+    useCaseKey: 'localAsr.sherpaModelZipformerUseCase',
   },
   {
     alias: 'qwen3-asr-0.6b-int8',
     labelKey: 'localAsr.sherpaModelQwen3',
     descKey: 'localAsr.sherpaModelQwen3Desc',
+    useCaseKey: 'localAsr.sherpaModelQwen3UseCase',
   },
 ];
 

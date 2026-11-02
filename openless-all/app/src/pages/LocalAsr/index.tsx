@@ -39,6 +39,7 @@ import {
   getFoundryLocalAsrModelDir,
   getFoundryLocalAsrCatalog,
   getFoundryLocalAsrStatus,
+  getLocalAsrDeviceProfile,
   getLocalAsrEngineStatus,
   getLocalAsrSettings,
   getSherpaOnnxAsrCatalog,
@@ -70,6 +71,7 @@ import {
   type FoundryPrepareProgress,
   type HfModelCard,
   type LocalAsrDownloadProgress,
+  type LocalAsrDeviceProfile,
   type LocalAsrEngineStatus,
   type LocalAsrMirror,
   type LocalAsrModelStatus,
@@ -98,6 +100,7 @@ import {
   normalizeFoundryRuntimeSourceForUi,
   normalizeSherpaLanguageHintForUi,
 } from './helpers';
+import { formatDeviceMemory, recommendationForModel } from './deviceRecommendation';
 import {
   DownloadProgressBlock,
   FoundryPrepareProgressBlock,
@@ -118,9 +121,12 @@ import type { RemoteSize } from './types';
 const OS = detectOS();
 const IS_WINDOWS = OS === 'win';
 const IS_QWEN_PLATFORM = OS === 'mac';
-// sherpa-onnx models: Windows and arm64 Android (this page only shows where
-// the backend reports local ASR support). Foundry stays Windows-only.
-const IS_SHERPA_PLATFORM = IS_WINDOWS || OS === 'android';
+// sherpa-onnx models: Windows, macOS, and arm64 Android (this page only shows
+// where the backend reports local ASR support).
+const IS_SHERPA_PLATFORM = IS_WINDOWS || OS === 'mac' || OS === 'android';
+// The legacy generic Qwen/Whisper runtimes are retired on macOS. Keep their
+// code paths for non-Mac builds, but the unified catalog uses sherpa-onnx.
+const HAS_GENERIC_LOCAL_MODELS = !IS_SHERPA_PLATFORM;
 
 function effectiveModelMirror(modelId: string, mirror: string): LocalAsrMirror {
   if (mirror === 'modelscope' && !modelId.startsWith('qwen3-asr-')) return 'huggingface';
@@ -279,6 +285,7 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
   const [sherpaCancelRequested, setSherpaCancelRequested] = useState(false);
   const [sherpaDownloadCancelRequested, setSherpaDownloadCancelRequested] = useState(false);
   const [sherpaModelDir, setSherpaModelDir] = useState('');
+  const [deviceProfile, setDeviceProfile] = useState<LocalAsrDeviceProfile | null>(null);
   const [testingModelId, setTestingModelId] = useState<string | null>(null);
   const [testResults, setTestResults] = useState<
     Record<string, LocalAsrTestResult | { error: string }>
@@ -312,6 +319,9 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
 
   useEffect(() => {
     void getPlatformCapabilities().then((caps) => setSupportsQwen3Mlx(caps.supportsLocalQwen3Mlx));
+    void getLocalAsrDeviceProfile()
+      .then(setDeviceProfile)
+      .catch((err) => console.warn('[localAsr] device profile query failed', err));
   }, []);
 
   const setDownloadDialog = (open: boolean) => {
@@ -528,9 +538,11 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
       setError(null);
       const [s, list] = await Promise.all([getLocalAsrSettings(), listLocalAsrModels()]);
       if (!isCurrent()) return;
-      const supportedModels = list.filter(
-        (model) => model.runtime === 'generic' && isLocalAsrModelSupportedOnOs(model, OS),
-      );
+      const supportedModels = HAS_GENERIC_LOCAL_MODELS
+        ? list.filter(
+            (model) => model.runtime === 'generic' && isLocalAsrModelSupportedOnOs(model, OS),
+          )
+        : [];
       setSettings(s);
       setModels(supportedModels);
       void refreshEngineStatus();
@@ -1728,8 +1740,8 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
   // "download new model" dialog).
   const allSidebarEntries = useMemo<SidebarModelEntry[]>(() => {
     const entries: SidebarModelEntry[] = [];
-    // macOS: Qwen3 / Whisper engines
-    for (const m of models) {
+    // Legacy generic Qwen3 / whisper.cpp engines (not used by the TypeFeng Mac catalog).
+    for (const m of HAS_GENERIC_LOCAL_MODELS ? models : []) {
       if (m.runtime !== 'generic' || !isLocalAsrModelSupportedOnOs(m, OS)) continue;
       const isWhisper = m.family === 'whisper';
       const isDownloading =
@@ -1775,16 +1787,18 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
           progress[m.id]?.phase === 'failed' ? progress[m.id]?.error || t('localAsr.failed') : null,
       });
     }
-    // Windows：sherpa-onnx + foundry
+    // sherpa-onnx: the unified cross-platform model library.
     for (const c of IS_SHERPA_PLATFORM ? sherpaCatalog : []) {
+      const guide = SHERPA_ONNX_ASR_MODELS.find((model) => model.alias === c.alias);
+      const recommendation = recommendationForModel(c.alias, deviceProfile);
       const isDownloading =
         Boolean(sherpaDownloadProgress[c.alias]) &&
         (sherpaDownloadProgress[c.alias]?.phase === 'started' ||
           sherpaDownloadProgress[c.alias]?.phase === 'progress');
       entries.push({
         id: c.alias,
-        name: c.displayName || c.alias,
-        displayName: c.displayName || undefined,
+        name: guide ? t(guide.labelKey) : c.displayName || c.alias,
+        displayName: guide ? t(guide.labelKey) : c.displayName || undefined,
         sizeBytes: c.fileSizeMb != null ? c.fileSizeMb * 1024 * 1024 : undefined,
         remoteBytes:
           sherpaRemoteSizes[c.alias]?.totalBytes ||
@@ -1801,7 +1815,15 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
         isActive:
           sherpaStatus?.activeModel === c.alias && activeAsrProvider === 'sherpa-onnx-local',
         engine: 'sherpa',
-        runtimeLabel: OS === 'android' ? 'Android · sherpa-onnx' : 'Windows · sherpa-onnx',
+        runtimeLabel:
+          OS === 'android'
+            ? 'Android · sherpa-onnx'
+            : OS === 'mac'
+              ? 'macOS · sherpa-onnx'
+              : 'Windows · sherpa-onnx',
+        useCaseKey: guide?.useCaseKey,
+        descKey: guide?.descKey,
+        recommendation,
         downloadError:
           sherpaDownloadProgress[c.alias]?.phase === 'failed'
             ? sherpaDownloadProgress[c.alias]?.error || t('localAsr.failed')
@@ -1831,7 +1853,9 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
         runtimeLabel: 'Windows · Foundry Local',
       });
     }
-    return entries;
+    return entries.sort(
+      (left, right) => (left.recommendation?.rank ?? 5) - (right.recommendation?.rank ?? 5),
+    );
   }, [
     models,
     supportsQwen3Mlx,
@@ -1847,6 +1871,7 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
     foundryProgress,
     foundryStatus?.activeModel,
     t,
+    deviceProfile,
   ]);
 
   // The board shows only downloaded / downloading models (downloading ones must show live progress).
@@ -1975,6 +2000,11 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
     modelLoadPending || busyModelId !== null || sherpaBusy !== null || anyDownloadInFlight;
   const visibleError =
     error || allSidebarEntries.find((entry) => entry.downloadError)?.downloadError;
+  const recommendedEntry =
+    allSidebarEntries.find((entry) => entry.recommendation?.fit === 'recommended') ??
+    allSidebarEntries.find((entry) => entry.recommendation?.fit === 'good') ??
+    null;
+  const deviceMemoryLabel = deviceProfile ? formatDeviceMemory(deviceProfile.memoryBytes) : '';
 
   return (
     <LocalAsrContentWrapper embedded={embedded}>
@@ -2016,6 +2046,109 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
         <div className="ol-model-error" role="alert" style={{ marginBottom: 20 }}>
           {visibleError}
         </div>
+      )}
+      {deviceProfile && recommendedEntry?.recommendation && (
+        <Card
+          style={{
+            marginBottom: 16,
+            border: '1px solid color-mix(in srgb, var(--ol-blue) 24%, transparent)',
+            background:
+              'linear-gradient(135deg, color-mix(in srgb, var(--ol-blue) 7%, transparent), transparent 70%)',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 16,
+              flexWrap: 'wrap',
+            }}
+          >
+            <div style={{ minWidth: 0, flex: '1 1 420px' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  flexWrap: 'wrap',
+                  marginBottom: 5,
+                }}
+              >
+                <Pill tone="blue" size="sm">
+                  {t('settings.providers.localModelsBadge')}
+                </Pill>
+                <strong style={{ fontSize: 14 }}>{t('localAsr.deviceRecommendedTitle')}</strong>
+              </div>
+              <div style={{ fontSize: 13, color: 'var(--ol-ink-2)', lineHeight: 1.55 }}>
+                <strong>{recommendedEntry.displayName || recommendedEntry.name}</strong>
+                <span> · {t(recommendedEntry.recommendation.reasonKey)}</span>
+              </div>
+              <div style={{ marginTop: 5, fontSize: 11.5, color: 'var(--ol-ink-4)' }}>
+                {t('localAsr.deviceDetected', {
+                  model: deviceProfile.hardwareModel || deviceProfile.architecture,
+                  arch: deviceProfile.architecture,
+                  cores: deviceProfile.physicalCpuCores,
+                  memory: deviceMemoryLabel || t('localAsr.sizeUnknown'),
+                })}
+              </div>
+            </div>
+            {!recommendedEntry.isDownloaded && !recommendedEntry.isDownloading && (
+              <Btn
+                variant="blue"
+                disabled={downloadDisabled}
+                onClick={() => {
+                  setSelectedModelId(recommendedEntry.id);
+                  setDownloadDialog(true);
+                }}
+              >
+                {t('localAsr.deviceDownloadRecommended')}
+              </Btn>
+            )}
+          </div>
+        </Card>
+      )}
+      {OS === 'mac' && IS_SHERPA_PLATFORM && (
+        <Card style={{ marginBottom: 16 }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 16,
+              flexWrap: 'wrap',
+            }}
+          >
+            <div style={{ minWidth: 0, flex: '1 1 320px' }}>
+              <div
+                style={{
+                  fontSize: 13,
+                  fontWeight: 'var(--ol-font-weight-semibold)',
+                  color: 'var(--ol-ink)',
+                  marginBottom: 4,
+                }}
+              >
+                {t('localAsr.sherpaLanguageTitle')}
+              </div>
+              <div style={{ fontSize: 12, color: 'var(--ol-ink-3)', lineHeight: 1.55 }}>
+                {t('localAsr.sherpaLanguageDesc')}
+              </div>
+            </div>
+            <SelectLite
+              value={selectedSherpaLanguageHint || 'auto'}
+              onChange={(value) =>
+                void handleSherpaLanguageChange(
+                  (value === 'auto' ? '' : value) as SherpaOnnxLanguageHint,
+                )
+              }
+              ariaLabel={t('localAsr.sherpaLanguageTitle')}
+              options={sherpaLanguageOptions.map((option) =>
+                option.value === '' ? { value: 'auto', label: option.label } : option,
+              )}
+              style={{ fontSize: 13, height: 31, minWidth: 180 }}
+            />
+          </div>
+        </Card>
       )}
       {!IS_WINDOWS && (
         <section className="ol-model-manager">
@@ -2077,6 +2210,12 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
                         ? () => void handleCleanupIncomplete(selectedEntry.id)
                         : undefined
                     }
+                    onActivate={() => {
+                      if (selectedEntry?.engine === 'sherpa') {
+                        void handleSherpaModelChange(selectedEntry.id as SherpaOnnxModelAlias);
+                      }
+                    }}
+                    showActivate={selectedEntry?.engine === 'sherpa'}
                     onTest={() => {
                       if (
                         selectedEntry?.engine === 'qwen3' ||
@@ -2139,7 +2278,7 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
           title={t('localAsr.downloadSettingsTitle')}
           desc={t('localAsr.downloadSettingsDesc')}
         >
-          {IS_QWEN_PLATFORM && (
+          {HAS_GENERIC_LOCAL_MODELS && IS_QWEN_PLATFORM && (
             <>
               <div className="ol-model-setting-group">
                 <div
@@ -2173,7 +2312,7 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
                   </div>
 
                   <SelectLite
-                    value={settings?.mirror ?? 'huggingface'}
+                    value={effectiveSherpaMirror(settings?.mirror ?? 'huggingface')}
                     onChange={(v) => void handleMirrorChange(v)}
                     ariaLabel={t('localAsr.mirrorLabel')}
                     options={[
@@ -2184,10 +2323,6 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
                       {
                         value: 'hf-mirror',
                         label: t('localAsr.mirrorHfMirror'),
-                      },
-                      {
-                        value: 'modelscope',
-                        label: t('localAsr.mirrorModelscope'),
                       },
                     ]}
                     style={{ fontSize: 13, height: 31, minWidth: 200 }}
@@ -2444,13 +2579,13 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
           // unreachable (mainland China). Sherpa models have no ModelScope copy.
           mirror={{
             label: t('localAsr.mirrorLabel'),
-            value: IS_QWEN_PLATFORM
+            value: HAS_GENERIC_LOCAL_MODELS
               ? (settings?.mirror ?? 'huggingface')
               : effectiveSherpaMirror(settings?.mirror ?? 'huggingface'),
             options: [
               { value: 'huggingface', label: t('localAsr.mirrorHuggingface') },
               { value: 'hf-mirror', label: t('localAsr.mirrorHfMirror') },
-              ...(IS_QWEN_PLATFORM
+              ...(HAS_GENERIC_LOCAL_MODELS
                 ? [{ value: 'modelscope', label: t('localAsr.mirrorModelscope') }]
                 : []),
             ],
@@ -3174,7 +3309,7 @@ export function LocalAsr({ embedded = false }: LocalAsrProps = {}) {
           On Windows / Linux the mirror / download / model list here would be dead UI. The Foundry block is already
           guarded by IS_WINDOWS above; the error Card (shared setError, also written by Foundry handlers) stays
           unconditionally visible. */}
-      {IS_QWEN_PLATFORM && !engineAvailable && (
+      {HAS_GENERIC_LOCAL_MODELS && IS_QWEN_PLATFORM && !engineAvailable && (
         <Card
           style={{
             marginBottom: 16,

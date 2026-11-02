@@ -2689,9 +2689,9 @@ impl PlatformCapabilities {
                 supports_overlay: true,
                 supports_desktop_hotkey: true,
                 supports_tray: true,
-                // The Tauri native local engine is available on Windows; Linux keeps the
+                // TypeFeng links sherpa-onnx on Windows and macOS. Linux keeps the
                 // retired generic provider metadata but has no inference runtime.
-                supports_local_asr: cfg!(target_os = "windows"),
+                supports_local_asr: cfg!(any(target_os = "windows", target_os = "macos")),
                 supports_local_qwen3_mlx: false,
                 supports_in_app_dictation: false,
                 supports_auto_update: true,

@@ -38,13 +38,15 @@ fn main() {
     }
 
     // `local_asr_sherpa`: targets that link sherpa-onnx for local ASR —
-    // Windows, and arm64 Android (see the Cargo.toml dependency comment).
-    // classify_target_os() only names android/macos/linux, so Windows is
-    // read from Cargo's own variable.
+    // Windows, macOS, and arm64 Android. TypeFeng keeps the model-library
+    // downloader and local recognizer available on Intel and Apple Silicon Macs.
     println!("cargo::rustc-check-cfg=cfg(local_asr_sherpa)");
     let cargo_target_os = std::env::var("CARGO_CFG_TARGET_OS").unwrap_or_default();
     let target_arch = std::env::var("CARGO_CFG_TARGET_ARCH").unwrap_or_default();
-    if cargo_target_os == "windows" || (target_os == "android" && target_arch == "aarch64") {
+    if cargo_target_os == "windows"
+        || cargo_target_os == "macos"
+        || (target_os == "android" && target_arch == "aarch64")
+    {
         println!("cargo:rustc-cfg=local_asr_sherpa");
     }
 

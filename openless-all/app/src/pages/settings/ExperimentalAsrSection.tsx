@@ -43,6 +43,12 @@ export function ExperimentalAsrSection({
         error: null,
       }))
     : models;
+  // SenseVoice now lives in the shared model library under Speech recognition.
+  // Keep a legacy row visible only when it was already installed/enabled so
+  // existing users can still manage it without downloading a second copy.
+  const visibleRows = rows.filter(
+    (status) => status.model !== 'sense-voice' || status.enabled || status.downloadedBytes > 0,
+  );
   return (
     <Card className="ol-experimental-models">
       <ExperimentalSectionTitle badge={t('common.experimental')}>
@@ -53,7 +59,7 @@ export function ExperimentalAsrSection({
           {navigationError ?? error}
         </p>
       </Collapse>
-      {rows.map((status) => {
+      {visibleRows.map((status) => {
         const name = experimentalAsrName(status.model);
         const percent = downloadPercent(status);
         return (

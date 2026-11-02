@@ -36,7 +36,7 @@ const localProviders = [
 ] as const;
 
 const expectedByPlatform: Record<OS, readonly string[]> = {
-  mac: ['apple-speech'],
+  mac: ['apple-speech', 'sherpa-onnx-local'],
   win: ['foundry-local-whisper', 'sherpa-onnx-local'],
   // arm64 Android links sherpa-onnx; Foundry stays Windows-only.
   android: ['sherpa-onnx-local'],

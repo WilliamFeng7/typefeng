@@ -840,7 +840,7 @@ pub async fn set_active_asr_provider(core: CoreState<'_>, provider: String) -> R
     if provider == crate::asr::local::sherpa::PROVIDER_ID
         && !active_sherpa_asr_is_supported(&provider)
     {
-        return Err("sherpa-onnx local ASR is only available on Windows".to_string());
+        return Err("sherpa-onnx local ASR is unavailable in this build".to_string());
     }
     if core
         .active_provider(openless_core::ProviderSlot::Asr)

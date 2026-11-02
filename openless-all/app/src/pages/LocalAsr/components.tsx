@@ -16,6 +16,7 @@ import { Btn, Card, Pill } from '../_atoms';
 import { Icon } from '../../components/Icon';
 import { formatBytes } from './helpers';
 import type { RemoteSize } from './types';
+import type { LocalModelRecommendation } from './deviceRecommendation';
 import { useLayoutStack } from '../../lib/useMobileLayout';
 import './local-asr.css';
 
@@ -497,6 +498,10 @@ export interface SidebarModelEntry {
   /** Engine tag; decides which action buttons dispatch on the right. */
   engine: 'qwen3' | 'whisper' | 'sherpa' | 'foundry';
   runtimeLabel?: string;
+  /** Curated, localized product guidance shown in the catalog. */
+  useCaseKey?: string;
+  descKey?: string;
+  recommendation?: LocalModelRecommendation;
   downloadError?: string | null;
 }
 
@@ -524,7 +529,43 @@ function ModelStatus({ entry }: { entry: SidebarModelEntry }) {
     >
       {entry.isDownloaded && !entry.isDownloading && <Icon name="check" size={13} />}
       {label}
+      {entry.recommendation && (
+        <span
+          style={{
+            marginLeft: 6,
+            color:
+              entry.recommendation.fit === 'recommended'
+                ? 'var(--ol-blue)'
+                : entry.recommendation.fit === 'good'
+                  ? 'var(--ol-ink-3)'
+                  : 'var(--ol-warn)',
+          }}
+        >
+          · {t(`localAsr.deviceFit.${entry.recommendation.fit}`)}
+        </span>
+      )}
     </span>
+  );
+}
+
+function ModelGuide({ entry }: { entry: SidebarModelEntry }) {
+  const { t } = useTranslation();
+  if (!entry.useCaseKey && !entry.descKey) return null;
+  return (
+    <div className="ol-model-description">
+      {entry.useCaseKey && (
+        <>
+          <h4>{t('localAsr.modelGuideUseCase')}</h4>
+          <p>{t(entry.useCaseKey)}</p>
+        </>
+      )}
+      {entry.descKey && (
+        <>
+          <h4>{t('localAsr.modelGuideDescription')}</h4>
+          <p>{t(entry.descKey)}</p>
+        </>
+      )}
+    </div>
   );
 }
 
@@ -557,6 +598,18 @@ function ModelChoice({
           <span>{Math.round(Math.max(0, Math.min(100, entry.percent)))}%</span>
         )}
       </span>
+      {entry.useCaseKey && (
+        <span
+          style={{
+            marginTop: 2,
+            color: 'var(--ol-ink-4)',
+            fontSize: 11.5,
+            lineHeight: 1.4,
+          }}
+        >
+          {t(entry.useCaseKey)}
+        </span>
+      )}
       {entry.isDownloading && (
         <progress
           className="ol-model-progress"
@@ -635,6 +688,15 @@ function ModelFacts({
           <dd>{formatBytes(entry.partialBytes)}</dd>
         </div>
       ) : null}
+      {entry.recommendation && (
+        <div className="ol-model-fact-wide">
+          <dt>{t('localAsr.deviceFit.label')}</dt>
+          <dd>
+            {t(`localAsr.deviceFit.${entry.recommendation.fit}`)} ·{' '}
+            {t(entry.recommendation.reasonKey)}
+          </dd>
+        </div>
+      )}
       {fileCount != null && fileCount > 0 && (
         <div>
           <dt>{t('localAsr.files')}</dt>
@@ -671,7 +733,9 @@ export function ModelDetailPanel({
   showReveal = true,
   onTest,
   onCleanup,
+  onActivate,
   showTest,
+  showActivate,
   testResult,
   testing,
 }: {
@@ -688,7 +752,9 @@ export function ModelDetailPanel({
   onTest: () => void;
   /** Clean up the staging directory of an interrupted download (shown only when leftovers exist and no download is running). */
   onCleanup?: () => void;
+  onActivate?: () => void;
   showTest: boolean;
+  showActivate?: boolean;
   testResult: LocalAsrTestResult | { error: string } | null;
   testing: boolean;
 }) {
@@ -702,6 +768,7 @@ export function ModelDetailPanel({
         <ModelStatus entry={entry} />
       </div>
       <ModelFacts entry={entry} fileCount={fileCount} mirrorLabel={mirrorLabel} />
+      <ModelGuide entry={entry} />
       {entry.isDownloading && <DownloadProgressBlock progress={progress} cancelRequested={false} />}
       {entry.downloadError && (
         <div className="ol-model-error" role="alert">
@@ -732,6 +799,16 @@ export function ModelDetailPanel({
           <Btn variant="blue" disabled={busy || testing} onClick={onTest}>
             {testing ? t('localAsr.testRunning') : t('localAsr.test')}
           </Btn>
+        )}
+        {entry.isDownloaded && showActivate && onActivate && !entry.isActive && (
+          <Btn variant="blue" disabled={busy || testing} onClick={onActivate}>
+            {t('localAsr.useModel')}
+          </Btn>
+        )}
+        {entry.isDownloaded && showActivate && entry.isActive && (
+          <Pill tone="blue" size="sm">
+            {t('localAsr.activeBadge')}
+          </Pill>
         )}
         {entry.isDownloaded && (
           <>
@@ -1004,6 +1081,7 @@ export function DownloadDialog({
                       entry={{ ...selected, remoteBytes: sizeOf(selected.id) ?? undefined }}
                       fileCount={fileCountOf(selected.id)}
                     />
+                    <ModelGuide entry={selected} />
                     {selected.downloadError && (
                       <div className="ol-model-error" role="alert">
                         {selected.downloadError}
