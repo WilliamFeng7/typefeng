@@ -7108,8 +7108,18 @@ impl OpenLessBackend {
         retention_days: u32,
         max_entries: Option<u32>,
     ) -> Result<(), BackendError> {
+        self.append_history_with_policy(session, retention_days, max_entries, false)
+    }
+
+    pub fn append_history_with_policy(
+        &self,
+        session: DictationSession,
+        retention_days: u32,
+        max_entries: Option<u32>,
+        keep_all: bool,
+    ) -> Result<(), BackendError> {
         self.history
-            .append_with_retention(session, retention_days, max_entries)?;
+            .append_with_policy(session, retention_days, max_entries, keep_all)?;
         self.publish_history_changed();
         Ok(())
     }
@@ -7120,8 +7130,18 @@ impl OpenLessBackend {
         retention_days: u32,
         max_entries: Option<u32>,
     ) -> Result<(), BackendError> {
+        self.upsert_history_with_policy(session, retention_days, max_entries, false)
+    }
+
+    pub fn upsert_history_with_policy(
+        &self,
+        session: DictationSession,
+        retention_days: u32,
+        max_entries: Option<u32>,
+        keep_all: bool,
+    ) -> Result<(), BackendError> {
         self.history
-            .upsert_with_retention(session, retention_days, max_entries)?;
+            .upsert_with_policy(session, retention_days, max_entries, keep_all)?;
         self.publish_history_changed();
         Ok(())
     }
@@ -8579,10 +8599,11 @@ impl OpenLessBackend {
             asr_ms: None,
             polish_ms: None,
         };
-        if let Err(error) = self.upsert_history(
+        if let Err(error) = self.upsert_history_with_policy(
             session,
             preferences.history_retention_days,
             preferences.history_max_entries,
+            preferences.history_keep_all,
         ) {
             log::warn!("failed to persist recording-start history: {error}");
         }
@@ -8724,10 +8745,11 @@ impl OpenLessBackend {
             asr_ms: attribution.asr_ms,
             polish_ms: attribution.polish_ms,
         };
-        if let Err(error) = self.upsert_history(
+        if let Err(error) = self.upsert_history_with_policy(
             session,
             preferences.history_retention_days,
             preferences.history_max_entries,
+            preferences.history_keep_all,
         ) {
             log::warn!("failed to persist completed dictation history: {error}");
         }
@@ -8807,10 +8829,11 @@ impl OpenLessBackend {
             asr_ms: attribution.asr_ms,
             polish_ms: attribution.polish_ms,
         };
-        if let Err(error) = self.upsert_history(
+        if let Err(error) = self.upsert_history_with_policy(
             session,
             preferences.history_retention_days,
             preferences.history_max_entries,
+            preferences.history_keep_all,
         ) {
             log::warn!("failed to persist dictation failure history: {error}");
         }

@@ -595,6 +595,7 @@ fn capture_preferences(
         conservative_layout: Some(preferences.conservative_layout),
         auto_update_check: Some(preferences.auto_update_check),
         history_max_entries: Some(preferences.history_max_entries),
+        history_keep_all: Some(preferences.history_keep_all),
         record_audio_for_debug: Some(preferences.record_audio_for_debug),
         audio_recording_max_entries: Some(preferences.audio_recording_max_entries),
         locale: ui.locale,
@@ -663,6 +664,7 @@ fn apply_preferences(preferences: &mut UserPreferences, incoming: &SyncPreferenc
         stacked_row_layout,
         conservative_layout,
         auto_update_check,
+        history_keep_all,
         record_audio_for_debug
     );
     if let Some(value) = incoming.history_max_entries {

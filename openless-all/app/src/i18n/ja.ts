@@ -1669,7 +1669,9 @@ export const ja: typeof zhCN = {
       historyRetentionDesc:
         '保持日数を超えた履歴は新規書き込み時に削除されます。0 = 時間で削除しない。',
       historyMaxEntriesLabel: '履歴件数の上限',
-      historyMaxEntriesDesc: 'ローカル保持セッション上限。空欄 = 200。範囲 5–200。',
+      historyMaxEntriesDesc: 'ローカル保持セッション上限。空欄 = 200。5～1,000,000 件。',
+      historyKeepAllLabel: 'すべての履歴を保持',
+      historyKeepAllDesc: '期間や件数による自動削除を行わず、すべての文字起こしを保持します。',
       polishSkipMaxCharsLabel: '短い入力は整形をスキップ（最大文字数）',
       polishSkipMaxCharsDesc:
         '空白を除いて N 文字以下の認識結果は、LLM を呼び出さずそのまま挿入します。0 = オフ。翻訳は常に整形します。',

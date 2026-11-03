@@ -1714,7 +1714,11 @@ export const de: typeof zhCN = {
       historyRetentionDesc:
         'Ältere Einträge werden beim Speichern neuer Einträge entfernt. 0 = keine zeitabhängige Bereinigung.',
       historyMaxEntriesLabel: 'Maximale Verlaufseinträge',
-      historyMaxEntriesDesc: 'Maximal lokal gespeicherte Sitzungen. Leer = 200. Bereich: 5–200.',
+      historyMaxEntriesDesc:
+        'Maximal lokal gespeicherte Sitzungen. Leer = 200. Bereich: 5–1.000.000.',
+      historyKeepAllLabel: 'Gesamten Verlauf behalten',
+      historyKeepAllDesc:
+        'Alle Transkripte dauerhaft behalten, ohne automatische Löschung nach Alter oder Anzahl.',
       polishSkipMaxCharsLabel: 'Überarbeitung bei kurzen Eingaben überspringen (max. Zeichen)',
       polishSkipMaxCharsDesc:
         'Transkripte mit höchstens N Zeichen (ohne Leerzeichen) werden ohne LLM-Aufruf als Rohtext eingefügt. 0 = aus. Übersetzungen werden immer überarbeitet.',

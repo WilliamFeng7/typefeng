@@ -552,6 +552,8 @@ pub enum SettingsField {
     /// 使用桌面播放参考进行回声抑制。
     EchoCancellation,
     RecordAudioForDebug,
+    /// Keep all transcript history without age/count pruning.
+    HistoryKeepAll,
     /// 调试录音：保留处理后的音频（主档案）。
     DebugArchiveProcessed,
     /// 调试录音：额外保留处理前的原始音频。
@@ -1211,6 +1213,7 @@ pub struct SettingsFields {
     /// 日志级别：0 = info，1 = debug，2 = trace。宿主本地设置，不进 Core 偏好。
     pub log_level: usize,
     pub history_max_entries: String,
+    pub history_keep_all: bool,
     /// 风格直达快捷键（可录制/停用/移除）。
     pub style_pack_hotkeys: Vec<StylePackHotkeyRow>,
     /// 润色上下文窗口分钟数（0 = 只用当前这条转写）。
@@ -1276,6 +1279,7 @@ impl Default for SettingsFields {
             aec_reference_index: 0,
             log_level: 0,
             history_max_entries: String::new(),
+            history_keep_all: false,
             style_pack_hotkeys: Vec::new(),
             polish_context_window: String::new(),
             polish_skip_max_chars: String::new(),

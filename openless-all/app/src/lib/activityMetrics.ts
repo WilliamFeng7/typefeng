@@ -1,8 +1,8 @@
 // Aggregation for the overview page's "last 7 days / last 30 days" period metrics.
 //
 // The data source is the activity store (date → {count, chars, durationMs}), **not**
-// listHistory(): history is capped at 200 entries, so a user with hundreds of sessions a
-// day pushes last week out within days; computing from history would draw the days without
+// listHistory(): history may be capped by the user's retention policy, so a user with hundreds of sessions a
+// day can push last week out within days; computing from history would draw the days without
 // data as 0 (even though the yearly heatmap lights up). Activity is kept for two years and
 // stores only aggregate numbers.
 
@@ -53,8 +53,8 @@ function readMetric(day: ActivityDay, metric: ActivityMetric): number {
  *
  * Old data (bare numbers written before the upgrade) lacks chars / durationMs and reads
  * back as 0: showing 0 for those days in the chars/duration metrics is honest — nothing was
- * recorded then, and it must not be fabricated from history, which is capped at 200
- * entries. The count metric is unaffected and works for the full range.
+ * recorded then, and it must not be fabricated from history, which may be capped by
+ * the user's retention policy. The count metric is unaffected and works for the full range.
  */
 export function buildPeriodSeries(
   activity: readonly ActivityDay[],

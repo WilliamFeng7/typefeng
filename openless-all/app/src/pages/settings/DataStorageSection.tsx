@@ -40,9 +40,8 @@ export function DataStorageSection() {
     if (Number.isNaN(parsed)) return;
     void savePrefs({ ...prefs, polishSkipMaxChars: clamp(parsed, 0, 50) });
   };
-  // History cap 200 is the current HISTORY_CAP (persistence.rs:32); the lower bound of 5 keeps a
-  // user-entered 0 from wiping everything as soon as one entry is written; empty string means
-  // unlimited, falling back to null → the backend applies its 200 default.
+  // Empty string restores the default 200-entry cap. Keep-all is a separate toggle so users can
+  // explicitly opt into retaining history without any age or count pruning.
   const onHistoryMaxEntriesChange = (raw: string) => {
     const trimmed = raw.trim();
     if (trimmed === '') {
@@ -51,7 +50,7 @@ export function DataStorageSection() {
     }
     const parsed = Number.parseInt(trimmed, 10);
     if (Number.isNaN(parsed)) return;
-    void savePrefs({ ...prefs, historyMaxEntries: clamp(parsed, 5, 200) });
+    void savePrefs({ ...prefs, historyMaxEntries: clamp(parsed, 5, 1_000_000) });
   };
 
   return (
@@ -67,15 +66,27 @@ export function DataStorageSection() {
           style={{ ...inputStyle, width: 80, textAlign: 'right' }}
         />
       </SettingRow>
-      <SettingRow label={t('settings.recording.historyMaxEntriesLabel')}>
+      <SettingRow
+        label={t('settings.recording.historyMaxEntriesLabel')}
+        desc={t('settings.recording.historyMaxEntriesDesc')}
+      >
         <input
           type="number"
           min={5}
-          max={200}
+          max={1_000_000}
           placeholder="200"
           value={prefs.historyMaxEntries ?? ''}
           onChange={(e) => onHistoryMaxEntriesChange(e.target.value)}
           style={{ ...inputStyle, width: 80, textAlign: 'right' }}
+        />
+      </SettingRow>
+      <SettingRow
+        label={t('settings.recording.historyKeepAllLabel')}
+        desc={t('settings.recording.historyKeepAllDesc')}
+      >
+        <Toggle
+          on={prefs.historyKeepAll}
+          onToggle={(next) => void savePrefs({ ...prefs, historyKeepAll: next })}
         />
       </SettingRow>
       <SettingRow label={t('settings.recording.polishContextWindowLabel')}>

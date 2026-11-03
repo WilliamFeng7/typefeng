@@ -219,6 +219,8 @@ pub struct SyncPreferences {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub history_max_entries: Option<Option<u32>>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub history_keep_all: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub record_audio_for_debug: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub audio_recording_max_entries: Option<Option<u32>>,

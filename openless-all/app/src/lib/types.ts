@@ -590,8 +590,10 @@ export interface UserPreferences {
    *  Desktop: when on, checks automatically; an update dialog asks the user to confirm installation.
    *  When off, only the manual "Check for updates" button in Settings works. */
   autoUpdateCheck: boolean;
-  /** History entry cap. null = default 200; 5..=200 for user-defined values. */
+  /** History entry cap. null = default 200; finite values may be larger than 200. */
   historyMaxEntries: number | null;
+  /** Keep every history entry and ignore age/count cleanup. */
+  historyKeepAll: boolean;
   /** Whether to keep the raw microphone audio file (wav) per session, for debugging ASR misrecognition / mic sensitivity.
    *  Default false. When on, it uses disk space and follows the same cleanup policy as historyRetentionDays. */
   recordAudioForDebug: boolean;

@@ -3034,7 +3034,7 @@ fn privacy_data(ui: &mut egui::Ui, vm: &mut FrontendViewModel, actions: &mut Vec
         text_edit_row(
             ui,
             tr_l10n(lang, "settings.recording.history_max_entries_label"),
-            "",
+            tr_l10n(lang, "settings.recording.history_max_entries_desc"),
             &mut vm.settings.history_max_entries,
             "200",
             |text| {
@@ -3043,6 +3043,13 @@ fn privacy_data(ui: &mut egui::Ui, vm: &mut FrontendViewModel, actions: &mut Vec
                     text.to_owned(),
                 ));
             },
+        );
+        toggle_row(
+            ui,
+            tr_l10n(lang, "settings.recording.history_keep_all_label"),
+            tr_l10n(lang, "settings.recording.history_keep_all_desc"),
+            vm.settings.history_keep_all,
+            || actions.push(FrontendAction::SettingsToggle(SettingsField::HistoryKeepAll)),
         );
         text_edit_row(
             ui,

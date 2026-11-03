@@ -144,6 +144,7 @@ export let mockSettings: UserPreferences = {
   conservativeLayout: false,
   autoUpdateCheck: true,
   historyMaxEntries: null,
+  historyKeepAll: false,
   recordAudioForDebug: false,
   debugArchiveProcessed: false,
   debugArchiveRaw: false,

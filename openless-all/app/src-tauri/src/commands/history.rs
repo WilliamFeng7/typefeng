@@ -43,7 +43,7 @@ pub fn clear_history(core: CoreState<'_>) -> Result<(), String> {
 /// page's yearly heatmap and the "last 7 / 30 days" metrics.
 /// Decoupled from history content / retention: clearing history does not
 /// affect it, the whole year's cells stay lit, and period statistics are not
-/// truncated by the 200-entry history cap.
+/// truncated by the user's history retention policy.
 #[tauri::command]
 pub fn get_activity_stats(core: CoreState<'_>) -> Vec<ActivityDay> {
     core.list_activity()

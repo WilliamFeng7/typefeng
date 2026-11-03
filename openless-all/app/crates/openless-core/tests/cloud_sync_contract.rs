@@ -254,6 +254,7 @@ async fn portable_data_round_trips_without_uploading_credentials_or_device_setti
     preferences.streaming_insert = false;
     preferences.windows_composition_input = true;
     preferences.history_max_entries = Some(42);
+    preferences.history_keep_all = true;
     source
         .backend
         .repositories()
@@ -362,6 +363,7 @@ async fn portable_data_round_trips_without_uploading_credentials_or_device_setti
     assert!(!preferences.streaming_insert);
     assert!(preferences.windows_composition_input);
     assert_eq!(preferences.history_max_entries, Some(42));
+    assert!(preferences.history_keep_all);
     let secret = target
         .credentials
         .read(

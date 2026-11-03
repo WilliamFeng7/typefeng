@@ -241,6 +241,9 @@ impl OpenLessEguiApp {
                     preferences.debug_archive_processed = true;
                 }
             }
+            frontend::view_model::SettingsField::HistoryKeepAll => {
+                preferences.history_keep_all = !preferences.history_keep_all;
+            }
             frontend::view_model::SettingsField::DebugArchiveProcessed => {
                 preferences.debug_archive_processed = !preferences.debug_archive_processed;
             }
@@ -664,7 +667,9 @@ impl OpenLessEguiApp {
                     .trim()
                     .parse::<u32>()
                     .ok()
-                    .map(|value| value.clamp(5, 200));
+                    .map(|value| {
+                        value.clamp(5, openless_core::MAX_CONFIGURED_HISTORY_ENTRIES)
+                    });
 
                 self.frontend_vm.settings.history_max_entries = text;
             }

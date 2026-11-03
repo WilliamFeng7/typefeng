@@ -1609,7 +1609,9 @@ export const zhCN = {
       historyRetentionLabel: '历史保留天数',
       historyRetentionDesc: '超过保留天数的历史在写入新条目时被清理；0 = 不按时间清理。',
       historyMaxEntriesLabel: '历史条数上限',
-      historyMaxEntriesDesc: '本地保留会话上限，留空 = 200。范围 5–200。',
+      historyMaxEntriesDesc: '本地保留会话上限，留空 = 200。可设置 5–1,000,000 条。',
+      historyKeepAllLabel: '保留全部历史',
+      historyKeepAllDesc: '永久保留所有历史转录，不按天数或条数自动清理。',
       polishSkipMaxCharsLabel: '短句跳过润色（最大字数）',
       polishSkipMaxCharsDesc:
         '转写不超过 N 个字（不计空白）时直接插入原文，不调用润色模型。0 = 关闭。翻译模式始终润色。',

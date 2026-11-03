@@ -1705,7 +1705,10 @@ export const es: typeof zhCN = {
         'Al guardar nuevos registros, se eliminan los anteriores a este plazo. 0 = sin eliminación por antigüedad.',
       historyMaxEntriesLabel: 'Máximo de registros',
       historyMaxEntriesDesc:
-        'Máximo de sesiones guardadas en el dispositivo. Vacío = 200. Intervalo: 5–200.',
+        'Máximo de sesiones guardadas en el dispositivo. Vacío = 200. Intervalo: 5–1.000.000.',
+      historyKeepAllLabel: 'Conservar todo el historial',
+      historyKeepAllDesc:
+        'Conserva todas las transcripciones sin limpieza automática por antigüedad o cantidad.',
       polishSkipMaxCharsLabel: 'Omitir mejora en dictados cortos (máx. caracteres)',
       polishSkipMaxCharsDesc:
         'Las transcripciones de hasta N caracteres (sin contar espacios) se insertan tal cual, sin llamar al LLM. 0 = desactivado. La traducción siempre se mejora.',

@@ -1597,7 +1597,9 @@ export const zhTW: typeof zhCN = {
       historyRetentionLabel: '歷史保留天數',
       historyRetentionDesc: '超過保留天數的歷史在寫入新條目時被清理；0 = 不按時間清理。',
       historyMaxEntriesLabel: '歷史條數上限',
-      historyMaxEntriesDesc: '本地保留會話上限，留空 = 200。範圍 5–200。',
+      historyMaxEntriesDesc: '本地保留會話上限，留空 = 200。可設定 5–1,000,000 條。',
+      historyKeepAllLabel: '保留全部歷史',
+      historyKeepAllDesc: '永久保留所有歷史轉錄，不按天數或條數自動清理。',
       polishSkipMaxCharsLabel: '短句跳過潤色（最大字數）',
       polishSkipMaxCharsDesc:
         '轉寫不超過 N 個字（不計空白）時直接插入原文，不呼叫潤色模型。0 = 關閉。翻譯模式始終潤色。',

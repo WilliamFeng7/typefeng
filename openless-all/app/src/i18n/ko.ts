@@ -1656,7 +1656,10 @@ export const ko: typeof zhCN = {
       historyRetentionDesc:
         '보관 기간을 초과한 기록은 새 항목 작성 시 정리됩니다. 0 = 시간 기반 정리 비활성화.',
       historyMaxEntriesLabel: '기록 개수 상한',
-      historyMaxEntriesDesc: '로컬 보관 세션 상한. 빈칸 = 200. 범위 5–200.',
+      historyMaxEntriesDesc:
+        '로컬 보관 세션 상한. 비워 두면 200이며 5–1,000,000까지 설정할 수 있습니다.',
+      historyKeepAllLabel: '모든 기록 보관',
+      historyKeepAllDesc: '기간이나 개수로 자동 삭제하지 않고 모든 변환 기록을 영구 보관합니다.',
       polishSkipMaxCharsLabel: '짧은 입력은 다듬기 건너뛰기(최대 글자 수)',
       polishSkipMaxCharsDesc:
         '공백을 제외하고 N자 이하의 인식 결과는 LLM 호출 없이 원문 그대로 삽입합니다. 0 = 끔. 번역은 항상 다듬습니다.',

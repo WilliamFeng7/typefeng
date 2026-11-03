@@ -1726,7 +1726,10 @@ export const fr: typeof zhCN = {
         'Les entrées plus anciennes sont supprimées lors de nouveaux enregistrements. 0 = pas de suppression selon l’ancienneté.',
       historyMaxEntriesLabel: 'Nombre maximal d’entrées',
       historyMaxEntriesDesc:
-        'Nombre maximal de sessions conservées localement. Vide = 200. Plage : 5–200.',
+        'Nombre maximal de sessions conservées localement. Vide = 200. Plage : 5–1 000 000.',
+      historyKeepAllLabel: 'Conserver tout l’historique',
+      historyKeepAllDesc:
+        'Conserve toutes les transcriptions sans nettoyage automatique par âge ou quantité.',
       polishSkipMaxCharsLabel: 'Ignorer l’amélioration pour les courtes dictées (caractères max)',
       polishSkipMaxCharsDesc:
         'Les transcriptions d’au plus N caractères (espaces non comptés) sont insérées telles quelles, sans appel au LLM. 0 = désactivé. La traduction est toujours améliorée.',

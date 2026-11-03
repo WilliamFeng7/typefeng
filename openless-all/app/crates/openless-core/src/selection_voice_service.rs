@@ -730,10 +730,11 @@ impl SelectionVoicePersistence {
             polish_ms: None,
         };
         let mut changed = false;
-        match self.history.append_with_retention(
+        match self.history.append_with_policy(
             session,
             preferences.history_retention_days,
             preferences.history_max_entries,
+            preferences.history_keep_all,
         ) {
             Ok(()) => changed = true,
             Err(error) => log::warn!("failed to persist selection voice history: {error}"),

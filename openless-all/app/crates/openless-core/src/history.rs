@@ -1,4 +1,4 @@
-//! Newest-first dictation history with retention and count caps.
+//! Newest-first dictation history with configurable retention and count caps.
 
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
@@ -9,6 +9,10 @@ use crate::persistence::{atomic_write, persistence_error};
 use crate::types::{DictationSession, HistorySource};
 
 pub const HISTORY_CAP: usize = 200;
+/// Upper bound for a user-selected finite history size. The ordinary default
+/// remains `HISTORY_CAP`; this only prevents an accidental u32-sized setting
+/// from turning every write into an unbounded memory operation.
+pub const MAX_CONFIGURED_HISTORY_ENTRIES: u32 = 1_000_000;
 
 pub struct HistoryStore {
     path: PathBuf,
@@ -76,6 +80,16 @@ impl HistoryStore {
         retention_days: u32,
         max_entries: Option<u32>,
     ) -> Result<(), BackendError> {
+        self.append_with_policy(session, retention_days, max_entries, false)
+    }
+
+    pub fn append_with_policy(
+        &self,
+        session: DictationSession,
+        retention_days: u32,
+        max_entries: Option<u32>,
+        keep_all: bool,
+    ) -> Result<(), BackendError> {
         crate::cloud_sync_e2ee_store::gate::with_registered_mutation(
             &self.path,
             crate::cloud_sync_e2ee_store::gate::ChangeOrigin::User,
@@ -83,7 +97,7 @@ impl HistoryStore {
                 let _guard = self.lock_store()?;
                 let mut sessions = self.read_locked()?;
                 sessions.insert(0, session);
-                retain_with_policy(&mut sessions, retention_days, max_entries, self.now_utc());
+                retain_with_policy(&mut sessions, retention_days, max_entries, keep_all, self.now_utc());
                 self.write_locked(&sessions)
             },
         )
@@ -96,6 +110,16 @@ impl HistoryStore {
         session: DictationSession,
         retention_days: u32,
         max_entries: Option<u32>,
+    ) -> Result<(), BackendError> {
+        self.upsert_with_policy(session, retention_days, max_entries, false)
+    }
+
+    pub fn upsert_with_policy(
+        &self,
+        session: DictationSession,
+        retention_days: u32,
+        max_entries: Option<u32>,
+        keep_all: bool,
     ) -> Result<(), BackendError> {
         crate::cloud_sync_e2ee_store::gate::with_registered_mutation(
             &self.path,
@@ -112,7 +136,7 @@ impl HistoryStore {
                 } else {
                     sessions.insert(0, session);
                 }
-                retain_with_policy(&mut sessions, retention_days, max_entries, self.now_utc());
+                retain_with_policy(&mut sessions, retention_days, max_entries, keep_all, self.now_utc());
                 self.write_locked(&sessions)
             },
         )
@@ -223,12 +247,16 @@ fn retain_with_policy(
     sessions: &mut Vec<DictationSession>,
     retention_days: u32,
     max_entries: Option<u32>,
+    keep_all: bool,
     now: chrono::DateTime<chrono::Utc>,
 ) {
     // Quick notes are intentionally outside the ordinary history retention
     // policy. A recording-start draft is also protected until it reaches a
     // terminal state, because its audio may be the only recoverable artifact
     // after a process crash.
+    if keep_all {
+        return;
+    }
     if retention_days > 0 {
         let cutoff = now - chrono::Duration::days(i64::from(retention_days));
         sessions.retain(|session| {
@@ -240,7 +268,9 @@ fn retain_with_policy(
         });
     }
     let cap = max_entries
-        .map(|count| (count as usize).clamp(5, HISTORY_CAP))
+        .map(|count| {
+            (count.min(MAX_CONFIGURED_HISTORY_ENTRIES) as usize).max(5)
+        })
         .unwrap_or(HISTORY_CAP);
     let mut ordinary_seen = 0usize;
     sessions.retain(|session| {
@@ -446,6 +476,54 @@ mod tests {
                 .count(),
             5
         );
+        let _ = std::fs::remove_file(path);
+    }
+
+    #[test]
+    fn configured_history_cap_can_exceed_the_default_cap() {
+        let path = std::env::temp_dir().join(format!(
+            "openless-core-history-large-cap-{}.json",
+            uuid::Uuid::new_v4().simple()
+        ));
+        let store = HistoryStore::at_path(path.clone());
+        for index in 0..205 {
+            store
+                .append_with_policy(
+                    session(&format!("entry-{index}"), chrono::Utc::now().to_rfc3339()),
+                    0,
+                    Some(250),
+                    false,
+                )
+                .unwrap();
+        }
+        assert_eq!(store.list().unwrap().len(), 205);
+        let _ = std::fs::remove_file(path);
+    }
+
+    #[test]
+    fn keep_all_history_skips_age_and_count_pruning() {
+        let path = std::env::temp_dir().join(format!(
+            "openless-core-history-keep-all-{}.json",
+            uuid::Uuid::new_v4().simple()
+        ));
+        let store = HistoryStore::at_path(path.clone());
+        let old = (chrono::Utc::now() - chrono::Duration::days(30)).to_rfc3339();
+        store
+            .append_with_policy(session("old", old), 1, Some(5), true)
+            .unwrap();
+        for index in 0..8 {
+            store
+                .append_with_policy(
+                    session(&format!("kept-{index}"), chrono::Utc::now().to_rfc3339()),
+                    1,
+                    Some(5),
+                    true,
+                )
+                .unwrap();
+        }
+        let entries = store.list().unwrap();
+        assert_eq!(entries.len(), 9);
+        assert!(entries.iter().any(|entry| entry.id == "old"));
         let _ = std::fs::remove_file(path);
     }
 
