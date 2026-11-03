@@ -275,7 +275,7 @@ pub use events::{
     RemoteInputErrorEvent, RemoteInputRuntimeEvent, SelectionVoiceRecordingLevel,
 };
 pub use external_audio::{AudioRecorderRouter, ExternalAudioRecorder};
-pub use history::{HistoryStore, HISTORY_CAP};
+pub use history::{HistoryStore, HISTORY_CAP, MAX_CONFIGURED_HISTORY_ENTRIES};
 pub use less_computer::LessComputerService;
 pub use local_asr_catalog::{
     normalize_foundry_language_hint, normalize_sherpa_language_hint, FoundryRuntimeSource,

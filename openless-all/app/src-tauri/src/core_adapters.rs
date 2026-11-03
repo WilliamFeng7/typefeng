@@ -222,7 +222,7 @@ pub(crate) fn backend_dependencies(
     #[cfg(not(local_asr_sherpa))]
     let _ = native_asr_dependencies;
     // Foundry is Windows-only; Sherpa runs wherever sherpa-onnx is linked
-    // (Windows and arm64 Android — see build.rs).
+    // (Windows, macOS, and arm64 Android — see build.rs).
     #[cfg(target_os = "windows")]
     for provider_type in [
         crate::asr::local::foundry::PROVIDER_ID,

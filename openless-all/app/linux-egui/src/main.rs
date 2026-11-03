@@ -5587,6 +5587,7 @@ mod linux_app {
                 s.launch_at_login = prefs.launch_at_login;
                 s.streaming_save_clipboard = prefs.streaming_insert_save_clipboard;
                 s.record_audio_for_debug = prefs.record_audio_for_debug;
+                s.history_keep_all = prefs.history_keep_all;
                 s.debug_archive_processed = prefs.debug_archive_processed;
                 s.debug_archive_raw = prefs.debug_archive_raw;
                 // 日志级别是宿主本地文件，不在 Core 偏好里；读不到就按 info 显示。

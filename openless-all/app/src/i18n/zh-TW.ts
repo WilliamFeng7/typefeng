@@ -1597,7 +1597,9 @@ export const zhTW: typeof zhCN = {
       historyRetentionLabel: '歷史保留天數',
       historyRetentionDesc: '超過保留天數的歷史在寫入新條目時被清理；0 = 不按時間清理。',
       historyMaxEntriesLabel: '歷史條數上限',
-      historyMaxEntriesDesc: '本地保留會話上限，留空 = 200。範圍 5–200。',
+      historyMaxEntriesDesc: '本地保留會話上限，留空 = 200。可設定 5–1,000,000 條。',
+      historyKeepAllLabel: '保留全部歷史',
+      historyKeepAllDesc: '永久保留所有歷史轉錄，不按天數或條數自動清理。',
       polishSkipMaxCharsLabel: '短句跳過潤色（最大字數）',
       polishSkipMaxCharsDesc:
         '轉寫不超過 N 個字（不計空白）時直接插入原文，不呼叫潤色模型。0 = 關閉。翻譯模式始終潤色。',
@@ -1770,7 +1772,7 @@ export const zhTW: typeof zhCN = {
         asrTencentCloud: '騰訊雲混元即時 ASR',
         asrGemini: 'Google Gemini 專用轉寫',
         asrElevenLabs: 'ElevenLabs Scribe',
-        asrSherpaOnnxLocal: '本地 sherpa-onnx（實驗性）',
+        asrSherpaOnnxLocal: '本地 sherpa-onnx',
         asrFoundryLocalWhisper: '本地 Whisper（Foundry Local）',
         asrLocalWhisper: '本地 Whisper（批次解碼）',
         asrExperimentalSenseVoice: experimentalAsr.senseVoiceLabel,
@@ -1784,6 +1786,14 @@ export const zhTW: typeof zhCN = {
         omniGemini: 'Google Gemini',
         omniDashscope: '阿里雲百煉 Omni',
       },
+      recognitionModeLabel: '辨識設定方式',
+      recognitionModeHint: '在雲端/本機管道與本機模型庫之間切換。',
+      recognitionChannelsTab: '管道',
+      recognitionLocalModelsTab: '本機模型',
+      recognitionLocalModelsTitle: '下載 / 設定本機模型',
+      recognitionLocalModelsDesc:
+        '下載 SenseVoice、Whisper 等離線模型，查看每個模型的適用情境，並選擇用於聽寫的模型。',
+      localModelsBadge: '本機執行',
       geminiTranscribeNotice:
         '兩個模型在此均使用逐字轉寫，可選用已設定的 LLM 繼續處理。gemini-3.5-transcribe 在錄音結束後上傳音訊；gemini-3.5-transcribe-live 邊說邊顯示結果，每次錄音最長 10 分鐘。如需智慧轉寫，請使用多模態模式。接口地址：https://generativelanguage.googleapis.com/v1beta。',
       geminiTranscribeOmniNotice:
@@ -2576,8 +2586,30 @@ export const zhTW: typeof zhCN = {
     foundryModelBaseDesc: '更快、資源佔用更低，適合日常輕量使用。',
     foundryModelTiny: 'Whisper Tiny（最快 / 冒煙測試）',
     foundryModelTinyDesc: '最快的檢查選項，適合確認 Foundry 路徑可用。',
-    sherpaTitle: 'Windows sherpa-onnx Local（實驗性）',
-    sherpaDesc: 'Windows 使用 sherpa-onnx 在本機離線批次識別，無需 ASR API Key。',
+    sherpaTitle: '本機 sherpa-onnx 模型庫',
+    sherpaDesc:
+      '在 Mac 或 Windows 上本機執行 SenseVoice、Whisper、Paraformer、Zipformer 與 Qwen3-ASR，無需 ASR API Key。',
+    sherpaLanguageTitle: '辨識語言',
+    sherpaLanguageDesc: '華語、粵語或中英混合聽寫建議指定語言；不確定時使用自動辨識。',
+    deviceRecommendedTitle: '依此裝置推薦',
+    deviceDetected: '偵測到：{{model}} · {{arch}} · {{cores}} 個 CPU 核心 · {{memory}} 記憶體',
+    deviceDownloadRecommended: '下載推薦模型',
+    deviceFit: {
+      label: '裝置適配度',
+      recommended: '推薦',
+      good: '適合',
+      demanding: '資源需求較高',
+    },
+    deviceReasonDetecting: '正在讀取此裝置的 CPU 與記憶體設定。',
+    deviceReasonIntelChinese: '在 Intel Mac 上兼顧中文準確率、辨識速度與電池消耗。',
+    deviceReasonLowMemory: '模型佔用較小，能為其他應用程式留出更多記憶體。',
+    deviceReasonBalancedChinese: '中文優先的均衡模型，適合日常聽寫與中英混合筆記。',
+    deviceReasonChineseLight: '輕量的純中文選項，資源佔用較穩定。',
+    deviceReasonMultilingual: '偏好多語言 Whisper 行為時的均衡備用方案。',
+    deviceReasonStreaming: '說話時即可顯示文字，但錄音期間會持續佔用 CPU。',
+    deviceReasonHeavyForDevice: '目前 CPU 執行此大型模型會明顯更慢，發熱與耗電也會增加。',
+    deviceReasonPowerful: '偵測到的記憶體足以支援這個較大的模型，適合品質優先的情境。',
+    deviceReasonAppSiliconLongContext: '偵測到的 Apple Silicon 與記憶體可胜任長句或混合語言聽寫。',
     sherpaRuntimeReady: '模型已載入',
     sherpaRuntimeMissing: '模型未載入',
     sherpaSetDefault: '設為預設 / 啟用 sherpa-onnx',
@@ -2590,20 +2622,35 @@ export const zhTW: typeof zhCN = {
     sherpaLanguageJa: '日語 ja',
     sherpaLanguageKo: '韓語 ko',
     sherpaLanguageYue: '粵語 yue',
-    sherpaModelSenseVoice: 'SenseVoice Small（預設 / 中文優先）',
-    sherpaModelSenseVoiceDesc: '預設實驗模型，適閤中文與中英混合聽寫。',
+    sherpaModelSenseVoice: 'SenseVoice Small（中文優先）',
+    sherpaModelSenseVoiceDesc:
+      '緊湊的多語言離線模型，針對華語、粵語、英語、日語與韓語最佳化；在 Intel Mac 上兼顧中文準確率、速度與耗電。',
+    sherpaModelSenseVoiceUseCase:
+      '適合日常中文聽寫、中英混合筆記、短訊息與重視續航力的筆記型電腦。',
     sherpaModelParaformer: 'Paraformer 中文',
-    sherpaModelParaformerDesc: '面向中文的實驗模型。',
+    sherpaModelParaformerDesc:
+      '中文專用離線模型，資源佔用較低，華語辨識穩定；說話者切換語言時不如 SenseVoice 穩定。',
+    sherpaModelParaformerUseCase: '適合純中文會議、長筆記與記憶體較緊張的裝置。',
     sherpaModelWhisper: 'Whisper Small 多語言',
-    sherpaModelWhisperDesc: '與 Whisper 系列行為一致的多語言實驗兜底模型。',
+    sherpaModelWhisperDesc:
+      '平衡型 Whisper 多語言模型，語言覆蓋廣、標點較穩定；通常比 SenseVoice 慢，中文也不是專門最佳化。',
+    sherpaModelWhisperUseCase:
+      '適合多語種聽寫、以英文為主的工作，以及需要穩定 Whisper 行為的情境。',
     sherpaModelWhisperLargeV3: 'Whisper Large V3（多語）',
     sherpaModelWhisperLargeV3Desc:
-      '開源多語通用中效果最好的 Whisper 檔，品質高、體積大，適合高品質轉寫。',
+      '面向困難口音、噪音與混合語言的 Whisper 高精度模型；下載約 1.7 GB，推論明顯較慢。',
+    sherpaModelWhisperLargeV3UseCase:
+      '適合高效能裝置上的品質優先轉寫；不建議在電池供電時頻繁聽寫短句。',
     sherpaModelZipformer: 'Zipformer 串流（中英）',
-    sherpaModelZipformerDesc: '邊說邊出的串流中英模型，延遲最低，適合即時聽寫。',
+    sherpaModelZipformerDesc:
+      '邊說邊顯示草稿的串流中英模型，延遲低；錄音期間會持續佔用 CPU，離線模型的準確率通常更高。',
+    sherpaModelZipformerUseCase:
+      '適合即時預覽、短指令，以及優先要立即看到文字、可以犧牲部分準確率的情境。',
     sherpaModelQwen3: 'Qwen3-ASR 0.6B INT8',
     sherpaModelQwen3Desc:
-      '轉換後的 sherpa-onnx Qwen3-ASR 模型，支援多語言識別與更強的長上下文能力。',
+      '轉換後的 Qwen3-ASR 模型，長上下文與混合語言能力更強；體積、記憶體佔用與推論時間都高於 SenseVoice。',
+    sherpaModelQwen3UseCase:
+      '適合較新硬體上的長句、複雜內容與混合語言聽寫；不是 Intel Mac 日常聽寫的首選。',
     modelSelectTitle: '模型下載與管理',
     modelSelectDesc:
       '下載的模型會自動出現在上方「ASR 語音轉寫」的本地供應商裡，選擇即可使用；點選「＋ 下載新模型」取得更多模型。',
@@ -2652,6 +2699,7 @@ export const zhTW: typeof zhCN = {
     sidebarTitle: '模型列表',
     activePill: '目前使用',
     setDefault: '設為預設',
+    useModel: '使用此模型',
     downloading: '下載中',
     startDownload: '開始下載',
     downloadNewModel: '下載新模型',
@@ -2675,6 +2723,8 @@ export const zhTW: typeof zhCN = {
     detailFiles: '個檔案',
     detailDownloaded: '已下載',
     detailEmpty: '從左側選擇模型檢視詳情',
+    modelGuideUseCase: '適用情境',
+    modelGuideDescription: '模型說明',
     foundryLanguage: '語言',
     foundryRuntimeSource: '執行時來源',
     mirrorGithubRelease: 'GitHub Releases',

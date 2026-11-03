@@ -18,7 +18,9 @@ import { ExperimentalSectionTitle, SettingRow, Toggle } from '../shared';
 import { useHotkeySettings } from '../../../state/HotkeySettingsContext';
 import { LocalModelPicker } from './LocalModelPicker';
 
-export function LocalModelsSection() {
+export function LocalModelsSection({
+  embeddedInRecognition = false,
+}: { embeddedInRecognition?: boolean } = {}) {
   const { t } = useTranslation();
   const { prefs, updatePrefs: savePrefs } = useHotkeySettings();
   const os = detectOS();
@@ -46,9 +48,33 @@ export function LocalModelsSection() {
         }}
       >
         <div style={{ minWidth: 0, opacity: isWin ? 0.45 : 1 }}>
-          <ExperimentalSectionTitle badge={t('common.experimental')} style={{ marginBottom: 0 }}>
-            {t('settings.advanced.localAsrTitle')}
+          <ExperimentalSectionTitle
+            badge={
+              embeddedInRecognition
+                ? t('settings.providers.localModelsBadge')
+                : t('common.experimental')
+            }
+            style={{ marginBottom: 0 }}
+          >
+            {t(
+              embeddedInRecognition
+                ? 'settings.providers.recognitionLocalModelsTitle'
+                : 'settings.advanced.localAsrTitle',
+            )}
           </ExperimentalSectionTitle>
+          {embeddedInRecognition && (
+            <p
+              style={{
+                margin: '7px 0 0',
+                maxWidth: 680,
+                fontSize: 12,
+                lineHeight: 1.6,
+                color: 'var(--ol-ink-3)',
+              }}
+            >
+              {t('settings.providers.recognitionLocalModelsDesc')}
+            </p>
+          )}
         </div>
         <div
           style={{

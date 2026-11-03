@@ -481,10 +481,11 @@ impl SelectionServiceInner {
             polish_ms: completed.polish_ms,
         };
         let mut changed = false;
-        match self.history.append_with_retention(
+        match self.history.append_with_policy(
             session,
             preferences.history_retention_days,
             preferences.history_max_entries,
+            preferences.history_keep_all,
         ) {
             Ok(()) => changed = true,
             Err(error) => log::warn!("failed to persist completed selection history: {error}"),

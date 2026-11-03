@@ -1656,7 +1656,10 @@ export const ko: typeof zhCN = {
       historyRetentionDesc:
         '보관 기간을 초과한 기록은 새 항목 작성 시 정리됩니다. 0 = 시간 기반 정리 비활성화.',
       historyMaxEntriesLabel: '기록 개수 상한',
-      historyMaxEntriesDesc: '로컬 보관 세션 상한. 빈칸 = 200. 범위 5–200.',
+      historyMaxEntriesDesc:
+        '로컬 보관 세션 상한. 비워 두면 200이며 5–1,000,000까지 설정할 수 있습니다.',
+      historyKeepAllLabel: '모든 기록 보관',
+      historyKeepAllDesc: '기간이나 개수로 자동 삭제하지 않고 모든 변환 기록을 영구 보관합니다.',
       polishSkipMaxCharsLabel: '짧은 입력은 다듬기 건너뛰기(최대 글자 수)',
       polishSkipMaxCharsDesc:
         '공백을 제외하고 N자 이하의 인식 결과는 LLM 호출 없이 원문 그대로 삽입합니다. 0 = 끔. 번역은 항상 다듬습니다.',
@@ -1840,7 +1843,7 @@ export const ko: typeof zhCN = {
         asrGemini: 'Google Gemini Transcribe',
         asrTencentCloud: 'Tencent Cloud Hunyuan 실시간 ASR',
         asrElevenLabs: 'ElevenLabs Scribe',
-        asrSherpaOnnxLocal: '로컬 sherpa-onnx(실험적)',
+        asrSherpaOnnxLocal: '로컬 sherpa-onnx',
         asrFoundryLocalWhisper: '로컬 Whisper(Foundry Local)',
         asrLocalWhisper: '로컬 Whisper(배치)',
         asrExperimentalSenseVoice: experimentalAsr.senseVoiceLabel,
@@ -1854,6 +1857,14 @@ export const ko: typeof zhCN = {
         omniGemini: 'Google Gemini',
         omniDashscope: 'Alibaba DashScope Omni',
       },
+      recognitionModeLabel: '음성 인식 설정 방식',
+      recognitionModeHint: '클라우드/로컬 채널과 기기 내 모델 라이브러리를 전환합니다.',
+      recognitionChannelsTab: '채널',
+      recognitionLocalModelsTab: '로컬 모델',
+      recognitionLocalModelsTitle: '로컬 모델 다운로드 / 설정',
+      recognitionLocalModelsDesc:
+        'SenseVoice, Whisper 등 오프라인 모델을 내려받고 용도를 비교한 뒤 받아쓰기에 사용할 모델을 선택합니다.',
+      localModelsBadge: '기기 내',
       geminiTranscribeNotice:
         '두 모델 모두 여기서는 말한 그대로 전사하며, 필요하면 설정된 LLM으로 추가 처리할 수 있습니다. gemini-3.5-transcribe는 녹음이 끝나면 오디오를 업로드합니다. gemini-3.5-transcribe-live는 말하는 동안 결과를 표시하며, 녹음은 한 번에 최대 10분까지 가능합니다. 스마트 전사에는 멀티모달 모드를 사용하세요. 기본 URL: https://generativelanguage.googleapis.com/v1beta.',
       geminiTranscribeOmniNotice:
@@ -2682,9 +2693,36 @@ export const ko: typeof zhCN = {
     foundryModelBaseDesc: '더 빠르고 리소스를 적게 사용해 가벼운 일상 받아쓰기에 적합합니다.',
     foundryModelTiny: 'Whisper Tiny(가장 빠름 / 스모크 테스트)',
     foundryModelTinyDesc: 'Foundry 경로가 작동하는지 확인하기 위한 가장 빠른 옵션.',
-    sherpaTitle: 'Windows sherpa-onnx Local(실험적)',
+    sherpaTitle: '로컬 sherpa-onnx 모델 라이브러리',
     sherpaDesc:
-      'Windows는 sherpa-onnx로 기기 내 오프라인 일괄 인식을 수행하며 ASR API 키가 필요 없습니다.',
+      'Mac 또는 Windows에서 SenseVoice, Whisper, Paraformer, Zipformer, Qwen3-ASR을 ASR API 키 없이 기기 내에서 실행합니다.',
+    sherpaLanguageTitle: '인식 언어',
+    sherpaLanguageDesc:
+      '표준 중국어, 광둥어, 중영 혼합 받아쓰기에는 언어를 지정하세요. 불확실할 때는 자동 인식을 사용합니다.',
+    deviceRecommendedTitle: '이 기기 추천',
+    deviceDetected: '감지됨: {{model}} · {{arch}} · CPU {{cores}}코어 · 메모리 {{memory}}',
+    deviceDownloadRecommended: '추천 모델 다운로드',
+    deviceFit: {
+      label: '기기 적합도',
+      recommended: '추천',
+      good: '적합',
+      demanding: '높은 리소스 필요',
+    },
+    deviceReasonDetecting: '이 기기의 CPU와 메모리 구성을 확인하는 중입니다.',
+    deviceReasonIntelChinese:
+      'Intel Mac에서 중국어 정확도, 속도, 배터리 사용의 균형이 가장 좋습니다.',
+    deviceReasonLowMemory: '메모리 사용량이 작아 다른 앱을 위한 여유를 남깁니다.',
+    deviceReasonBalancedChinese:
+      '중국어 우선 균형 모델로 일상 받아쓰기와 중영 혼합 메모에 적합합니다.',
+    deviceReasonChineseLight: '중국어 전용 경량 옵션으로 리소스 사용이 안정적입니다.',
+    deviceReasonMultilingual: '다국어 Whisper 동작을 선호할 때의 균형형 대안입니다.',
+    deviceReasonStreaming: '말하는 동안 표시되지만 녹음 중 CPU를 계속 사용합니다.',
+    deviceReasonHeavyForDevice:
+      '감지된 CPU에서는 큰 모델이 눈에 띄게 느려지고 발열과 배터리 소모가 증가할 수 있습니다.',
+    deviceReasonPowerful:
+      '감지된 메모리라면 이 대형 모델을 감당할 수 있어 속도보다 품질을 우선할 때 적합합니다.',
+    deviceReasonAppSiliconLongContext:
+      '감지된 Apple Silicon과 메모리로 긴 문장이나 다국어 받아쓰기를 처리할 수 있습니다.',
     sherpaRuntimeReady: '모델 로드됨',
     sherpaRuntimeMissing: '모델 로드되지 않음',
     sherpaSetDefault: '기본값으로 설정 / sherpa-onnx 활성화',
@@ -2697,21 +2735,36 @@ export const ko: typeof zhCN = {
     sherpaLanguageJa: '일본어 ja',
     sherpaLanguageKo: '한국어 ko',
     sherpaLanguageYue: '광둥어 yue',
-    sherpaModelSenseVoice: 'SenseVoice Small(기본 / 중국어 우선)',
-    sherpaModelSenseVoiceDesc: '중국어 및 중영 혼합 받아쓰기에 적합한 기본 실험 모델.',
+    sherpaModelSenseVoice: 'SenseVoice Small(중국어 우선)',
+    sherpaModelSenseVoiceDesc:
+      '표준 중국어, 광둥어, 영어, 일본어, 한국어에 최적화된 소형 다국어 오프라인 모델입니다. Intel Mac에서 중국어 정확도, 속도, 배터리 사용의 균형이 가장 좋습니다.',
+    sherpaModelSenseVoiceUseCase:
+      '일상 중국어 받아쓰기, 중영 혼합 메모, 짧은 메시지, 배터리를 중시하는 노트북에 적합합니다.',
     sherpaModelParaformer: 'Paraformer 중국어',
-    sherpaModelParaformerDesc: '중국어 중심 실험 모델.',
+    sherpaModelParaformerDesc:
+      '중국어 전용 오프라인 모델로 리소스 사용이 적고 표준 중국어 인식이 안정적입니다. 언어를 바꾸는 음성에서는 SenseVoice보다 견고하지 않습니다.',
+    sherpaModelParaformerUseCase:
+      '중국어만 사용하는 회의, 긴 메모, 메모리 사용을 줄여야 하는 기기에 적합합니다.',
     sherpaModelWhisper: 'Whisper Small 다국어',
-    sherpaModelWhisperDesc: 'Whisper 계열 동작에 맞춘 다국어 실험 폴백 모델.',
+    sherpaModelWhisperDesc:
+      '폭넓은 언어와 안정적인 문장 부호를 제공하는 균형형 Whisper 모델입니다. 보통 SenseVoice보다 느리고 중국어 전용 최적화는 아닙니다.',
+    sherpaModelWhisperUseCase:
+      '다국어 받아쓰기, 영어 중심 작업, 일관된 Whisper 동작이 필요한 경우에 적합합니다.',
     sherpaModelWhisperLargeV3: 'Whisper Large V3 (다국어)',
     sherpaModelWhisperLargeV3Desc:
-      '오픈소스 다국어 모델 중 품질이 가장 좋은 Whisper 계열. 고품질이지만 용량이 큽니다.',
+      '어려운 억양, 잡음, 다국어 음성용 고정확도 Whisper입니다. 약 1.7GB이며 추론 속도가 눈에 띄게 느립니다.',
+    sherpaModelWhisperLargeV3UseCase:
+      '고성능 기기에서 품질을 우선하는 전사에 적합합니다. 배터리로 짧은 받아쓰기를 자주 하는 용도에는 권장하지 않습니다.',
     sherpaModelZipformer: 'Zipformer 스트리밍(중·영)',
     sherpaModelZipformerDesc:
-      '말하는 동안 텍스트가 나오는 스트리밍 중·영어 모델로, 지연이 가장 낮아 실시간 받아쓰기에 적합합니다.',
+      '말하는 동안 초안을 보여 주는 중·영 스트리밍 모델입니다. 지연은 낮지만 CPU를 계속 사용하며 오프라인 모델의 정확도가 더 높을 수 있습니다.',
+    sherpaModelZipformerUseCase:
+      '실시간 미리보기, 짧은 명령, 최고 정확도보다 즉시 표시가 중요한 상황에 적합합니다.',
     sherpaModelQwen3: 'Qwen3-ASR 0.6B INT8',
     sherpaModelQwen3Desc:
-      '변환된 sherpa-onnx Qwen3-ASR 모델로 다국어 인식과 더 강한 긴 문맥 처리를 지원합니다.',
+      '긴 문맥과 다국어 혼합에 강한 변환형 Qwen3-ASR 모델입니다. SenseVoice보다 크고 느리며 메모리를 더 사용합니다.',
+    sherpaModelQwen3UseCase:
+      '최신 하드웨어에서 길고 복잡하거나 여러 언어가 섞인 받아쓰기에 적합합니다. Intel Mac의 일상 용도에는 첫 선택이 아닙니다.',
     modelSelectTitle: '이 기기의 모델',
     modelSelectDesc: '다운로드 상태를 확인하고 파일을 관리하거나 모델을 불러와 테스트하세요.',
     modelSelectPlaceholder: '다운로드된 모델 선택…',
@@ -2762,6 +2815,7 @@ export const ko: typeof zhCN = {
     sidebarTitle: '다운로드 완료 및 진행 중',
     activePill: '현재 사용 중',
     setDefault: '기본값으로 설정',
+    useModel: '이 모델 사용',
     downloading: '다운로드 중',
     startDownload: '다운로드 시작',
     downloadNewModel: '새 모델 다운로드',
@@ -2789,6 +2843,8 @@ export const ko: typeof zhCN = {
     detailFiles: '개 파일',
     detailDownloaded: '다운로드됨',
     detailEmpty: '모델을 선택하여 세부 정보 보기',
+    modelGuideUseCase: '적합한 용도',
+    modelGuideDescription: '모델 설명',
     foundryLanguage: '언어',
     foundryRuntimeSource: '런타임 소스',
     mirrorGithubRelease: 'GitHub Releases',

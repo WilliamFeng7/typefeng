@@ -2,6 +2,98 @@ use super::*;
 
 use openless_core::{LocalAsrMirror, LocalAsrRuntime, LocalAsrTarget};
 
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct LocalAsrDeviceProfileWire {
+    pub architecture: String,
+    pub physical_cpu_cores: u32,
+    pub logical_cpu_cores: u32,
+    pub memory_bytes: u64,
+    pub hardware_model: Option<String>,
+}
+
+#[cfg(target_os = "macos")]
+unsafe fn sysctl_raw(name: &std::ffi::CStr) -> Option<Vec<u8>> {
+    let mut size = 0usize;
+    if libc::sysctlbyname(
+        name.as_ptr(),
+        std::ptr::null_mut(),
+        &mut size,
+        std::ptr::null_mut(),
+        0,
+    ) != 0
+        || size == 0
+    {
+        return None;
+    }
+    let mut value = vec![0u8; size];
+    if libc::sysctlbyname(
+        name.as_ptr(),
+        value.as_mut_ptr().cast(),
+        &mut size,
+        std::ptr::null_mut(),
+        0,
+    ) != 0
+    {
+        return None;
+    }
+    value.truncate(size);
+    Some(value)
+}
+
+#[cfg(target_os = "macos")]
+fn sysctl_u32(name: &str) -> Option<u32> {
+    let name = std::ffi::CString::new(name).ok()?;
+    let raw = unsafe { sysctl_raw(&name) }?;
+    raw.get(..4)
+        .and_then(|bytes| bytes.try_into().ok())
+        .map(u32::from_ne_bytes)
+}
+
+#[cfg(target_os = "macos")]
+fn sysctl_u64(name: &str) -> Option<u64> {
+    let name = std::ffi::CString::new(name).ok()?;
+    let raw = unsafe { sysctl_raw(&name) }?;
+    raw.get(..8)
+        .and_then(|bytes| bytes.try_into().ok())
+        .map(u64::from_ne_bytes)
+}
+
+#[cfg(target_os = "macos")]
+fn sysctl_string(name: &str) -> Option<String> {
+    let name = std::ffi::CString::new(name).ok()?;
+    let raw = unsafe { sysctl_raw(&name) }?;
+    let end = raw.iter().position(|byte| *byte == 0).unwrap_or(raw.len());
+    String::from_utf8(raw[..end].to_vec()).ok()
+}
+
+#[tauri::command]
+pub fn local_asr_device_profile() -> LocalAsrDeviceProfileWire {
+    let logical_cpu_cores = std::thread::available_parallelism()
+        .map(|count| count.get() as u32)
+        .unwrap_or(1);
+    #[cfg(target_os = "macos")]
+    {
+        LocalAsrDeviceProfileWire {
+            architecture: std::env::consts::ARCH.to_string(),
+            physical_cpu_cores: sysctl_u32("hw.physicalcpu").unwrap_or(logical_cpu_cores),
+            logical_cpu_cores: sysctl_u32("hw.logicalcpu").unwrap_or(logical_cpu_cores),
+            memory_bytes: sysctl_u64("hw.memsize").unwrap_or(0),
+            hardware_model: sysctl_string("hw.model"),
+        }
+    }
+    #[cfg(not(target_os = "macos"))]
+    {
+        LocalAsrDeviceProfileWire {
+            architecture: std::env::consts::ARCH.to_string(),
+            physical_cpu_cores: logical_cpu_cores,
+            logical_cpu_cores,
+            memory_bytes: 0,
+            hardware_model: None,
+        }
+    }
+}
+
 fn core_error(error: openless_core::BackendError) -> String {
     error.to_string()
 }

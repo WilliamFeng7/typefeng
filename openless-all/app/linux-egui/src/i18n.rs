@@ -3682,6 +3682,36 @@ pub const CATALOG: &[Msg] = &[
         ),
     },
     Msg {
+        key: "settings.recording.history_max_entries_desc",
+        text: row(
+            "本地保留会话上限，留空 = 200。可设置 5–1,000,000 条。",
+            "本地保留會話上限，留空 = 200。可設定 5–1,000,000 條。",
+            "Max sessions retained locally. Blank = 200. Range: 5–1,000,000.",
+            "ローカル保持セッション上限。空欄 = 200。5～1,000,000 件。",
+            "로컬 보관 세션 상한. 비워 두면 200이며 5–1,000,000까지 설정할 수 있습니다.",
+        ),
+    },
+    Msg {
+        key: "settings.recording.history_keep_all_label",
+        text: row(
+            "保留全部历史",
+            "保留全部歷史",
+            "Keep all history",
+            "すべての履歴を保持",
+            "모든 기록 보관",
+        ),
+    },
+    Msg {
+        key: "settings.recording.history_keep_all_desc",
+        text: row(
+            "永久保留所有历史转录，不按天数或条数自动清理。",
+            "永久保留所有歷史轉錄，不按天數或條數自動清理。",
+            "Keep every transcript permanently without age or count pruning.",
+            "期間や件数による自動削除を行わず、すべての文字起こしを保持します。",
+            "기간이나 개수로 자동 삭제하지 않고 모든 변환 기록을 영구 보관합니다.",
+        ),
+    },
+    Msg {
         key: "settings.recording.history_retention_label",
         text: row(
             "历史保留天数",

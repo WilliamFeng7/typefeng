@@ -115,7 +115,7 @@ pub use selection_voice::*;
 pub(crate) use settings::sync_low_latency_capture_preferences;
 pub use settings::*;
 #[cfg(any(not(mobile), local_asr_sherpa))]
-// Sherpa commands are registered on Windows and arm64 Android; other desktop
+// Sherpa commands are registered on Windows, macOS, and arm64 Android; other desktop
 // targets keep an empty re-export.
 #[allow(unused_imports)]
 pub use sherpa_asr::*;

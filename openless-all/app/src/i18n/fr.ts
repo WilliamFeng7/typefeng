@@ -1726,7 +1726,10 @@ export const fr: typeof zhCN = {
         'Les entrées plus anciennes sont supprimées lors de nouveaux enregistrements. 0 = pas de suppression selon l’ancienneté.',
       historyMaxEntriesLabel: 'Nombre maximal d’entrées',
       historyMaxEntriesDesc:
-        'Nombre maximal de sessions conservées localement. Vide = 200. Plage : 5–200.',
+        'Nombre maximal de sessions conservées localement. Vide = 200. Plage : 5–1 000 000.',
+      historyKeepAllLabel: 'Conserver tout l’historique',
+      historyKeepAllDesc:
+        'Conserve toutes les transcriptions sans nettoyage automatique par âge ou quantité.',
       polishSkipMaxCharsLabel: 'Ignorer l’amélioration pour les courtes dictées (caractères max)',
       polishSkipMaxCharsDesc:
         'Les transcriptions d’au plus N caractères (espaces non comptés) sont insérées telles quelles, sans appel au LLM. 0 = désactivé. La traduction est toujours améliorée.',
@@ -1919,7 +1922,7 @@ export const fr: typeof zhCN = {
         asrXiaomiMimo: 'Xiaomi MiMo ASR',
         asrIflytek: 'iFlytek ASR en temps réel',
         asrElevenLabs: 'ElevenLabs Scribe',
-        asrSherpaOnnxLocal: 'sherpa-onnx local (expérimental)',
+        asrSherpaOnnxLocal: 'sherpa-onnx local',
         asrFoundryLocalWhisper: 'Whisper local (Foundry Local)',
         asrLocalWhisper: 'Whisper local (par lots)',
         asrExperimentalSenseVoice: experimentalAsr.senseVoiceLabel,
@@ -1933,6 +1936,15 @@ export const fr: typeof zhCN = {
         omniGemini: 'Google Gemini',
         omniDashscope: 'Alibaba DashScope Omni',
       },
+      recognitionModeLabel: 'Mode de reconnaissance',
+      recognitionModeHint:
+        'Basculer entre les canaux cloud/locaux et la bibliothèque de modèles sur l’appareil.',
+      recognitionChannelsTab: 'Canaux',
+      recognitionLocalModelsTab: 'Modèles locaux',
+      recognitionLocalModelsTitle: 'Télécharger / configurer les modèles locaux',
+      recognitionLocalModelsDesc:
+        'Téléchargez SenseVoice, Whisper et d’autres modèles hors ligne, comparez leurs usages, puis choisissez le modèle utilisé pour la dictée.',
+      localModelsBadge: 'Sur l’appareil',
       geminiTranscribeNotice:
         'Les deux modèles transcrivent ici mot à mot, avec traitement facultatif par le LLM configuré. gemini-3.5-transcribe envoie l’audio à la fin de l’enregistrement. gemini-3.5-transcribe-live affiche les résultats pendant que vous parlez, jusqu’à 10 minutes par enregistrement. Pour la transcription intelligente, utilisez le mode multimodal. URL de base : https://generativelanguage.googleapis.com/v1beta.',
       geminiTranscribeOmniNotice:
@@ -2827,9 +2839,40 @@ export const fr: typeof zhCN = {
     foundryModelBaseDesc: 'Plus rapide et moins gourmand pour la dictée quotidienne légère.',
     foundryModelTiny: 'Whisper Tiny (le plus rapide / test de base)',
     foundryModelTinyDesc: 'L’option la plus rapide pour vérifier que Foundry fonctionne.',
-    sherpaTitle: 'sherpa-onnx local pour Windows (expérimental)',
+    sherpaTitle: 'Bibliothèque de modèles sherpa-onnx locale',
     sherpaDesc:
-      'Windows utilise sherpa-onnx pour la reconnaissance locale par lots, hors ligne et sans clé API ASR.',
+      'Exécutez SenseVoice, Whisper, Paraformer, Zipformer et Qwen3-ASR localement sur Mac ou Windows, sans clé API ASR.',
+    sherpaLanguageTitle: 'Langue de reconnaissance',
+    sherpaLanguageDesc:
+      'Choisissez une langue pour le mandarin, le cantonais ou une dictée mixte chinois-anglais. Le mode automatique convient lorsque la langue est incertaine.',
+    deviceRecommendedTitle: 'Recommandé pour cet appareil',
+    deviceDetected: 'Détecté : {{model}} · {{arch}} · {{cores}} cœurs CPU · {{memory}} RAM',
+    deviceDownloadRecommended: 'Télécharger le modèle recommandé',
+    deviceFit: {
+      label: 'Compatibilité',
+      recommended: 'Recommandé',
+      good: 'Adapté',
+      demanding: 'Très exigeant',
+    },
+    deviceReasonDetecting: 'Lecture de la configuration CPU et mémoire de cet appareil.',
+    deviceReasonIntelChinese:
+      'Meilleur équilibre entre précision chinoise, vitesse et autonomie sur un Mac Intel.',
+    deviceReasonLowMemory:
+      'Son faible besoin en mémoire laisse de la place aux autres applications.',
+    deviceReasonBalancedChinese:
+      'Modèle équilibré orienté chinois pour la dictée quotidienne et les notes mixtes.',
+    deviceReasonChineseLight:
+      'Option légère uniquement chinoise, avec une consommation de ressources prévisible.',
+    deviceReasonMultilingual:
+      'Solution multilingue équilibrée si vous préférez le comportement de Whisper.',
+    deviceReasonStreaming:
+      'Affiche le texte pendant que vous parlez, mais sollicite le CPU pendant l’enregistrement.',
+    deviceReasonHeavyForDevice:
+      'Ce grand modèle est nettement plus lent sur le CPU détecté, avec plus de chaleur et de consommation.',
+    deviceReasonPowerful:
+      'La mémoire détectée peut prendre en charge ce grand modèle lorsque la qualité prime sur la vitesse.',
+    deviceReasonAppSiliconLongContext:
+      'L’Apple Silicon et la mémoire détectés peuvent traiter les dictées longues ou multilingues.',
     sherpaRuntimeReady: 'Modèle chargé',
     sherpaRuntimeMissing: 'Modèle non chargé',
     sherpaSetDefault: 'Définir par défaut / Activer sherpa-onnx',
@@ -2842,23 +2885,36 @@ export const fr: typeof zhCN = {
     sherpaLanguageJa: 'Japonais ja',
     sherpaLanguageKo: 'Coréen ko',
     sherpaLanguageYue: 'Cantonais yue',
-    sherpaModelSenseVoice: 'SenseVoice Small (par défaut / priorité au chinois)',
+    sherpaModelSenseVoice: 'SenseVoice Small (priorité au chinois)',
     sherpaModelSenseVoiceDesc:
-      'Modèle expérimental par défaut pour la dictée en chinois ou mêlant chinois et anglais.',
+      'Modèle hors ligne multilingue compact optimisé pour le mandarin, le cantonais, l’anglais, le japonais et le coréen. Sur un Mac Intel, il offre le meilleur équilibre entre précision chinoise, vitesse et autonomie.',
+    sherpaModelSenseVoiceUseCase:
+      'Idéal pour la dictée chinoise quotidienne, les notes mixtes chinois-anglais, les messages courts et les ordinateurs portables soucieux de l’autonomie.',
     sherpaModelParaformer: 'Paraformer chinois',
-    sherpaModelParaformerDesc: 'Modèle expérimental spécialisé en chinois.',
+    sherpaModelParaformerDesc:
+      'Modèle hors ligne spécialisé en chinois, peu gourmand en ressources et stable en mandarin. Il résiste moins bien que SenseVoice aux changements de langue.',
+    sherpaModelParaformerUseCase:
+      'Idéal pour les réunions uniquement en mandarin, les longues notes et les appareils à mémoire limitée.',
     sherpaModelWhisper: 'Whisper Small multilingue',
     sherpaModelWhisperDesc:
-      'Solution expérimentale multilingue au comportement conforme à la famille Whisper.',
+      'Modèle Whisper multilingue équilibré avec une large couverture linguistique et une ponctuation stable. Il est généralement plus lent et moins spécialisé en chinois que SenseVoice.',
+    sherpaModelWhisperUseCase:
+      'Idéal pour la dictée multilingue, le travail à dominante anglaise et un comportement Whisper prévisible.',
     sherpaModelWhisperLargeV3: 'Whisper Large V3 (multilingue)',
     sherpaModelWhisperLargeV3Desc:
-      'La version multilingue open source la plus avancée de Whisper : grande qualité et téléchargement volumineux.',
+      'L’option Whisper de haute précision pour les accents difficiles, les enregistrements bruyants et les langues mélangées. Le téléchargement fait environ 1,7 Go et l’inférence est nettement plus lente.',
+    sherpaModelWhisperLargeV3UseCase:
+      'Idéal pour une transcription privilégiant la qualité sur du matériel puissant ; à éviter pour de courtes dictées fréquentes sur batterie.',
     sherpaModelZipformer: 'Zipformer streaming (zh/en)',
     sherpaModelZipformerDesc:
-      'Modèle streaming chinois-anglais à la latence la plus faible — le texte apparaît pendant que vous parlez.',
+      'Modèle streaming chinois-anglais qui affiche un brouillon pendant que vous parlez. La latence est faible, mais le CPU reste sollicité et les modèles hors ligne peuvent être plus précis.',
+    sherpaModelZipformerUseCase:
+      'Idéal pour l’aperçu en direct, les commandes courtes et les cas où voir le texte immédiatement compte plus que la précision maximale.',
     sherpaModelQwen3: 'Qwen3-ASR 0.6B INT8',
     sherpaModelQwen3Desc:
-      'Modèle Qwen3-ASR converti pour sherpa-onnx, avec reconnaissance multilingue et meilleure gestion du contexte long.',
+      'Modèle Qwen3-ASR converti, plus robuste sur le contexte long et les langues mélangées. Il est plus volumineux, plus lent et plus gourmand en mémoire que SenseVoice.',
+    sherpaModelQwen3UseCase:
+      'Idéal pour les dictées longues, complexes ou multilingues sur du matériel récent ; ce n’est pas le premier choix pour un Mac Intel.',
     modelSelectTitle: 'Modèles sur cet appareil',
     modelSelectDesc:
       'Suivez les téléchargements, gérez les fichiers ou chargez un modèle pour le tester.',
@@ -2911,6 +2967,7 @@ export const fr: typeof zhCN = {
     sidebarTitle: 'Téléchargés et en téléchargement',
     activePill: 'Actif',
     setDefault: 'Définir par défaut',
+    useModel: 'Utiliser ce modèle',
     downloading: 'Téléchargement',
     startDownload: 'Démarrer le téléchargement',
     downloadNewModel: 'Télécharger un nouveau modèle',
@@ -2937,6 +2994,8 @@ export const fr: typeof zhCN = {
     detailFiles: 'fichiers',
     detailDownloaded: 'Téléchargé',
     detailEmpty: 'Sélectionnez un modèle pour afficher ses détails',
+    modelGuideUseCase: 'Idéal pour',
+    modelGuideDescription: 'À propos de ce modèle',
     foundryLanguage: 'Langue',
     foundryRuntimeSource: 'Source des composants d’exécution',
     mirrorGithubRelease: 'GitHub Releases',

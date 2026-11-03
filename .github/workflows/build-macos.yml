@@ -1,44 +1,34 @@
 name: build-macos
 
 on:
-  # Manual only: a full Tauri release build needs ~15 min and a macOS runner.
   workflow_dispatch:
+    inputs:
+      arch:
+        description: macOS architecture to build
+        required: true
+        default: both
+        type: choice
+        options:
+          - both
+          - arm64
+          - x86_64
 
 jobs:
-  build:
-    runs-on: macos-15
-    defaults:
-      run:
-        working-directory: openless-all/app
-    env:
-      CI: 'true'
-      APPLE_SIGNING_IDENTITY: '-'
-    steps:
-      - uses: actions/checkout@v4
+  arm64:
+    if: inputs.arch == 'both' || inputs.arch == 'arm64'
+    uses: ./.github/workflows/build-macos-reusable.yml
+    with:
+      arch: aarch64
+      verify_arch: arm64
+      runner: macos-latest
+      bundle_arch: aarch64
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: openless-all/app/package-lock.json
+  x86_64:
+    if: inputs.arch == 'both' || inputs.arch == 'x86_64'
+    uses: ./.github/workflows/build-macos-reusable.yml
+    with:
+      arch: x86_64
+      verify_arch: x86_64
+      runner: macos-15-intel
+      bundle_arch: x64
 
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: 1.99.1
-
-      - name: Install frontend dependencies
-        run: npm ci
-
-      - name: Build frontend
-        run: npm run build
-
-      - name: Build TypeFeng app
-        run: npm run tauri -- build --ci --config src-tauri/tauri.macos.conf.json -- --locked
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: TypeFeng-macos
-          path: |
-            openless-all/app/src-tauri/target/release/bundle/macos/TypeFeng.app
-            openless-all/app/src-tauri/target/release/bundle/dmg/*.dmg
-          if-no-files-found: warn

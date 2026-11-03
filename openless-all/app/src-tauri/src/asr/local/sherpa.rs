@@ -1,7 +1,7 @@
-//! Native runtime modes and event payloads for Windows sherpa-onnx local ASR.
+//! Native runtime modes and event payloads for sherpa-onnx local ASR.
 //!
-//! The current catalog covers Windows offline batch models and experimental online streaming
-//! models; `sherpa_runtime.rs` holds the `OfflineRecognizer` / `OnlineRecognizer` respectively.
+//! The current catalog covers offline batch models and experimental online streaming models;
+//! `sherpa_runtime.rs` holds the `OfflineRecognizer` / `OnlineRecognizer` respectively.
 
 use serde::Serialize;
 
@@ -72,8 +72,7 @@ impl SherpaPrepareProgressPayload {
 #[allow(dead_code)]
 pub struct SherpaRuntimeStatus {
     pub provider_id: String,
-    /// Whether the current platform has sherpa-onnx inference capability. True on Windows;
-    /// other platforms keep the provider metadata but provide no local sherpa inference.
+    /// Whether the current platform has sherpa-onnx inference capability.
     pub available: bool,
     /// Whether the current model is loaded in memory.
     pub runtime_ready: bool,

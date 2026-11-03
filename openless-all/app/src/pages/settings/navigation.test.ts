@@ -107,20 +107,17 @@ assert.equal(
   'macOS retains its native correction observer settings',
 );
 
-assert.equal(
-  visibleAdvancedPages('desktop', 'mac')[0].id,
-  'localModels',
-  'macOS experiments entry is first',
-);
-assert.equal(
-  visibleAdvancedPages('desktop', 'win').some((page) => page.id === 'localModels'),
-  false,
-  'Windows experiments stay unchanged',
-);
+for (const os of ['mac', 'win'] as const) {
+  assert.equal(
+    visibleAdvancedPages('desktop', os).some((page) => page.id === 'localModels'),
+    false,
+    `${os}: local model management lives under Speech recognition`,
+  );
+}
 assert.equal(
   availableServiceViews(false, 'mac').includes('models'),
-  true,
-  'macOS retains only a disabled retirement placeholder',
+  false,
+  'macOS exposes local models inside Speech recognition instead of a retired top-level tab',
 );
 assert.equal(
   availableServiceViews(true, 'win').includes('models'),
@@ -129,14 +126,9 @@ assert.equal(
 );
 
 assert.equal(
-  isServiceViewInactive('models', false, 'mac'),
-  true,
-  'Mac legacy entry is always disabled',
-);
-assert.equal(
   resolveServiceView('models', availableServiceViews(false, 'mac'), false, 'mac'),
   'llm',
-  'retired entry never opens old model controls',
+  'an absent Mac models page falls back to the working editor',
 );
 const serviceViews = availableServiceViews(true);
 assert.deepEqual(

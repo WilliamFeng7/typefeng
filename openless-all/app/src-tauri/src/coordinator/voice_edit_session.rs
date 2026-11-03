@@ -624,10 +624,11 @@ fn persist_history(
         asr_ms: None,
         polish_ms: None,
     };
-    if let Err(error) = backend.append_history(
+    if let Err(error) = backend.append_history_with_policy(
         session,
         preferences.history_retention_days,
         preferences.history_max_entries,
+        preferences.history_keep_all,
     ) {
         log::warn!("voice edit history persistence failed: {error}");
     }

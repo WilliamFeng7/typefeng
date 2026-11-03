@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import { AndroidPermissionsPanel } from '@android/components/AndroidPermissionsPanel';
 import { Icon } from '../../components/Icon';
-import { Tooltip } from '../../components/Tooltip';
 import { detectOS } from '../../components/WindowChrome';
 import { ExperimentalAsrSection, type ExperimentalAsrController } from './ExperimentalAsrSection';
 import { RecordingInputSection } from './RecordingInputSection';
@@ -126,28 +125,38 @@ export function AppearanceTab() {
 export function ServicesTab({
   asrNavigation = 0,
   initialView,
-}: { asrNavigation?: number; initialView?: ServiceViewId } = {}) {
+  initialRecognitionPanel,
+}: {
+  asrNavigation?: number;
+  initialView?: ServiceViewId;
+  initialRecognitionPanel?: 'channels' | 'local';
+} = {}) {
   const { t } = useTranslation();
   const { prefs, updatePrefs } = useHotkeySettings();
   const platformCaps = usePlatformCaps();
-  const showLocalModel = detectOS() !== 'mac' && platformCaps?.supportsLocalAsr === true;
+  const os = detectOS();
+  const showLocalModel = os !== 'mac' && platformCaps?.supportsLocalAsr === true;
+  const showRecognitionLocalModels = os === 'mac' && platformCaps?.supportsLocalAsr === true;
   const multimodal =
     prefs?.multimodalPipelineEnabled === true && prefs.pipelineMode === 'multimodal';
   const [view, setView] = useState<ServiceViewId>(initialView ?? (asrNavigation ? 'asr' : 'llm'));
+  const [recognitionPanel, setRecognitionPanel] = useState<'channels' | 'local'>(
+    initialRecognitionPanel ?? 'channels',
+  );
   useEffect(() => {
     if (initialView) setView(initialView);
     else if (asrNavigation) setView('asr');
   }, [initialView, asrNavigation]);
+  useEffect(() => {
+    if (initialRecognitionPanel) setRecognitionPanel(initialRecognitionPanel);
+  }, [initialRecognitionPanel]);
+  useEffect(() => {
+    if (asrNavigation) setRecognitionPanel('channels');
+  }, [asrNavigation]);
   const voiceActivationModels =
     showLocalModel && detectOS() === 'win' && prefs?.voiceActivationEnabled === true;
-  const views = availableServiceViews(showLocalModel, detectOS());
-  const requestedView = resolveServiceView(
-    view,
-    views,
-    multimodal,
-    detectOS(),
-    voiceActivationModels,
-  );
+  const views = availableServiceViews(showLocalModel, os);
+  const requestedView = resolveServiceView(view, views, multimodal, os, voiceActivationModels);
   const contentRef = useRef<HTMLDivElement>(null);
   const selectedView = requestedView;
   const navigationRef = useRef<HTMLDivElement>(null);
@@ -237,37 +246,7 @@ export function ServicesTab({
         >
           <span ref={navigationIndicatorRef} aria-hidden className="ol-service-view-indicator" />
           {views.map((id) => {
-            if (id === 'models' && detectOS() === 'mac') {
-              return (
-                <Tooltip
-                  key={id}
-                  content={t('experimentalAsr.retiredHint')}
-                  placement="bottom"
-                  wrap
-                  focusable
-                  trigger={<span />}
-                >
-                  <button
-                    type="button"
-                    disabled
-                    data-retired-local-models
-                    aria-label={t('modal.serviceViews.models')}
-                    style={{ pointerEvents: 'none' }}
-                  >
-                    <span>{t('modal.serviceViews.models')}</span>
-                    <span className="ol-service-inactive-tag">
-                      {t('experimentalAsr.retiredLabel')}
-                    </span>
-                  </button>
-                </Tooltip>
-              );
-            }
-            const inactive = isServiceViewInactive(
-              id,
-              multimodal,
-              detectOS(),
-              voiceActivationModels,
-            );
+            const inactive = isServiceViewInactive(id, multimodal, os, voiceActivationModels);
             const required = !inactive && (id === 'llm' || id === 'asr');
             const configured =
               id === 'llm' ? requiredConfigured.llm : id === 'asr' ? requiredConfigured.asr : false;
@@ -327,13 +306,50 @@ export function ServicesTab({
           {/* The LocalModelPicker inside the channel editor jumps to this view through this context. */}
           <LocalModelsNavContext.Provider
             value={
-              showLocalModel && (!multimodal || voiceActivationModels)
-                ? () => setView('models')
-                : null
+              showRecognitionLocalModels
+                ? () => {
+                    setView('asr');
+                    setRecognitionPanel('local');
+                  }
+                : showLocalModel && (!multimodal || voiceActivationModels)
+                  ? () => setView('models')
+                  : null
             }
           >
             {selectedView === 'llm' && <ProvidersSection kind="llm" />}
-            {selectedView === 'asr' && <ProvidersSection kind="asr" />}
+            {selectedView === 'asr' && (
+              <>
+                {showRecognitionLocalModels && (
+                  <Card style={{ marginBottom: 16 }}>
+                    <SettingRow
+                      label={t('settings.providers.recognitionModeLabel')}
+                      desc={t('settings.providers.recognitionModeHint')}
+                    >
+                      <Segmented
+                        label={t('settings.providers.recognitionModeLabel')}
+                        value={recognitionPanel}
+                        onChange={setRecognitionPanel}
+                        options={[
+                          {
+                            value: 'channels',
+                            label: t('settings.providers.recognitionChannelsTab'),
+                          },
+                          {
+                            value: 'local',
+                            label: t('settings.providers.recognitionLocalModelsTab'),
+                          },
+                        ]}
+                      />
+                    </SettingRow>
+                  </Card>
+                )}
+                {showRecognitionLocalModels && recognitionPanel === 'local' ? (
+                  <LocalModelsSection embeddedInRecognition />
+                ) : (
+                  <ProvidersSection kind="asr" />
+                )}
+              </>
+            )}
             {selectedView === 'omni' && <OmniChannelSection />}
             {showLocalModel && selectedView === 'models' && (
               <>
@@ -352,7 +368,8 @@ export function ServicesTab({
               </>
             )}
           </LocalModelsNavContext.Provider>
-          {(selectedView === 'llm' || selectedView === 'asr') && (
+          {(selectedView === 'llm' ||
+            (selectedView === 'asr' && recognitionPanel === 'channels')) && (
             <p className="ol-service-storage-note">
               {t('settings.providers.credentialStorageNotice')}
             </p>

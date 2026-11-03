@@ -589,10 +589,11 @@ impl QaService {
             asr_ms: None,
             polish_ms: None,
         };
-        match persistence.history.append_with_retention(
+        match persistence.history.append_with_policy(
             session,
             preferences.history_retention_days,
             preferences.history_max_entries,
+            preferences.history_keep_all,
         ) {
             Ok(()) => {
                 let revision = persistence.history_revision.fetch_add(1, Ordering::AcqRel) + 1;

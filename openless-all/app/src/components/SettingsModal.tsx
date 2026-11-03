@@ -76,6 +76,9 @@ export function SettingsModal({
   );
   const [requestedAdvancedPage, setAdvancedPage] = useState<AdvancedPageId | null>(null);
   const [requestedServiceView, setRequestedServiceView] = useState<ServiceViewId | undefined>();
+  const [requestedRecognitionPanel, setRequestedRecognitionPanel] = useState<
+    'channels' | 'local' | undefined
+  >();
   const [query, setQuery] = useState('');
   const [platformCaps, setPlatformCaps] = useState(getCachedPlatformCapabilities);
   const experimentalAsr = useExperimentalAsr(platformCaps?.platform === 'desktop' && os === 'mac');
@@ -89,6 +92,7 @@ export function SettingsModal({
       setQuery('');
       setAdvancedPage(null);
       setSection('services');
+      setRequestedRecognitionPanel('channels');
     });
     if (!navigated) throw new Error(t('common.operationFailed'));
   };
@@ -209,18 +213,26 @@ export function SettingsModal({
     next: SettingsSectionId,
     fromSearch = false,
     serviceView?: ServiceViewId,
+    recognitionPanel?: 'channels' | 'local',
   ) => {
     void providerForm.finish(() => {
       channelCloseRef.current?.();
       setSection(next);
       setRequestedServiceView(next === 'services' ? serviceView : undefined);
+      setRequestedRecognitionPanel(next === 'services' ? recognitionPanel : undefined);
       setAdvancedPage(null);
       setQuery('');
       if (fromSearch) window.requestAnimationFrame(() => headingRef.current?.focus());
     });
   };
 
-  const openLocalModels = () => selectSection('services', false, 'models');
+  const openLocalModels = () =>
+    selectSection(
+      'services',
+      false,
+      os === 'mac' ? 'asr' : 'models',
+      os === 'mac' ? 'local' : undefined,
+    );
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     // Nested selectors and shortcut recorders own their keys before the dialog does.
@@ -686,6 +698,7 @@ export function SettingsModal({
                         <ServicesTab
                           asrNavigation={asrNavigation}
                           initialView={requestedServiceView}
+                          initialRecognitionPanel={requestedRecognitionPanel}
                         />
                       )}
                       {section === 'privacy' && <PrivacyTab />}

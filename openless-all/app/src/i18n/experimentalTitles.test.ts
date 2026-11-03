@@ -27,11 +27,18 @@ for (const [locale, messages] of Object.entries(locales)) {
 
   for (const [key, title] of Object.entries({
     streamingInsertTitleLinux: messages.settings.advanced.streamingInsertTitleLinux,
-    asrSherpaOnnxLocal: messages.settings.providers.presets.asrSherpaOnnxLocal,
-    sherpaTitle: messages.localAsr.sherpaTitle,
   })) {
     if (!title.includes(marker)) {
       throw new Error(`${locale}.${key} must use the shared experimental wording`);
+    }
+  }
+
+  for (const [key, title] of Object.entries({
+    asrSherpaOnnxLocal: messages.settings.providers.presets.asrSherpaOnnxLocal,
+    sherpaTitle: messages.localAsr.sherpaTitle,
+  })) {
+    if (title.includes(marker)) {
+      throw new Error(`${locale}.${key} is promoted and must not be marked experimental`);
     }
   }
 }

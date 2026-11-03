@@ -497,6 +497,22 @@ for (const platform of ['desktop', 'mobile']) {
   );
 }
 
+const desktopInvokeMacro = invokeHandlers
+  .split('macro_rules! app_invoke_handler_desktop')[1]
+  ?.split('\n}')[0];
+for (const command of [
+  'local_asr_device_profile',
+  'sherpa_onnx_asr_catalog',
+  'sherpa_onnx_asr_set_language_hint',
+  'sherpa_onnx_asr_download_model',
+]) {
+  assert.match(
+    desktopInvokeMacro ?? '',
+    new RegExp(`#\\[cfg\\(local_asr_sherpa\\)\\]\\s*commands::${command}\\s*,`),
+    `desktop sherpa command ${command} must be registered wherever the runtime is linked`,
+  );
+}
+
 for (const method of [
   'accept_pending_correction',
   'reject_pending_correction',

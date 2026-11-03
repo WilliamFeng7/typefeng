@@ -513,31 +513,33 @@ macro_rules! app_invoke_handler_desktop {
             commands::foundry_local_asr_model_dir,
             commands::foundry_local_asr_delete_model,
             commands::foundry_local_asr_reveal_model_dir,
-            #[cfg(target_os = "windows")]
+            #[cfg(local_asr_sherpa)]
             commands::sherpa_onnx_asr_status,
-            #[cfg(target_os = "windows")]
+            #[cfg(local_asr_sherpa)]
+            commands::local_asr_device_profile,
+            #[cfg(local_asr_sherpa)]
             commands::sherpa_onnx_asr_catalog,
-            #[cfg(target_os = "windows")]
+            #[cfg(local_asr_sherpa)]
             commands::sherpa_onnx_asr_fetch_remote_info,
-            #[cfg(target_os = "windows")]
+            #[cfg(local_asr_sherpa)]
             commands::sherpa_onnx_asr_download_model,
-            #[cfg(target_os = "windows")]
+            #[cfg(local_asr_sherpa)]
             commands::sherpa_onnx_asr_cancel_download,
-            #[cfg(target_os = "windows")]
+            #[cfg(local_asr_sherpa)]
             commands::sherpa_onnx_asr_set_model,
-            #[cfg(target_os = "windows")]
+            #[cfg(local_asr_sherpa)]
             commands::sherpa_onnx_asr_set_language_hint,
-            #[cfg(target_os = "windows")]
+            #[cfg(local_asr_sherpa)]
             commands::sherpa_onnx_asr_prepare,
-            #[cfg(target_os = "windows")]
+            #[cfg(local_asr_sherpa)]
             commands::sherpa_onnx_asr_cancel_prepare,
-            #[cfg(target_os = "windows")]
+            #[cfg(local_asr_sherpa)]
             commands::sherpa_onnx_asr_release,
-            #[cfg(target_os = "windows")]
+            #[cfg(local_asr_sherpa)]
             commands::sherpa_onnx_asr_model_dir,
-            #[cfg(target_os = "windows")]
+            #[cfg(local_asr_sherpa)]
             commands::sherpa_onnx_asr_delete_model,
-            #[cfg(target_os = "windows")]
+            #[cfg(local_asr_sherpa)]
             commands::sherpa_onnx_asr_reveal_model_dir,
             commands::export_error_log,
             commands::debug_read_cursor_context,
@@ -725,7 +727,8 @@ macro_rules! app_invoke_handler_mobile {
             $crate::restart_app,
             $crate::reset_accessibility_permission_and_restart_app,
             $crate::log_client_error,
-            // Local ASR: arm64 Android links sherpa-onnx (build.rs `local_asr_sherpa`).
+            // Local ASR is registered on platforms that link sherpa-onnx (build.rs
+            // `local_asr_sherpa`).
             #[cfg(local_asr_sherpa)]
             $crate::commands::local_asr_get_settings,
             #[cfg(local_asr_sherpa)]
@@ -772,6 +775,8 @@ macro_rules! app_invoke_handler_mobile {
             $crate::commands::local_asr_set_keep_loaded_secs,
             #[cfg(local_asr_sherpa)]
             $crate::commands::sherpa_onnx_asr_status,
+            #[cfg(local_asr_sherpa)]
+            $crate::commands::local_asr_device_profile,
             #[cfg(local_asr_sherpa)]
             $crate::commands::sherpa_onnx_asr_catalog,
             #[cfg(local_asr_sherpa)]

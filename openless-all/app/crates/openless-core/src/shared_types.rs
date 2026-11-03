@@ -245,8 +245,8 @@ pub fn split_front_app_opt(label: Option<&str>) -> FrontApp {
 ///
 /// The yearly heatmap uses only `count`; `chars` / `duration_ms` feed the
 /// "last 7 / 30 days" character and duration metrics. Those used to be
-/// computed on the fly from `list_history()`, which the 200-entry history
-/// cap truncates (heavy users push last week out within days).
+/// computed on the fly from `list_history()`, which may be bounded by the
+/// user's history policy (heavy users can push last week out quickly).
 pub use crate::activity::ActivityDay;
 
 pub use crate::types::DictationSession;
@@ -861,10 +861,13 @@ pub struct UserPreferences {
     /// only the Settings manual "check for updates" button works.
     #[serde(default = "default_true")]
     pub auto_update_check: bool,
-    /// History entry cap. `None` = the built-in 200-entry hard cap;
-    /// `Some(n)` = a user-defined cap from Settings (5..=200).
+    /// History entry cap. `None` = the built-in 200-entry default;
+    /// `Some(n)` = a user-defined finite cap from Settings (5..=1,000,000).
     #[serde(default)]
     pub history_max_entries: Option<u32>,
+    /// Keep every history entry and ignore both age and count cleanup.
+    #[serde(default)]
+    pub history_keep_all: bool,
     /// Whether to keep each session's raw microphone audio (wav) under
     /// `recordings/` for diagnosing ASR misrecognition / mic sensitivity.
     /// Default false. When on it consumes disk and follows the same cleanup
@@ -1238,6 +1241,8 @@ struct UserPreferencesWire {
     #[serde(default)]
     history_max_entries: Option<u32>,
     #[serde(default)]
+    history_keep_all: bool,
+    #[serde(default)]
     record_audio_for_debug: bool,
     #[serde(default)]
     debug_archive_processed: bool,
@@ -1437,6 +1442,7 @@ impl Default for UserPreferencesWire {
             conservative_layout: prefs.conservative_layout,
             auto_update_check: prefs.auto_update_check,
             history_max_entries: prefs.history_max_entries,
+            history_keep_all: prefs.history_keep_all,
             record_audio_for_debug: prefs.record_audio_for_debug,
             debug_archive_processed: prefs.debug_archive_processed,
             debug_archive_raw: prefs.debug_archive_raw,
@@ -1677,6 +1683,7 @@ impl<'de> Deserialize<'de> for UserPreferences {
             conservative_layout: wire.conservative_layout,
             auto_update_check: wire.auto_update_check,
             history_max_entries: wire.history_max_entries,
+            history_keep_all: wire.history_keep_all,
             record_audio_for_debug: wire.record_audio_for_debug,
             debug_archive_processed: wire.debug_archive_processed,
             debug_archive_raw: wire.debug_archive_raw,
@@ -2060,6 +2067,7 @@ impl Default for UserPreferences {
             conservative_layout: false,
             auto_update_check: true,
             history_max_entries: None,
+            history_keep_all: false,
             record_audio_for_debug: false,
             debug_archive_processed: false,
             debug_archive_raw: false,
@@ -2689,9 +2697,9 @@ impl PlatformCapabilities {
                 supports_overlay: true,
                 supports_desktop_hotkey: true,
                 supports_tray: true,
-                // The Tauri native local engine is available on Windows; Linux keeps the
+                // TypeFeng links sherpa-onnx on Windows and macOS. Linux keeps the
                 // retired generic provider metadata but has no inference runtime.
-                supports_local_asr: cfg!(target_os = "windows"),
+                supports_local_asr: cfg!(any(target_os = "windows", target_os = "macos")),
                 supports_local_qwen3_mlx: false,
                 supports_in_app_dictation: false,
                 supports_auto_update: true,

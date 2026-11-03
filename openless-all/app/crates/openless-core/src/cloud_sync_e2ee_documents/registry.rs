@@ -845,6 +845,13 @@ pub const PREFERENCE_FIELDS: &[PreferenceField] = &[
         reason: "portable_setting",
     },
     PreferenceField {
+        rust_name: "history_keep_all",
+        key: "historyKeepAll",
+        class: PreferenceClass::Portable,
+        shape: PreferenceShape::Boolean,
+        reason: "portable_setting",
+    },
+    PreferenceField {
         rust_name: "record_audio_for_debug",
         key: "recordAudioForDebug",
         class: PreferenceClass::Portable,

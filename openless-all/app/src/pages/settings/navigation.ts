@@ -34,7 +34,8 @@ export function visibleAdvancedPages(
   enabled = false,
 ): AdvancedPage[] {
   return ADVANCED_PAGES.filter((page) => {
-    if (page.id === 'localModels') return platform === 'desktop' && os === 'mac';
+    // Local model management lives in AI services → Speech recognition.
+    if (page.id === 'localModels') return false;
     if (isTestingFeaturePage(page.id) && !enabled) return false;
     if (page.id === 'lessComputer') return platform === 'desktop' && (os === 'mac' || os === 'win');
     if (page.id === 'claudeConsole') return platform === 'desktop' && os === 'mac';
@@ -98,13 +99,8 @@ export function searchSettingsSections<T extends SearchableSettingsSection>(
 export type ServiceViewId = 'llm' | 'asr' | 'omni' | 'models' | 'connections';
 
 export function availableServiceViews(localModels: boolean, os?: OS): ServiceViewId[] {
-  return [
-    'llm',
-    'asr',
-    'omni',
-    ...(localModels || os === 'mac' ? (['models'] as const) : []),
-    'connections',
-  ];
+  void os;
+  return ['llm', 'asr', 'omni', ...(localModels ? (['models'] as const) : []), 'connections'];
 }
 
 export function isServiceViewInactive(
@@ -114,7 +110,7 @@ export function isServiceViewInactive(
   voiceActivationModels = false,
 ): boolean {
   if (view === 'models' && os === 'win' && voiceActivationModels) return false;
-  if (view === 'models' && os === 'mac') return true;
+  void os;
   return multimodal ? view !== 'omni' && view !== 'connections' : view === 'omni';
 }
 

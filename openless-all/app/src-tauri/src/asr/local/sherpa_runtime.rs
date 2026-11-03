@@ -5,9 +5,9 @@
 //! lifecycle, unaware of `Coordinator` / `Recorder` / UI / Tauri events. Failures propagate as
 //! `anyhow::Error` for the upper layer to translate into user-visible text.
 //!
-//! The Windows path currently wires in sherpa-onnx's `OfflineRecognizer` and
-//! `OnlineRecognizer`, supporting model loading, caching, whole-PCM transcription, online
-//! chunked decoding and release. Non-Windows keeps only a compilable status facade.
+//! Platforms that link sherpa-onnx wire in its `OfflineRecognizer` and `OnlineRecognizer`,
+//! supporting model loading, caching, whole-PCM transcription, online chunked decoding and
+//! release. Other platforms keep only a compilable status facade.
 
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -26,6 +26,8 @@ use crate::asr::local::sherpa::{
 };
 
 const QWEN3_ASR_CHUNK_LIMIT_MS: u64 = 30_000;
+const WHISPER_MULTILINGUAL_TAIL_PADDING_FRAMES: i32 = 300;
+const WHISPER_AUTO_LANGUAGE: &str = "";
 #[derive(Clone, Debug)]
 pub struct SherpaTokenEmission {
     pub text: String,
@@ -230,9 +232,8 @@ impl SherpaOnnxRuntime {
         Ok(alias.to_string())
     }
 
-    /// On Windows, whole-PCM batch transcription via the loaded `OfflineRecognizer`; non-Windows
-    /// keeps an empty implementation so the sherpa provider never appears as an available
-    /// inference capability.
+    /// Whole-PCM batch transcription via the loaded `OfflineRecognizer`; platforms without the
+    /// Sherpa native feature keep an empty implementation so the provider is unavailable there.
     #[allow(dead_code)]
     pub async fn transcribe_pcm(
         &self,
@@ -557,15 +558,7 @@ fn create_offline_recognizer(alias: &str, dir: &Path) -> Result<OfflineRecognize
         }
         Some(openless_core::SherpaModelFamily::Whisper) => {
             config.model_config.tokens = Some(path_to_string(&dir.join("tokens.txt"))?);
-            config.model_config.whisper = OfflineWhisperModelConfig {
-                encoder: Some(path_to_string(&dir.join("encoder.int8.onnx"))?),
-                decoder: Some(path_to_string(&dir.join("decoder.int8.onnx"))?),
-                language: Some("auto".into()),
-                task: Some("transcribe".into()),
-                tail_paddings: 0,
-                enable_token_timestamps: false,
-                enable_segment_timestamps: false,
-            };
+            config.model_config.whisper = whisper_model_config(dir)?;
         }
         Some(openless_core::SherpaModelFamily::Qwen3Asr) => {
             config.model_config.qwen3_asr = OfflineQwen3ASRModelConfig {
@@ -635,6 +628,24 @@ fn path_to_string(path: &Path) -> Result<String> {
         .to_str()
         .ok_or_else(|| anyhow::anyhow!("path is not valid UTF-8: {}", path.display()))?
         .to_string())
+}
+
+#[cfg(local_asr_sherpa)]
+fn whisper_model_config(dir: &Path) -> Result<OfflineWhisperModelConfig> {
+    Ok(OfflineWhisperModelConfig {
+        encoder: Some(path_to_string(&dir.join("encoder.int8.onnx"))?),
+        decoder: Some(path_to_string(&dir.join("decoder.int8.onnx"))?),
+        // Sherpa Whisper uses an empty language to request automatic detection. The literal
+        // string "auto" is invalid and makes the native decoder call SHERPA_ONNX_EXIT(-1),
+        // which terminates the app after accept_waveform().
+        language: Some(WHISPER_AUTO_LANGUAGE.into()),
+        task: Some("transcribe".into()),
+        // Sherpa recommends 300 frames for multilingual Whisper so the decoder can observe the
+        // end-of-transcript token on recordings shorter than 30 seconds.
+        tail_paddings: WHISPER_MULTILINGUAL_TAIL_PADDING_FRAMES,
+        enable_token_timestamps: false,
+        enable_segment_timestamps: false,
+    })
 }
 
 #[cfg(local_asr_sherpa)]
@@ -1299,6 +1310,16 @@ mod tests {
     #[test]
     fn pcm_s16le_to_f32_rejects_odd_length() {
         assert!(pcm_s16le_to_f32(&[0]).is_err());
+    }
+
+    #[cfg(local_asr_sherpa)]
+    #[test]
+    fn whisper_multilingual_defaults_match_sherpa_contract() {
+        let config = whisper_model_config(Path::new("/tmp/typefeng-whisper"))
+            .expect("Whisper config should not require model files");
+        assert_eq!(config.language.as_deref(), Some(""));
+        assert_eq!(config.task.as_deref(), Some("transcribe"));
+        assert_eq!(config.tail_paddings, 300);
     }
 
     #[test]

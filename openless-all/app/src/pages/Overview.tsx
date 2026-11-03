@@ -230,8 +230,8 @@ export function Overview({ onOpenHistory, onOpenSettings }: OverviewProps) {
 
   // Period metrics: last 7 / 30 days × count / chars / duration.
   //
-  // The data source must be activity, not history — history has a 200-entry hard cap, so a user with hundreds of
-  // daily sessions pushes last week out within days; computing from history would draw data-less days as 0 while
+  // The data source must be activity, not history — history can be capped by the user's policy, so a user with hundreds of
+  // daily sessions can push last week out within days; computing from history would draw data-less days as 0 while
   // the yearly heatmap on the same page shows them lit, contradicting itself.
   const [period, setPeriod] = useState<ActivityPeriod>(7);
   const [metric, setMetric] = useState<ActivityMetric>('count');
@@ -294,7 +294,6 @@ export function Overview({ onOpenHistory, onOpenSettings }: OverviewProps) {
           ) : null}
         </div>
       </section>
-
 
       {isHarmonyHost && <HarmonyDictation onComplete={refreshAll} />}
 

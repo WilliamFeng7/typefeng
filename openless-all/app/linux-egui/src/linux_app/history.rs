@@ -5,7 +5,7 @@ use super::*;
 pub(super) struct HistoryCache {
     pub(super) entries: Vec<openless_core::DictationSession>,
     pub(super) error: Option<String>,
-    policy: Option<(u32, Option<u32>, Option<u32>)>,
+    policy: Option<(u32, Option<u32>, bool, Option<u32>)>,
     revision: u64,
     wanted_revision: Option<u64>,
     generation: u64,
@@ -28,6 +28,7 @@ impl HistoryCache {
         let policy = (
             preferences.history_retention_days,
             preferences.history_max_entries,
+            preferences.history_keep_all,
             preferences.audio_recording_max_entries,
         );
         self.policy
